@@ -3,233 +3,403 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faculty Evaluation Portal</title>
-    <!-- Tailwind CSS for modern styling -->
+    <title>Academic Faculty Evaluation System</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- FontAwesome for professional icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Utility styles for active custom radio buttons */
+        .rating-btn:hover { background-color: #e2e8f0; }
+        input[type="radio"]:checked + label {
+            background-color: #312e81; /* indigo-900 */
+            color: #ffffff;
+            border-color: #312e81;
+        }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans">
+<body class="bg-slate-100 text-slate-800 font-sans antialiased">
 
-    <!-- Top Navigation Bar -->
-    <nav class="bg-indigo-900 text-white shadow-md px-6 py-4 flex justify-between items-center">
+    <nav class="bg-indigo-950 text-white shadow-lg sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
         <div class="flex items-center space-x-3">
-            <i class="fa-solid fa-graduation-cap text-2xl text-amber-400"></i>
-            <span class="font-bold text-xl tracking-wide">EduEval Portal</span>
+            <div class="bg-amber-500 text-indigo-950 p-2 rounded-lg font-black text-xl tracking-tight shadow-inner">
+                <i class="fa-solid fa-layer-group"></i>
+            </div>
+            <div>
+                <span class="font-bold text-lg block tracking-wide leading-none">EduMetrics</span>
+                <span class="text-[10px] text-indigo-300 tracking-widest uppercase font-semibold">Institutional Evaluation</span>
+            </div>
         </div>
-        <div class="space-x-2">
-            <button onclick="switchTab('evaluate')" id="btn-evaluate" class="px-4 py-2 rounded bg-indigo-700 font-medium transition duration-200">
-                <i class="fa-solid fa-pen-to-square mr-2"></i>Evaluate
+        <div class="flex space-x-2">
+            <button onclick="changeView('evaluate')" id="nav-eval" class="px-4 py-2 text-sm rounded-lg bg-indigo-800 font-medium transition duration-150">
+                <i class="fa-solid fa-file-signature mr-2"></i>Evaluation Form
             </button>
-            <button onclick="switchTab('dashboard')" id="btn-dashboard" class="px-4 py-2 rounded hover:bg-indigo-800 font-medium transition duration-200">
-                <i class="fa-solid fa-chart-pie mr-2"></i>Admin Dashboard
+            <button onclick="changeView('admin')" id="nav-admin" class="px-4 py-2 text-sm rounded-lg text-indigo-200 hover:bg-indigo-900 font-medium transition duration-150">
+                <i class="fa-solid fa-chart-line mr-2"></i>Analytics Dashboard
             </button>
         </div>
     </nav>
 
-    <!-- Main Container -->
-    <main class="max-w-4xl mx-auto my-10 px-4">
+    <main class="max-w-5xl mx-auto my-8 px-4">
         
-        <!-- SECTION 1: EVALUATION FORM -->
-        <section id="evaluate-view" class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8">
-            <div class="border-b border-slate-100 pb-4 mb-6">
-                <h2 class="text-2xl font-bold text-slate-900">Faculty Performance Evaluation</h2>
-                <p class="text-sm text-slate-500 mt-1">Please provide honest feedback to help improve our academic standards.</p>
+        <section id="view-evaluate" class="space-y-6">
+            
+            <div class="bg-white rounded-xl shadow-xs border border-slate-200 p-5 grid grid-cols-2 md:grid-cols-5 gap-3">
+                <div class="p-2 border-l-4 border-emerald-500 bg-slate-50 rounded-r-lg"><b class="block text-sm text-slate-900">5 - Always</b><span class="text-xs text-slate-500">91% – 100% of instances</span></div>
+                <div class="p-2 border-l-4 border-teal-500 bg-slate-50 rounded-r-lg"><b class="block text-sm text-slate-900">4 - Often</b><span class="text-xs text-slate-500">61% – 90% of instances</span></div>
+                <div class="p-2 border-l-4 border-amber-500 bg-slate-50 rounded-r-lg"><b class="block text-sm text-slate-900">3 - Sometimes</b><span class="text-xs text-slate-500">31% – 60% of instances</span></div>
+                <div class="p-2 border-l-4 border-orange-500 bg-slate-50 rounded-r-lg"><b class="block text-sm text-slate-900">2 - Seldom</b><span class="text-xs text-slate-500">11% – 30% of instances</span></div>
+                <div class="p-2 border-l-4 border-rose-500 bg-slate-50 rounded-r-lg col-span-2 md:col-span-1"><b class="block text-sm text-slate-900">1 - Never</b><span class="text-xs text-slate-500">0% – 10% of instances</span></div>
             </div>
 
-            <form id="evaluationForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
-                <!-- Faculty Selection -->
-                <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-2">Select Instructor</label>
-                    <select id="facultySelect" required class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white">
-                        <option value="" disabled selected>-- Choose a Professor --</option>
-                        <option value="Dr. Alan Turing">Dr. Alan Turing (Computer Science)</option>
-                        <option value="Prof. Marie Curie">Prof. Marie Curie (Physics)</option>
-                        <option value="Dr. Ada Lovelace">Dr. Ada Lovelace (Mathematics)</option>
-                    </select>
-                </div>
-
-                <!-- Criteria 1: Teaching Competence -->
-                <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
-                    <label class="block text-sm font-semibold text-slate-800 mb-1">1. Teaching Competence</label>
-                    <p class="text-xs text-slate-500 mb-3">The instructor explains concepts clearly and manages class time effectively.</p>
-                    <div class="flex items-center space-x-4">
-                        <input type="range" name="q1" min="1" max="5" value="3" class="w-full accent-indigo-600" oninput="this.nextElementSibling.innerText = this.value">
-                        <span class="font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded border border-indigo-100 min-w-[35px] text-center">3</span>
+            <form id="evaluationMatrixForm" onsubmit="submitEvaluation(event)" class="bg-white rounded-xl shadow-xs border border-slate-200 overflow-hidden">
+                
+                <div class="bg-slate-900 text-white p-6 border-b border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h1 class="text-xl font-bold tracking-tight">Faculty Performance Appraisal</h1>
+                        <p class="text-xs text-slate-400 mt-1">Select an instructor target to begin evaluation metrics routing.</p>
+                    </div>
+                    <div class="min-w-[260px]">
+                        <select id="evalTargetFaculty" required class="w-full px-3 py-2 bg-slate-800 text-white font-medium text-sm rounded-lg border border-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                            <option value="" disabled selected>-- Select Faculty Member --</option>
+                            <option value="Prof. Jane Doe">Prof. Jane Doe (Department of Computing)</option>
+                            <option value="Dr. John Smith">Dr. John Smith (Natural Sciences)</option>
+                            <option value="Engr. Robert Lee">Engr. Robert Lee (Engineering & Tech)</option>
+                        </select>
                     </div>
                 </div>
 
-                <!-- Criteria 2: Communication Skills -->
-                <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
-                    <label class="block text-sm font-semibold text-slate-800 mb-1">2. Communication & Interaction</label>
-                    <p class="text-xs text-slate-500 mb-3">The instructor encourages participation and addresses student concerns professionally.</p>
-                    <div class="flex items-center space-x-4">
-                        <input type="range" name="q2" min="1" max="5" value="3" class="w-full accent-indigo-600" oninput="this.nextElementSibling.innerText = this.value">
-                        <span class="font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded border border-indigo-100 min-w-[35px] text-center">3</span>
+                <div class="flex border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-500 overflow-x-auto">
+                    <button type="button" onclick="switchStep(1)" id="stepTab1" class="flex-1 py-3 px-4 border-b-2 border-indigo-600 text-indigo-900 bg-white whitespace-nowrap">A. Teaching Mgmt</button>
+                    <button type="button" onclick="switchStep(2)" id="stepTab2" class="flex-1 py-3 px-4 border-b-2 border-transparent hover:text-slate-900 whitespace-nowrap">B. Pedagogy & Tech</button>
+                    <button type="button" onclick="switchStep(3)" id="stepTab3" class="flex-1 py-3 px-4 border-b-2 border-transparent hover:text-slate-900 whitespace-nowrap">C. Commitment & Feedback</button>
+                </div>
+
+                <div class="p-6 md:p-8 space-y-6">
+
+                    <div id="stepSection1" class="space-y-4">
+                        <div class="mb-4 bg-indigo-50 border border-indigo-100 p-4 rounded-lg">
+                            <h3 class="text-sm font-bold text-indigo-950 uppercase tracking-wide">Category A: Management of Teaching and Learning</h3>
+                            <p class="text-xs text-indigo-800 mt-0.5">Focuses on classroom structure, time utilization, and the execution of objective standard pacing configurations.</p>
+                        </div>
+                        <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">01.</span>Comes to class on time.</p>
+                            <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold">
+                                <template class="likert-buttons" data-qid="q1"></template>
+                            </div>
+                        </div>
+                        <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">02.</span>Explains learning outcomes, expectations, grading system and requirements clearly.</p>
+                            <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q2"></template></div>
+                        </div>
+                        <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">03.</span>Maximizes the allocated time/learning hours effectively.</p>
+                            <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q3"></template></div>
+                        </div>
+                        <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">04.</span>Facilitates students to think critically and creatively by providing appropriate activities.</p>
+                            <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q4"></template></div>
+                        </div>
+                        <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">05.</span>Guides students to learn independently, reflect on new ideas, and make execution decisions.</p>
+                            <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q5"></template></div>
+                        </div>
+                        <div class="matrix-row pb-2 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">06.</span>Communicates constructive feedback to students for their academic growth.</p>
+                            <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q6"></template></div>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Criteria 3: Grading & Assessment -->
-                <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
-                    <label class="block text-sm font-semibold text-slate-800 mb-1">3. Fair Assessments</label>
-                    <p class="text-xs text-slate-500 mb-3">Grading system is transparent, objective, and aligns well with course materials.</p>
-                    <div class="flex items-center space-x-4">
-                        <input type="range" name="q3" min="1" max="5" value="3" class="w-full accent-indigo-600" oninput="this.nextElementSibling.innerText = this.value">
-                        <span class="font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded border border-indigo-100 min-w-[35px] text-center">3</span>
+                    <div id="stepSection2" class="space-y-4 hidden">
+                        <div class="mb-4 bg-teal-50 border border-teal-100 p-4 rounded-lg">
+                            <h3 class="text-sm font-bold text-teal-950 uppercase tracking-wide">Category B: Content Knowledge, Pedagogy and Technology</h3>
+                            <p class="text-xs text-teal-800 mt-0.5">Assesses core framework competence, modern digital workspace tools incorporation, and complex logic grouping resolution.</p>
+                        </div>
+                        <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">07.</span>Demonstrates extensive and broad knowledge of the subject/courses.</p>
+                            <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q7"></template></div>
+                        </div>
+                        <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">08.</span>Simplifies complex ideas in the lesson for ease of understanding.</p>
+                            <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q8"></template></div>
+                        </div>
+                        <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">09.</span>Relates the subject matter to contemporary issues and daily life operations.</p>
+                            <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q9"></template></div>
+                        </div>
+                        <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">10.</span>Promotes active learning and student engagement using appropriate ICT platforms.</p>
+                            <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q10"></template></div>
+                        </div>
+                        <div class="matrix-row pb-2 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">11.</span>Uses appropriate assessments (projects, exams, quizzes) aligned with learning outcomes.</p>
+                            <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q11"></template></div>
+                        </div>
                     </div>
+
+                    <div id="stepSection3" class="space-y-6 hidden">
+                        <div class="space-y-4">
+                            <div class="mb-4 bg-amber-50 border border-amber-100 p-4 rounded-lg">
+                                <h3 class="text-sm font-bold text-amber-950 uppercase tracking-wide">Category C: Commitment and Transparency</h3>
+                                <p class="text-xs text-amber-800 mt-0.5">Upholding inclusion metrics, student transparency tracking, and standard equity delivery scales.</p>
+                            </div>
+                            <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">12.</span>Recognizes and values the unique diversity and individual differences among students.</p>
+                                <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q12"></template></div>
+                            </div>
+                            <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">13.</span>Assists students with their learning challenges during consultation hours.</p>
+                                <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q13"></template></div>
+                            </div>
+                            <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">14.</span>Provides immediate feedback on student outputs and execution metrics.</p>
+                                <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q14"></template></div>
+                            </div>
+                            <div class="matrix-row pb-2 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">15.</span>Provides transparent and clear criteria in rating student performance.</p>
+                                <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q15"></template></div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-200 space-y-4">
+                            <div>
+                                <label class="block text-sm font-bold text-slate-900 mb-1">1. What specific qualities of the Faculty Member do you admire the most? <span class="text-rose-500">*</span></label>
+                                <textarea id="commentAdmire" required rows="3" placeholder="Write core strengths..." class="w-full text-sm px-3 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-600 outline-none"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-slate-900 mb-1">2. What are the qualities and teaching methodology of the Faculty Member that need improvement? <span class="text-rose-500">*</span></label>
+                                <textarea id="commentImprove" required rows="3" placeholder="Write descriptive structural areas requiring change..." class="w-full text-sm px-3 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-600 outline-none"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
-                <!-- Comments -->
-                <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-2">Constructive Comments / Remarks</label>
-                    <textarea id="comments" rows="3" placeholder="Share specific insights or areas of improvement..." class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                <div class="bg-slate-50 border-t border-slate-200 px-6 py-4 flex justify-between items-center">
+                    <button type="button" id="prevFormBtn" onclick="navigateStep(-1)" class="px-4 py-2 text-sm font-semibold rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 disabled:opacity-50" disabled>
+                        Back
+                    </button>
+                    <button type="button" id="nextFormBtn" onclick="navigateStep(1)" class="px-4 py-2 text-sm font-semibold rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">
+                        Continue Next
+                    </button>
+                    <button type="submit" id="submitFormBtn" class="px-5 py-2 text-sm font-bold rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 hidden">
+                        Complete Submission
+                    </button>
                 </div>
-
-                <!-- Submit Button -->
-                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-lg shadow transition duration-200">
-                    Submit Evaluation
-                </button>
             </form>
         </section>
 
-        <!-- SECTION 2: ADMIN DASHBOARD (HIDDEN BY DEFAULT) -->
-        <section id="dashboard-view" class="hidden bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8">
-            <div class="border-b border-slate-100 pb-4 mb-6 flex justify-between items-center">
+        <section id="view-admin" class="hidden space-y-6">
+            <div class="bg-white rounded-xl shadow-xs border border-slate-200 p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
-                    <h2 class="text-2xl font-bold text-slate-900">Evaluation Metrics</h2>
-                    <p class="text-sm text-slate-500 mt-1">Live aggregated scores based on form submissions.</p>
+                    <h2 class="text-xl font-bold tracking-tight text-slate-900">Institutional Faculty Matrix</h2>
+                    <p class="text-xs text-slate-500 mt-0.5">Real-time calculations sorted by categorical performance metrics.</p>
                 </div>
-                <button onclick="clearLocalStorage()" class="text-xs text-rose-600 hover:underline">
-                    <i class="fa-solid fa-trash-can mr-1"></i>Reset Data
+                <button onclick="wipeMetricsCache()" class="px-3 py-1.5 text-xs font-semibold bg-rose-50 border border-rose-200 rounded-lg text-rose-700 hover:bg-rose-100">
+                    <i class="fa-solid fa-trash-can mr-2"></i>Clear Records Cache
                 </button>
             </div>
 
-            <!-- Dynamic Summary Cards -->
-            <div id="resultsContainer" class="space-y-6">
-                <!-- Injected via JavaScript -->
-            </div>
+            <div id="analyticsDashboardRoot" class="space-y-6">
+                </div>
         </section>
 
     </main>
 
-    <!-- JavaScript Handling UI state and Data Simulation -->
     <script>
-        // Tab management logic
-        function switchTab(tab) {
-            const evalView = document.getElementById('evaluate-view');
-            const dashView = document.getElementById('dashboard-view');
-            const btnEval = document.getElementById('btn-evaluate');
-            const btnDash = document.getElementById('btn-dashboard');
+        let operationalStep = 1;
 
-            if (tab === 'evaluate') {
-                evalView.classList.remove('hidden');
-                dashView.classList.add('hidden');
-                btnEval.classList.add('bg-indigo-700');
-                btnDash.classList.remove('bg-indigo-700');
+        // Auto-Generate custom responsive Likert rows instantly 
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".likert-buttons").forEach(template => {
+                const qid = template.getAttribute("data-qid");
+                let html = '';
+                // 5 down to 1
+                for(let score = 5; score >= 1; score--) {
+                    html += `
+                        <div class="relative">
+                            <input type="radio" id="${qid}_${score}" name="${qid}" value="${score}" required class="sr-only">
+                            <label for="${qid}_${score}" class="rating-btn inline-block border border-slate-200 px-4 py-2 rounded-lg cursor-pointer text-slate-600 font-bold transition-all text-center min-w-[45px]">
+                                ${score}
+                            </label>
+                        </div>
+                    `;
+                }
+                template.outerHTML = html;
+            });
+        });
+
+        function changeView(target) {
+            const elEval = document.getElementById('view-evaluate');
+            const elAdmin = document.getElementById('view-admin');
+            const navEval = document.getElementById('nav-eval');
+            const navAdmin = document.getElementById('nav-admin');
+
+            if (target === 'evaluate') {
+                elEval.classList.remove('hidden');
+                elAdmin.classList.add('hidden');
+                navEval.className = "px-4 py-2 text-sm rounded-lg bg-indigo-800 font-medium text-white";
+                navAdmin.className = "px-4 py-2 text-sm rounded-lg text-indigo-200 hover:bg-indigo-900 font-medium";
             } else {
-                evalView.classList.add('hidden');
-                dashView.classList.remove('hidden');
-                btnEval.classList.remove('bg-indigo-700');
-                btnDash.classList.add('bg-indigo-700');
-                renderDashboard();
+                elEval.classList.add('hidden');
+                elAdmin.classList.remove('hidden');
+                navEval.className = "px-4 py-2 text-sm rounded-lg text-indigo-200 hover:bg-indigo-900 font-medium";
+                navAdmin.className = "px-4 py-2 text-sm rounded-lg bg-indigo-800 font-medium text-white";
+                renderInstitutionalDashboard();
             }
         }
 
-        // Handle Evaluation form collection
-        function handleFormSubmit(event) {
-            event.preventDefault();
+        function switchStep(stepIndex) {
+            operationalStep = stepIndex;
             
-            const faculty = document.getElementById('facultySelect').value;
-            const q1 = parseInt(document.querySelector('input[name="q1"]').value);
-            const q2 = parseInt(document.querySelector('input[name="q2"]').value);
-            const q3 = parseInt(document.querySelector('input[name="q3"]').value);
-            const textComment = document.getElementById('comments').value.trim();
+            // Hide/Show sections
+            document.getElementById('stepSection1').classList.toggle('hidden', operationalStep !== 1);
+            document.getElementById('stepSection2').classList.toggle('hidden', operationalStep !== 2);
+            document.getElementById('stepSection3').classList.toggle('hidden', operationalStep !== 3);
 
-            const overallScore = ((q1 + q2 + q3) / 3).toFixed(1);
+            // Tab bar configuration updates
+            for (let i = 1; i <= 3; i++) {
+                const tab = document.getElementById(`stepTab${i}`);
+                if (i === operationalStep) {
+                    tab.className = "flex-1 py-3 px-4 border-b-2 border-indigo-600 text-indigo-900 bg-white whitespace-nowrap text-center font-bold";
+                } else {
+                    tab.className = "flex-1 py-3 px-4 border-b-2 border-transparent hover:text-slate-900 whitespace-nowrap text-center";
+                }
+            }
 
-            // Fetch stored scores or initialize an empty configuration
-            let evaluations = JSON.parse(localStorage.getItem('evaluations')) || [];
-            
-            evaluations.push({
-                faculty,
-                scores: [q1, q2, q3],
-                average: parseFloat(overallScore),
-                comment: textComment || "No written remarks provided."
-            });
-
-            localStorage.setItem('evaluations', JSON.stringify(evaluations));
-
-            alert(`Evaluation submitted successfully for ${faculty}!`);
-            document.getElementById('evaluationForm').reset();
-            
-            // Reset counter labels back to midpoints (3)
-            document.querySelectorAll('input[type="range"]').forEach(input => {
-                input.nextElementSibling.innerText = '3';
-            });
+            // Footer controls configuration 
+            document.getElementById('prevFormBtn').disabled = (operationalStep === 1);
+            if (operationalStep === 3) {
+                document.getElementById('nextFormBtn').classList.add('hidden');
+                document.getElementById('submitFormBtn').classList.remove('hidden');
+            } else {
+                document.getElementById('nextFormBtn').classList.remove('hidden');
+                document.getElementById('submitFormBtn').classList.add('hidden');
+            }
         }
 
-        // Render dashboard dynamically using local storage entries
-        function renderDashboard() {
-            const container = document.getElementById('resultsContainer');
-            const evaluations = JSON.parse(localStorage.getItem('evaluations')) || [];
+        function navigateStep(direction) {
+            let nextTarget = operationalStep + direction;
+            if(nextTarget >= 1 && nextTarget <= 3) {
+                switchStep(nextTarget);
+            }
+        }
 
-            if (evaluations.length === 0) {
+        function submitEvaluation(event) {
+            event.preventDefault();
+            
+            const facultyName = document.getElementById('evalTargetFaculty').value;
+            
+            // Collect section data Arrays
+            const categoryA_scores = [1,2,3,4,5,6].map(i => parseInt(document.querySelector(`input[name="q${i}"]:checked`).value));
+            const categoryB_scores = [7,8,9,10,11].map(i => parseInt(document.querySelector(`input[name="q${i}"]:checked`).value));
+            const categoryC_scores = [12,13,14,15].map(i => parseInt(document.querySelector(`input[name="q${i}"]:checked`).value));
+
+            const payload = {
+                faculty: facultyName,
+                timestamp: new Date().toLocaleDateString(),
+                scoresA: categoryA_scores,
+                scoresB: categoryB_scores,
+                scoresC: categoryC_scores,
+                admireText: document.getElementById('commentAdmire').value.trim(),
+                improveText: document.getElementById('commentImprove').value.trim()
+            };
+
+            let dataStore = JSON.parse(localStorage.getItem('academic_evaluations')) || [];
+            dataStore.push(payload);
+            localStorage.setItem('academic_evaluations', JSON.stringify(dataStore));
+
+            alert(`Evaluation safely saved for ${facultyName}!`);
+            
+            // Complete reset tracking 
+            document.getElementById('evaluationMatrixForm').reset();
+            switchStep(1);
+        }
+
+        function renderInstitutionalDashboard() {
+            const container = document.getElementById('analyticsDashboardRoot');
+            const dataStore = JSON.parse(localStorage.getItem('academic_evaluations')) || [];
+
+            if(dataStore.length === 0) {
                 container.innerHTML = `
-                    <div class="text-center py-12 border-2 border-dashed border-slate-200 rounded-xl">
-                        <i class="fa-solid fa-folder-open text-4xl text-slate-300 mb-3"></i>
-                        <p class="text-slate-500">No data records found. Go evaluate a professor to test!</p>
+                    <div class="text-center bg-white border border-slate-200 py-16 rounded-xl">
+                        <i class="fa-solid fa-rectangle-list text-slate-300 text-5xl mb-3"></i>
+                        <p class="text-slate-500 font-medium">No analytical database files parsed yet.</p>
                     </div>`;
                 return;
             }
 
-            // Group data matrix by instructor
-            const dictionary = {};
-            evaluations.forEach(ev => {
-                if (!dictionary[ev.faculty]) {
-                    dictionary[ev.faculty] = { totalSum: 0, count: 0, comments: [] };
+            // Performance parser arrays grouping
+            const facultyMap = {};
+
+            dataStore.forEach(entry => {
+                if(!facultyMap[entry.faculty]) {
+                    facultyMap[entry.faculty] = { sumA:0, countA:0, sumB:0, countB:0, sumC:0, countC:0, logs:[] };
                 }
-                dictionary[ev.faculty].totalSum += ev.average;
-                dictionary[ev.faculty].count += 1;
-                dictionary[ev.faculty].comments.push(ev.comment);
+                
+                // Reducer arrays operations 
+                entry.scoresA.forEach(s => { facultyMap[entry.faculty].sumA += s; facultyMap[entry.faculty].countA++; });
+                entry.scoresB.forEach(s => { facultyMap[entry.faculty].sumB += s; facultyMap[entry.faculty].countB++; });
+                entry.scoresC.forEach(s => { facultyMap[entry.faculty].sumC += s; facultyMap[entry.faculty].countC++; });
+                
+                facultyMap[entry.faculty].logs.push({ admire: entry.admireText, improve: entry.improveText });
             });
 
-            // Build dashboard blocks
-            let htmlOutput = '';
-            for (const name in dictionary) {
-                const calculatedAvg = (dictionary[name].totalSum / dictionary[name].count).toFixed(2);
-                const responsesCount = dictionary[name].count;
+            let finalHtml = '';
+            for(const name in facultyMap) {
+                const target = facultyMap[name];
+                const avgA = (target.sumA / target.countA).toFixed(2);
+                const avgB = (target.sumB / target.countB).toFixed(2);
+                const avgC = (target.sumC / target.countC).toFixed(2);
                 
-                // Determine a status badge based on score thresholds
-                let statusColor = 'bg-emerald-100 text-emerald-800';
-                if (calculatedAvg < 3.5) statusColor = 'bg-amber-100 text-amber-800';
-                if (calculatedAvg < 2.0) statusColor = 'bg-rose-100 text-rose-800';
+                const totalCompositeScore = ((parseFloat(avgA) + parseFloat(avgB) + parseFloat(avgC)) / 3).toFixed(2);
 
-                htmlOutput += `
-                    <div class="p-5 border border-slate-200 rounded-lg shadow-xs bg-slate-50">
-                        <div class="flex justify-between items-start mb-3">
+                finalHtml += `
+                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-xs">
+                        <div class="bg-slate-900 text-white p-5 flex justify-between items-center">
                             <div>
-                                <h3 class="text-lg font-bold text-slate-900">${name}</h3>
-                                <span class="text-xs text-slate-500">${responsesCount} submission(s) parsed</span>
+                                <h3 class="font-bold text-lg leading-tight">${name}</h3>
+                                <span class="text-slate-400 text-xs">${target.logs.length} evaluations calculated</span>
                             </div>
-                            <span class="text-sm font-semibold px-2.5 py-1 rounded-full ${statusColor}">
-                                Rating: ${calculatedAvg} / 5.0
-                            </span>
+                            <div class="text-right">
+                                <span class="text-[10px] font-bold block tracking-wider uppercase text-amber-400">Composite Score</span>
+                                <span class="text-2xl font-black">${totalCompositeScore} <span class="text-xs text-slate-400 font-normal">/ 5.00</span></span>
+                            </div>
                         </div>
-                        <div class="mt-3">
-                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Student Remarks:</h4>
-                            <ul class="text-sm space-y-1.5 pl-4 list-disc text-slate-600">
-                                ${dictionary[name].comments.map(c => `<li>"${c}"</li>`).join('')}
-                            </ul>
+                        
+                        <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-slate-100">
+                            <div class="bg-slate-50 p-4 border border-slate-200 rounded-lg">
+                                <span class="text-xs font-bold text-indigo-950 block mb-1">A. Teaching Management</span>
+                                <div class="text-lg font-extrabold text-slate-900">${avgA} <span class="text-xs font-normal text-slate-400">/ 5.00</span></div>
+                            </div>
+                            <div class="bg-slate-50 p-4 border border-slate-200 rounded-lg">
+                                <span class="text-xs font-bold text-teal-950 block mb-1">B. Pedagogy & Technology</span>
+                                <div class="text-lg font-extrabold text-slate-900">${avgB} <span class="text-xs font-normal text-slate-400">/ 5.00</span></div>
+                            </div>
+                            <div class="bg-slate-50 p-4 border border-slate-200 rounded-lg">
+                                <span class="text-xs font-bold text-amber-950 block mb-1">C. Commitment & Feedback</span>
+                                <div class="text-lg font-extrabold text-slate-900">${avgC} <span class="text-xs font-normal text-slate-400">/ 5.00</span></div>
+                            </div>
                         </div>
-                    </div>`;
+
+                        <div class="p-6 bg-slate-50/50 space-y-4">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400">Qualitative Text Log Feed:</h4>
+                            ${target.logs.map(l => `
+                                <div class="text-xs bg-white border border-slate-200 rounded-lg p-3 space-y-2">
+                                    <div><b class="text-emerald-700">Admired Traits:</b> <span class="text-slate-600">"${l.admire}"</span></div>
+                                    <div><b class="text-rose-700">Areas For Growth:</b> <span class="text-slate-600">"${l.improve}"</span></div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
             }
-            container.innerHTML = htmlOutput;
+
+            container.innerHTML = finalHtml;
         }
 
-        function clearLocalStorage() {
-            if(confirm("Are you sure you want to delete all cached metrics?")) {
-                localStorage.removeItem('evaluations');
-                renderDashboard();
+        function wipeMetricsCache() {
+            if(confirm("Confirm clearing institutional history caches?")) {
+                localStorage.removeItem('academic_evaluations');
+                renderInstitutionalDashboard();
             }
         }
     </script>
