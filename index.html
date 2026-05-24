@@ -17,6 +17,63 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
+    <section id="view-login" class="fixed inset-0 bg-indigo-950 z-99 flex items-center justify-center px-4 overflow-y-auto">
+        <div class="max-w-md w-full bg-white rounded-2xl shadow-2xl overflow-hidden p-6 md:p-8 space-y-6 my-8">
+            
+            <div class="text-center space-y-2">
+                <img src="RTU_Portal_Header.png" alt="Rizal Technological University Banner" class="mx-auto h-16 w-auto object-contain">
+                <div class="pt-2 border-t border-slate-100">
+                    <h2 class="text-lg font-bold text-indigo-950 uppercase tracking-wide">CampusNet Portal Login</h2>
+                    <p class="text-xs text-slate-400">Faculty Performance Evaluation clearance gateway authorization.</p>
+                </div>
+            </div>
+
+            <form onsubmit="handlePortalLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Student ID Number:</label>
+                    <div class="relative flex items-center">
+                        <i class="fa-solid fa-id-badge absolute left-3 text-slate-400 text-sm"></i>
+                        <input type="text" id="loginStudentId" required placeholder="e.g. 2024-10143-MN-0" class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 focus:border-transparent transition">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Full Name:</label>
+                    <div class="relative flex items-center">
+                        <i class="fa-solid fa-user absolute left-3 text-slate-400 text-sm"></i>
+                        <input type="text" id="loginStudentName" required placeholder="SURNAME , FIRST NAME MIDDLENAME" class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-bold text-slate-800 uppercase outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 focus:border-transparent transition">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Course / Section / Year Level:</label>
+                    <div class="relative flex items-center">
+                        <i class="fa-solid fa-graduation-cap absolute left-3 text-slate-400 text-sm"></i>
+                        <input type="text" id="loginStudentCourse" required placeholder="e.g. BS Computer Engineering / 2nd Year" class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium text-slate-700 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 focus:border-transparent transition">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Portal Access Password:</label>
+                    <div class="relative flex items-center">
+                        <i class="fa-solid fa-lock absolute left-3 text-slate-400 text-sm"></i>
+                        <input type="password" required placeholder="•••••••••••••" class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 focus:border-transparent transition">
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 text-[11px] text-amber-900 flex items-start space-x-2">
+                    <i class="fa-solid fa-shield-halved text-sm mt-0.5 flex-shrink-0"></i>
+                    <span><b>Clearance Check:</b> Authentication variables automatically cascade into your formal submission clearance references spreadsheet upon entry.</span>
+                </div>
+
+                <button type="submit" class="w-full bg-indigo-900 hover:bg-indigo-800 text-white font-bold py-3 px-4 rounded-lg text-sm tracking-wide shadow-md transition transform active:scale-98 flex items-center justify-center space-x-2 cursor-pointer">
+                    <i class="fa-solid fa-right-to-bracket text-xs"></i>
+                    <span>Login to CampusNet</span>
+                </button>
+            </form>
+        </div>
+    </section>
+
     <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 px-6 py-3 flex justify-between items-center shadow-xs">
         <div class="flex items-center">
             <img src="RTU_Portal_Header.png" alt="Rizal Technological University" class="h-14 w-auto object-contain">
@@ -27,6 +84,9 @@
             </button>
             <button onclick="changeView('admin')" id="nav-admin" class="px-3 py-1.5 text-xs rounded text-indigo-200 hover:bg-indigo-900 font-medium transition">
                 <i class="fa-solid fa-chart-line text-xs mr-1.5"></i> Admin Dashboard
+            </button>
+            <button onclick="handleLogout()" class="px-3 py-1.5 text-xs rounded bg-rose-50 text-rose-700 font-medium hover:bg-rose-100 transition border border-rose-200">
+                <i class="fa-solid fa-right-from-bracket text-xs mr-1.5"></i> Logout
             </button>
         </div>
     </nav>
@@ -42,22 +102,22 @@
                 <div class="md:col-span-8 grid grid-cols-3 gap-y-3 gap-x-4 items-center">
                     <span class="font-bold text-slate-700">Current School Year:</span>
                     <div class="col-span-2">
-                        <input type="text" value="2025 - 2026" class="w-full max-w-xs bg-slate-50 text-amber-800 font-bold px-3 py-1.5 rounded border border-slate-200 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 transition">
+                        <input type="text" id="metaSchoolYear" value="2025 - 2026" class="w-full max-w-xs bg-slate-50 text-amber-800 font-bold px-3 py-1.5 rounded border border-slate-200 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 transition">
                     </div>
 
                     <span class="font-bold text-slate-700">Current Semester:</span>
                     <div class="col-span-2">
-                        <input type="text" value="2nd Semester" class="w-full max-w-xs bg-slate-50 text-amber-800 font-bold px-3 py-1.5 rounded border border-slate-200 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 transition">
+                        <input type="text" id="metaSemester" value="2nd Semester" class="w-full max-w-xs bg-slate-50 text-amber-800 font-bold px-3 py-1.5 rounded border border-slate-200 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 transition">
                     </div>
 
                     <span class="font-bold text-slate-700">Student Name:</span>
                     <div class="col-span-2">
-                        <input type="text" placeholder="Enter Student Name" class="w-full bg-slate-50 text-slate-700 font-semibold uppercase px-3 py-1.5 rounded border border-slate-200 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 transition">
+                        <input type="text" id="metaStudentName" placeholder="Enter Student Name" class="w-full bg-slate-50 text-slate-700 font-semibold uppercase px-3 py-1.5 rounded border border-slate-200 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 transition">
                     </div>
 
                     <span class="font-bold text-slate-700">Course / Year Level:</span>
                     <div class="col-span-2">
-                        <input type="text" placeholder="Enter Course / Year Level" class="w-full bg-slate-50 text-slate-600 italic px-3 py-1.5 rounded border border-slate-200 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 transition">
+                        <input type="text" id="metaCourseLevel" placeholder="Enter Course / Year Level" class="w-full bg-slate-50 text-slate-600 italic px-3 py-1.5 rounded border border-slate-200 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 transition">
                     </div>
 
                     <span class="font-bold text-slate-700">Evaluation Schedule:</span>
@@ -251,7 +311,7 @@
         let scheduleItems = [
             { classCode: "141216", subjectCode: "ECE01L", desc: "Fundamentals of Electronic Circuits Laboratory", professor: "Boss Atan", status: "PENDING", refNo: "--" },
             { classCode: "141331", subjectCode: "CPE204", desc: "Software Design", professor: "Boss Agul", status: "PENDING", refNo: "--" },
-            { classCode: "141332", subjectCode: "CPE204L", desc: "Software Design Laboratory", professor: "Boss Agul", status: "PENDING", refNo: "--" },
+            { classCode: "141332", subjectCode: "CPE204L", desc: "Software Design Laboratory", professor: "Princess Fiona", status: "PENDING", refNo: "--" },
             { classCode: "141333", subjectCode: "ECE01", desc: "Fundamentals of Electronic Circuits", professor: "Fernando Rivera", status: "PENDING", refNo: "--" },
             { classCode: "141335", subjectCode: "CPE205", desc: "Assembly Language Programming", professor: "Daddy tyga", status: "PENDING", refNo: "--" },
             { classCode: "190022", subjectCode: "DE", desc: "Differential Equations", professor: "Jonas Marmol", status: "PENDING", refNo: "--" },
@@ -267,9 +327,36 @@
         }
 
         document.addEventListener("DOMContentLoaded", () => {
+            // Check session visibility state to persist login state if refreshed
+            if (localStorage.getItem('active_session_name')) {
+                document.getElementById('metaStudentName').value = localStorage.getItem('active_session_name');
+                document.getElementById('metaCourseLevel').value = localStorage.getItem('active_session_course');
+                document.getElementById('view-login').classList.add('hidden');
+            }
             renderScheduleTable();
             buildLikertRadioButtons();
         });
+
+        function handlePortalLogin(event) {
+            event.preventDefault();
+            
+            const inputName = document.getElementById('loginStudentName').value.trim().toUpperCase();
+            const inputCourse = document.getElementById('loginStudentCourse').value.trim();
+
+            localStorage.setItem('active_session_name', inputName);
+            localStorage.setItem('active_session_course', inputCourse);
+
+            document.getElementById('metaStudentName').value = inputName;
+            document.getElementById('metaCourseLevel').value = inputCourse;
+
+            document.getElementById('view-login').classList.add('hidden');
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('active_session_name');
+            localStorage.removeItem('active_session_course');
+            location.reload();
+        }
 
         function renderScheduleTable() {
             const tbody = document.getElementById('scheduleTableBody');
@@ -301,7 +388,6 @@
             document.getElementById('cardFacultyName').innerText = targetItem.professor;
             document.getElementById('cardSubject').innerText = `${targetItem.subjectCode} - ${targetItem.desc}`;
             
-            // Dynamic image assignment utilizing your explicit code filenames
             const imageEl = document.getElementById('cardFacultyImage');
             if (targetItem.professor === "Boss Atan") {
                 imageEl.src = "BOSS%20ATAN.jpg";
@@ -408,7 +494,6 @@
             dataStore.push(payload);
             localStorage.setItem('eval_logs_v5', JSON.stringify(dataStore));
 
-            // Setup corresponding reference numbers exactly from your portal view
             const references = [
                 "2605-2665326653", "2605-2665826658", "2605-2666226662",
                 "2605-2666726667", "2605-2667026670", "2605-2668126681",
