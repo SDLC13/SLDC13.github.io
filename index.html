@@ -112,7 +112,7 @@
 
             <form id="evaluationMatrixForm" onsubmit="submitEvaluation(event)" class="bg-white rounded-xl shadow-xs border border-slate-200 overflow-hidden">
                 <div class="bg-white p-6 border-b border-slate-200">
-                    <h2 class="text-xl font-bold text-center text-slate-800 tracking-tight pb-4 border-b border-slate-100">Faculty Evaluation</h2>
+                    <h2 class="text-xl font-bold text-center text-slate-800 tracking-tight pb-4 border-b border-slate-100">Faculty Performance Evaluation</h2>
                     
                     <div class="flex flex-col md:flex-row items-center md:items-stretch gap-6 mt-4">
                         <div class="flex-1 w-full space-y-4">
@@ -142,88 +142,88 @@
                 </div>
 
                 <div class="flex border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase text-slate-500">
-                    <button type="button" onclick="switchStep(1)" id="stepTab1" class="flex-1 py-3 border-b-2 border-indigo-600 text-indigo-900 bg-white font-bold text-center">A. Teaching Mgmt</button>
-                    <button type="button" onclick="switchStep(2)" id="stepTab2" class="flex-1 py-3 border-b-2 border-transparent text-center">B. Pedagogy & Tech</button>
-                    <button type="button" onclick="switchStep(3)" id="stepTab3" class="flex-1 py-3 border-b-2 border-transparent text-center">C. Commitment</button>
+                    <button type="button" onclick="switchStep(1)" id="stepTab1" class="flex-1 py-3 border-b-2 border-indigo-600 text-indigo-900 bg-white font-bold text-center">A. Management of Teaching and Learning</button>
+                    <button type="button" onclick="switchStep(2)" id="stepTab2" class="flex-1 py-3 border-b-2 border-transparent text-center">B. Content Knowledge, Pedagogy and Technology</button>
+                    <button type="button" onclick="switchStep(3)" id="stepTab3" class="flex-1 py-3 border-b-2 border-transparent text-center">C. Commitment and Transparency</button>
                 </div>
 
                 <div class="p-6 md:p-8 space-y-6">
                     <div id="stepSection1" class="space-y-4">
                         <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">01. Comes to class and starts instruction on time.</p>
+                            <p class="text-sm text-slate-700 font-medium">01. Comes to class on the time.</p>
                             <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q1"></template></div>
                         </div>
                         <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">02. Explains course requirements and grading system clearly.</p>
+                            <p class="text-sm text-slate-700 font-medium">02. Explains learning outcomes, expectations, grading system and various requirements of the subject/course.</p>
                             <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q2"></template></div>
                         </div>
                         <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">03. Maximizes allocated time for learning effectively.</p>
+                            <p class="text-sm text-slate-700 font-medium">03. Maximizes the allocated time/learning hours effectively.</p>
                             <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q3"></template></div>
                         </div>
                         <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">04. Maintains class records and systematic topic tracking.</p>
+                            <p class="text-sm text-slate-700 font-medium">04. Facilitates students to think critically and creatively by providing appropriate learnig activities.</p>
                             <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q4"></template></div>
                         </div>
-                        <div class="matrix-row pb-2 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">05. Observes consistency in following the class schedule.</p>
+                        <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
+                            <p class="text-sm text-slate-700 font-medium">05. Guides students to learn on their own, reflect on new ideas and experiences, and make decisions in accomplishing given tasks.</p>
                             <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q5"></template></div>
+                        </div>
+                        <div class="matrix-row pb-2 flex justify-between items-center">
+                            <p class="text-sm text-slate-700 font-medium">06. Communicates constructive feedback to students for their academic growth.</p>
+                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q6"></template></div>
                         </div>
                     </div>
 
                     <div id="stepSection2" class="space-y-4 hidden">
                         <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">06. Demonstrates extensive knowledge of the subject matter.</p>
-                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q6"></template></div>
-                        </div>
-                        <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">07. Simplifies complex concepts for easy understanding.</p>
+                            <p class="text-sm text-slate-700 font-medium">07. Demonstrates extensive and broad knowledge of the subject/courses.</p>
                             <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q7"></template></div>
                         </div>
                         <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">08. Relates lessons to real-world applications and issues.</p>
+                            <p class="text-sm text-slate-700 font-medium">08. Simplifies complex ideas in the lesson for ease of understanding.</p>
                             <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q8"></template></div>
                         </div>
                         <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">09. Utilizes modern ICT tools to aid student learning.</p>
+                            <p class="text-sm text-slate-700 font-medium">09. Relates the subject matter to contemporary issues and developments in the descipline and/or daily life activities.</p>
                             <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q9"></template></div>
                         </div>
-                        <div class="matrix-row pb-2 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">10. Encourages critical thinking and creative problem-solving.</p>
+                        <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
+                            <p class="text-sm text-slate-700 font-medium">10. Promotes active learning and students engagement by using appropriate teaching and learning resources including ICT tools and platform.</p>
                             <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q10"></template></div>
+                        </div>
+                        <div class="matrix-row pb-2 flex justify-between items-center">
+                            <p class="text-sm text-slate-700 font-medium">11. Uses appropriate assessments(projects, exam, quizzes, assignment, etc.) aligned with the learning outcomes.</p>
+                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q11"></template></div>
                         </div>
                     </div>
 
                     <div id="stepSection3" class="space-y-6 hidden">
                         <div class="space-y-4">
                             <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                                <p class="text-sm text-slate-700 font-medium">11. Respects individual differences and student diversity.</p>
-                                <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q11"></template></div>
-                            </div>
-                            <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                                <p class="text-sm text-slate-700 font-medium">12. Available for consultations during designated hours.</p>
+                                <p class="text-sm text-slate-700 font-medium">12. Recognizes and values the unique diversity and individual differences among students.</p>
                                 <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q12"></template></div>
                             </div>
                             <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                                <p class="text-sm text-slate-700 font-medium">13. Provides prompt and constructive feedback on works.</p>
+                                <p class="text-sm text-slate-700 font-medium">13. Assists students with their learning challenges during consultations hours.</p>
                                 <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q13"></template></div>
                             </div>
                             <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                                <p class="text-sm text-slate-700 font-medium">14. Observes professional ethics and rapport with students.</p>
+                                <p class="text-sm text-slate-700 font-medium">14. Provides immediate feedback on student outputs and performance.</p>
                                 <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q14"></template></div>
                             </div>
                             <div class="matrix-row pb-2 flex justify-between items-center">
-                                <p class="text-sm text-slate-700 font-medium">15. Upholds fairness and objectivity in grading performance.</p>
+                                <p class="text-sm text-slate-700 font-medium">15. Provides transparent and clear criteria in rating student's performance.</p>
                                 <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q15"></template></div>
                             </div>
                         </div>
                         <div class="pt-4 border-t border-slate-200 space-y-4">
                             <div>
-                                <label class="block text-sm font-bold text-slate-900 mb-1">Qualities I admire most in this faculty:</label>
+                                <label class="block text-sm font-bold text-slate-900 mb-1">1. What specific qualities of the Faculty Member you admire the most?(Required)</label>
                                 <textarea id="commentAdmire" required rows="2" class="w-full text-xs p-2 rounded border border-slate-300 outline-none focus:ring-2 focus:ring-indigo-600 transition"></textarea>
                             </div>
                             <div>
-                                <label class="block text-sm font-bold text-slate-900 mb-1">Suggestions for improvement:</label>
+                                <label class="block text-sm font-bold text-slate-900 mb-1">2. What are the qualities and teaching methodology of the Faculty Member that needs for improvement? (Required)</label>
                                 <textarea id="commentImprove" required rows="2" class="w-full text-xs p-2 rounded border border-slate-300 outline-none focus:ring-2 focus:ring-indigo-600 transition"></textarea>
                             </div>
                         </div>
@@ -251,19 +251,23 @@
         let operationalStep = 1;
         let activeTargetIndex = null;
 
-        // Expanded dataset mapping all 5 fields exactly from your layout table reference image
+        // Anonymized professor dataset structure mapping all 9 table items perfectly
         let scheduleItems = [
-            { classCode: "141216", subjectCode: "ECE01L", desc: "Fundamentals of Electronic Circuits Laboratory", professor: "MARTINEZ, RICARDO M.", status: "PENDING", refNo: "--" },
-            { classCode: "141331", subjectCode: "CPE204", desc: "Software Design", professor: "GOMEZ, MARIFE E.", status: "PENDING", refNo: "--" },
-            { classCode: "141332", subjectCode: "CPE204L", desc: "Software Design Laboratory", professor: "GOMEZ, MARIFE E.", status: "PENDING", refNo: "--" },
-            { classCode: "141333", subjectCode: "ECE01", desc: "Fundamentals of Electronic Circuits", professor: "GOMEZ, ROY I.", status: "PENDING", refNo: "--" },
-            { classCode: "141335", subjectCode: "CPE205", desc: "Assembly Language Programming", professor: "ZAPLAN, CHRISTOPHER L.", status: "PENDING", refNo: "--" }
+            { classCode: "141216", subjectCode: "ECE01L", desc: "Fundamentals of Electronic Circuits Laboratory", professor: "Boss Atan", status: "PENDING", refNo: "--" },
+            { classCode: "141331", subjectCode: "CPE204", desc: "Software Design", professor: "Boss Agul", status: "PENDING", refNo: "--" },
+            { classCode: "141332", subjectCode: "CPE204L", desc: "Software Design Laboratory", professor: "Boss Agul", status: "PENDING", refNo: "--" },
+            { classCode: "141333", subjectCode: "ECE01", desc: "Fundamentals of Electronic Circuits", professor: "Fernando Rivera", status: "PENDING", refNo: "--" },
+            { classCode: "141335", subjectCode: "CPE205", desc: "Assembly Language Programming", professor: "Daddy tyga", status: "PENDING", refNo: "--" },
+            { classCode: "1490022", subjectCode: "DE", desc: "Differential Equations", professor: "Jonas Marmol", status: "PENDING", refNo: "--" },
+            { classCode: "1310063", subjectCode: "GE-ELEC14", desc: "Technical Communication", professor: "Anygma Yuson", status: "PENDING", refNo: "--" },
+            { classCode: "1313031", subjectCode: "GE03", desc: "The Contemporary World", professor: "Bato dela rosa", status: "PENDING", refNo: "--" },
+            { classCode: "13100069", subjectCode: "PE04", desc: "Physical Activities Towards Health and Fitness II", professor: "Naruto Uzumaki", status: "PENDING", refNo: "--" }
         ];
 
-        if(localStorage.getItem('schedule_tracker_v5')) {
-            scheduleItems = JSON.parse(localStorage.getItem('schedule_tracker_v5'));
+        if(localStorage.getItem('schedule_tracker_v6')) {
+            scheduleItems = JSON.parse(localStorage.getItem('schedule_tracker_v6'));
         } else {
-            localStorage.setItem('schedule_tracker_v5', JSON.stringify(scheduleItems));
+            localStorage.setItem('schedule_tracker_v6', JSON.stringify(scheduleItems));
         }
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -301,15 +305,15 @@
             document.getElementById('cardFacultyName').innerText = targetItem.professor;
             document.getElementById('cardSubject').innerText = `${targetItem.subjectCode} - ${targetItem.desc}`;
             
-            // Dynamic image assignment utilizing exact permalink rules
+            // Image asset assignment matching the custom permalinks precisely
             const imageEl = document.getElementById('cardFacultyImage');
-            if (targetItem.professor.includes("MARTINEZ")) {
+            if (targetItem.professor === "Boss Atan") {
                 imageEl.src = "ECE01L%20prof.jpg";
-            } else if (targetItem.professor.includes("MARIFE")) {
+            } else if (targetItem.professor === "Boss Agul") {
                 imageEl.src = "PROF%20IMAGE.jpg";
-            } else if (targetItem.professor.includes("ROY")) {
+            } else if (targetItem.professor === "Fernando Rivera") {
                 imageEl.src = "ECE01%20prof.jpg";
-            } else if (targetItem.professor.includes("ZAPLAN")) {
+            } else if (targetItem.professor === "Daddy tyga") {
                 imageEl.src = "CPE205%20prof.jpg";
             } else {
                 imageEl.src = "prof-placeholder.png";
@@ -363,8 +367,8 @@
             for (let i = 1; i <= 3; i++) {
                 const tab = document.getElementById(`stepTab${i}`);
                 tab.className = i === operationalStep 
-                    ? "flex-1 py-3 border-b-2 border-indigo-600 text-indigo-900 bg-white font-bold text-center"
-                    : "flex-1 py-3 border-b-2 border-transparent text-center text-slate-400";
+                    ? "flex-1 py-3 border-b-2 border-indigo-600 text-indigo-900 bg-white font-bold text-center text-xs"
+                    : "flex-1 py-3 border-b-2 border-transparent text-center text-slate-400 text-xs";
             }
 
             document.getElementById('prevFormBtn').disabled = (operationalStep === 1);
@@ -400,18 +404,16 @@
             dataStore.push(payload);
             localStorage.setItem('eval_logs_v5', JSON.stringify(dataStore));
 
-            // Static array index reference matcher matching your target portal values sequence
+            // Matching structural reference IDs from your target snapshot sequence
             const references = [
-                "2605-2665326653",
-                "2605-2665826658",
-                "2605-2666226662",
-                "2605-2666726667",
-                "2605-2667026670"
+                "2605-2665326653", "2605-2665826658", "2605-2666226662",
+                "2605-2666726667", "2605-2667026670", "2605-2668126681",
+                "2605-2669026690", "2605-2669726697", "2605-2670326703"
             ];
             
             scheduleItems[activeTargetIndex].status = "EVALUATED";
             scheduleItems[activeTargetIndex].refNo = references[activeTargetIndex] || "2605-0000000000";
-            localStorage.setItem('schedule_tracker_v5', JSON.stringify(scheduleItems));
+            localStorage.setItem('schedule_tracker_v6', JSON.stringify(scheduleItems));
 
             alert(`Evaluation processed successfully.`);
             document.getElementById('evaluationMatrixForm').reset();
