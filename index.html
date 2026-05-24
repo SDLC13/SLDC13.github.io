@@ -7,297 +7,308 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .rating-btn:hover { background-color: #e2e8f0; }
+        /* Custom Premium Rating Styles */
+        .rating-btn:hover { background-color: #fef08a; color: #1e3a8a; }
         input[type="radio"]:checked + label {
-            background-color: #312e81;
+            background-color: #1e3a8a;
             color: #ffffff;
-            border-color: #312e81;
+            border-color: #1e3a8a;
+            box-shadow: 0 0 8px rgba(30, 58, 138, 0.4);
+        }
+        /* Classic Geometric Corner Accents matching image reference */
+        .gold-border-corner {
+            position: relative;
+        }
+        .gold-border-corner::before {
+            content: ''; position: absolute; inset: 4px;
+            border: 1px solid rgba(234, 179, 8, 0.3);
+            pointer-events: none; rounded-xl;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+<body class="bg-gradient-to-br from-[#0b1b3d] via-[#122b5c] to-[#08132b] min-h-screen text-slate-100 font-sans antialiased selection:bg-amber-500 selection:text-indigo-950">
 
-    <section id="view-login" class="fixed inset-0 bg-indigo-950 z-99 flex items-center justify-center px-4 overflow-y-auto">
-        <div class="max-w-md w-full bg-white rounded-2xl shadow-2xl overflow-hidden p-6 md:p-8 space-y-6 my-8">
-            
-            <div class="text-center space-y-2">
-                <img src="RTU_Portal_Header.png" alt="Rizal Technological University Banner" class="mx-auto h-16 w-auto object-contain">
-                <div class="pt-2 border-t border-slate-100">
-                    <h2 class="text-lg font-bold text-indigo-950 uppercase tracking-wide">CampusNet Portal Login</h2>
-                    <p class="text-xs text-slate-400">Faculty Performance Evaluation clearance gateway authorization.</p>
+    <section id="view-login" class="fixed inset-0 bg-gradient-to-b from-[#071126] to-[#0f244d] z-99 flex items-center justify-center px-4 overflow-y-auto">
+        <div class="max-w-md w-full bg-gradient-to-b from-[#e6c687] via-[#cca356] to-[#ad8336] rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] p-1">
+            <div class="bg-[#0f2042] rounded-2xl p-6 md:p-8 space-y-6 gold-border-corner">
+                
+                <div class="text-center space-y-3">
+                    <img src="RTU_Portal_Header.png" alt="Rizal Technological University" class="mx-auto h-14 w-auto object-contain drop-shadow-md">
+                    <div class="pt-2 border-t border-amber-500/20">
+                        <h2 class="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 uppercase tracking-wider">CampusNet Login</h2>
+                        <p class="text-[11px] text-amber-200/60">Faculty Appraisal Clearance Authentication Gateway</p>
+                    </div>
                 </div>
+
+                <form onsubmit="handlePortalLogin(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Student ID Number:</label>
+                        <div class="relative flex items-center">
+                            <i class="fa-solid fa-id-badge absolute left-3 text-amber-400/60 text-sm"></i>
+                            <input type="text" id="loginStudentId" required placeholder="e.g. 2024-10143-MN-0" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm font-semibold text-amber-100 placeholder-slate-500 outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Full Name:</label>
+                        <div class="relative flex items-center">
+                            <i class="fa-solid fa-user absolute left-3 text-amber-400/60 text-sm"></i>
+                            <input type="text" id="loginStudentName" required placeholder="SURNAME , FIRST NAME MIDDLENAME" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm font-bold text-amber-100 uppercase placeholder-slate-500 outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Course / Section / Year Level:</label>
+                        <div class="relative flex items-center">
+                            <i class="fa-solid fa-graduation-cap absolute left-3 text-amber-400/60 text-sm"></i>
+                            <input type="text" id="loginStudentCourse" required placeholder="e.g. BS Computer Engineering / 2nd Year" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm font-medium text-amber-200/90 placeholder-slate-500 outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Portal Access Password:</label>
+                        <div class="relative flex items-center">
+                            <i class="fa-solid fa-lock absolute left-3 text-amber-400/60 text-sm"></i>
+                            <input type="password" required placeholder="•••••••••••••" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm text-amber-100 outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition">
+                        </div>
+                    </div>
+
+                    <div class="bg-amber-500/10 border border-amber-500/20 rounded-lg p-3 text-[11px] text-amber-200/90 flex items-start space-x-2">
+                        <i class="fa-solid fa-shield-halved text-sm mt-0.5 flex-shrink-0 text-amber-400"></i>
+                        <span><b>Authentication Notice:</b> Credentials safe-lock onto your institutional dashboard records matrix instantly.</span>
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-to-r from-amber-300 via-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-700 text-indigo-950 font-black py-3 px-4 rounded-lg text-xs uppercase tracking-widest shadow-lg transition transform active:scale-98 flex items-center justify-center space-x-2 cursor-pointer">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <span>Login to CampusNet</span>
+                    </button>
+                </form>
             </div>
-
-            <form onsubmit="handlePortalLogin(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Student ID Number:</label>
-                    <div class="relative flex items-center">
-                        <i class="fa-solid fa-id-badge absolute left-3 text-slate-400 text-sm"></i>
-                        <input type="text" id="loginStudentId" required placeholder="e.g. 2024-10143-MN-0" class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-slate-800 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 focus:border-transparent transition">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Full Name:</label>
-                    <div class="relative flex items-center">
-                        <i class="fa-solid fa-user absolute left-3 text-slate-400 text-sm"></i>
-                        <input type="text" id="loginStudentName" required placeholder="SURNAME , FIRST NAME MIDDLENAME" class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-bold text-slate-800 uppercase outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 focus:border-transparent transition">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Course / Section / Year Level:</label>
-                    <div class="relative flex items-center">
-                        <i class="fa-solid fa-graduation-cap absolute left-3 text-slate-400 text-sm"></i>
-                        <input type="text" id="loginStudentCourse" required placeholder="e.g. BS Computer Engineering / 2nd Year" class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium text-slate-700 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 focus:border-transparent transition">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Portal Access Password:</label>
-                    <div class="relative flex items-center">
-                        <i class="fa-solid fa-lock absolute left-3 text-slate-400 text-sm"></i>
-                        <input type="password" required placeholder="•••••••••••••" class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 focus:border-transparent transition">
-                    </div>
-                </div>
-
-                <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 text-[11px] text-amber-900 flex items-start space-x-2">
-                    <i class="fa-solid fa-shield-halved text-sm mt-0.5 flex-shrink-0"></i>
-                    <span><b>Clearance Check:</b> Authentication variables automatically cascade into your formal submission clearance references spreadsheet upon entry.</span>
-                </div>
-
-                <button type="submit" class="w-full bg-indigo-900 hover:bg-indigo-800 text-white font-bold py-3 px-4 rounded-lg text-sm tracking-wide shadow-md transition transform active:scale-98 flex items-center justify-center space-x-2 cursor-pointer">
-                    <i class="fa-solid fa-right-to-bracket text-xs"></i>
-                    <span>Login to CampusNet</span>
-                </button>
-            </form>
         </div>
     </section>
 
-    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 px-6 py-3 flex justify-between items-center shadow-xs">
+    <nav class="bg-[#0b1730]/90 backdrop-blur-md border-b border-amber-500/20 sticky top-0 z-50 px-6 py-3 flex justify-between items-center shadow-lg">
         <div class="flex items-center">
-            <img src="RTU_Portal_Header.png" alt="Rizal Technological University" class="h-14 w-auto object-contain">
+            <img src="RTU_Portal_Header.png" alt="Rizal Technological University" class="h-12 w-auto object-contain">
         </div>
         <div class="flex space-x-2">
-            <button onclick="showScheduleView()" class="px-3 py-1.5 text-xs rounded bg-indigo-900 text-white font-medium hover:bg-indigo-800 transition shadow-xs">
-                <i class="fa-solid fa-list text-xs mr-1.5"></i> My Schedule
+            <button onclick="showScheduleView()" class="px-3 py-1.5 text-xs rounded font-bold bg-gradient-to-b from-amber-300 to-amber-500 text-indigo-950 hover:from-amber-400 hover:to-amber-600 transition shadow-md">
+                <i class="fa-solid fa-list mr-1.5"></i> My Schedule
             </button>
-            <button onclick="changeView('admin')" id="nav-admin" class="px-3 py-1.5 text-xs rounded text-indigo-200 hover:bg-indigo-900 font-medium transition">
-                <i class="fa-solid fa-chart-line text-xs mr-1.5"></i> Admin Dashboard
+            <button onclick="changeView('admin')" id="nav-admin" class="px-3 py-1.5 text-xs rounded border border-amber-500/30 text-amber-300 hover:bg-amber-500/10 font-bold transition">
+                <i class="fa-solid fa-chart-line mr-1.5"></i> Admin Dashboard
             </button>
-            <button onclick="handleLogout()" class="px-3 py-1.5 text-xs rounded bg-rose-50 text-rose-700 font-medium hover:bg-rose-100 transition border border-rose-200">
-                <i class="fa-solid fa-right-from-bracket text-xs mr-1.5"></i> Logout
+            <button onclick="handleLogout()" class="px-3 py-1.5 text-xs rounded bg-rose-950/40 text-rose-300 font-bold hover:bg-rose-900/50 transition border border-rose-500/30">
+                <i class="fa-solid fa-right-from-bracket mr-1.5"></i> Logout
             </button>
         </div>
     </nav>
 
-    <main class="max-w-6xl mx-auto my-6 px-4">
+    <main class="max-w-6xl mx-auto my-8 px-4">
         
         <section id="view-schedule" class="space-y-6">
-            <h1 class="text-2xl text-center font-serif text-slate-900 tracking-wide border-b border-slate-200 pb-3">
+            <h1 class="text-2xl text-center font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 uppercase border-b border-amber-500/20 pb-4">
                 Faculty Performance Evaluation
             </h1>
 
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 text-sm bg-white p-5 rounded-xl border border-slate-200 shadow-xs">
-                <div class="md:col-span-8 grid grid-cols-3 gap-y-3 gap-x-4 items-center">
-                    <span class="font-bold text-slate-700">Current School Year:</span>
-                    <div class="col-span-2">
-                        <input type="text" id="metaSchoolYear" value="2025 - 2026" class="w-full max-w-xs bg-slate-50 text-amber-800 font-bold px-3 py-1.5 rounded border border-slate-200 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 transition">
-                    </div>
+            <div class="bg-gradient-to-b from-[#e6c687] via-[#cca356] to-[#ad8336] p-[1px] rounded-xl shadow-xl">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4 text-xs bg-[#0b162e] p-5 rounded-xl gold-border-corner">
+                    <div class="md:col-span-8 grid grid-cols-3 gap-y-3 gap-x-4 items-center">
+                        <span class="font-bold text-amber-400 uppercase tracking-wider">Current School Year:</span>
+                        <div class="col-span-2">
+                            <input type="text" id="metaSchoolYear" value="2025 - 2026" class="w-full max-w-xs bg-[#060d1f] text-amber-200 font-bold px-3 py-1.5 rounded border border-amber-500/20 outline-none">
+                        </div>
 
-                    <span class="font-bold text-slate-700">Current Semester:</span>
-                    <div class="col-span-2">
-                        <input type="text" id="metaSemester" value="2nd Semester" class="w-full max-w-xs bg-slate-50 text-amber-800 font-bold px-3 py-1.5 rounded border border-slate-200 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 transition">
-                    </div>
+                        <span class="font-bold text-amber-400 uppercase tracking-wider">Current Semester:</span>
+                        <div class="col-span-2">
+                            <input type="text" id="metaSemester" value="2nd Semester" class="w-full max-w-xs bg-[#060d1f] text-amber-200 font-bold px-3 py-1.5 rounded border border-amber-500/20 outline-none">
+                        </div>
 
-                    <span class="font-bold text-slate-700">Student Name:</span>
-                    <div class="col-span-2">
-                        <input type="text" id="metaStudentName" placeholder="Enter Student Name" class="w-full bg-slate-50 text-slate-700 font-semibold uppercase px-3 py-1.5 rounded border border-slate-200 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 transition">
-                    </div>
+                        <span class="font-bold text-amber-400 uppercase tracking-wider">Student Name:</span>
+                        <div class="col-span-2">
+                            <input type="text" id="metaStudentName" class="w-full bg-[#060d1f] text-slate-100 font-bold uppercase px-3 py-1.5 rounded border border-amber-500/20 outline-none">
+                        </div>
 
-                    <span class="font-bold text-slate-700">Course / Year Level:</span>
-                    <div class="col-span-2">
-                        <input type="text" id="metaCourseLevel" placeholder="Enter Course / Year Level" class="w-full bg-slate-50 text-slate-600 italic px-3 py-1.5 rounded border border-slate-200 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 transition">
-                    </div>
+                        <span class="font-bold text-amber-400 uppercase tracking-wider">Course / Year Level:</span>
+                        <div class="col-span-2">
+                            <input type="text" id="metaCourseLevel" class="w-full bg-[#060d1f] text-slate-200 italic px-3 py-1.5 rounded border border-amber-500/20 outline-none">
+                        </div>
 
-                    <span class="font-bold text-slate-700">Evaluation Schedule:</span>
-                    <div class="col-span-2">
-                        <input type="text" value="May 11, 2026 to May 25, 2026" class="w-full bg-slate-50 text-slate-600 px-3 py-1.5 rounded border border-slate-200 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 transition">
+                        <span class="font-bold text-amber-400 uppercase tracking-wider">Evaluation Schedule:</span>
+                        <div class="col-span-2">
+                            <input type="text" value="May 11, 2026 to May 25, 2026" class="w-full bg-[#060d1f] text-slate-300 px-3 py-1.5 rounded border border-amber-500/20 outline-none">
+                        </div>
                     </div>
-                </div>
-                
-                <div class="md:col-span-4 border-l border-slate-100 pl-4 text-[11px] text-slate-400 flex flex-col justify-between gap-2">
-                    <p>Current School Year and term of enrollment defined in CampusNet System Options.</p>
-                    <div class="bg-rose-50 border border-rose-200 text-rose-800 p-2 rounded text-xs font-bold text-center">
-                        Screenshot your faculty evaluation process for clearance purposes
+                    
+                    <div class="md:col-span-4 border-l border-amber-500/10 pl-4 text-[11px] text-slate-400 flex flex-col justify-between gap-3">
+                        <p class="italic leading-relaxed">System parameters sync securely to RTU internal database directories automatically via client operations logs.</p>
+                        <div class="bg-rose-950/40 border border-rose-500/30 text-rose-300 p-2.5 rounded font-bold text-center text-xs">
+                            Screenshot your evaluation process grid for physical clearance records
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="flex items-center space-x-2 text-indigo-900 font-bold text-sm">
-                <i class="fa-solid fa-circle text-[10px] text-indigo-500"></i>
+            <div class="flex items-center space-x-2 text-amber-400 font-bold text-sm tracking-wider uppercase">
+                <i class="fa-solid fa-circle-nodes text-xs"></i>
                 <span>Schedule Details</span>
             </div>
 
-            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-xs">
-                <table class="w-full text-left text-xs border-collapse">
-                    <thead>
-                        <tr class="bg-slate-600 text-white uppercase tracking-wider text-[11px]">
-                            <th class="p-3 text-center border-r border-slate-500 w-12">No.</th>
-                            <th class="p-3 border-r border-slate-500">Class Code</th>
-                            <th class="p-3 border-r border-slate-500">Subject</th>
-                            <th class="p-3 border-r border-slate-500">Subject Description</th>
-                            <th class="p-3 border-r border-slate-500">Faculty</th>
-                            <th class="p-3 border-r border-slate-500 text-center w-28">Status</th>
-                            <th class="p-3 text-center w-40">Ref. No.</th>
-                        </tr>
-                    </thead>
-                    <tbody id="scheduleTableBody"></tbody>
-                </table>
+            <div class="bg-gradient-to-b from-[#e6c687] to-[#ad8336] p-[1px] rounded-xl shadow-2xl overflow-hidden">
+                <div class="overflow-x-auto bg-[#091226]">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-gradient-to-b from-[#162e5c] to-[#0f2042] text-amber-300 uppercase tracking-wider font-bold border-b border-amber-500/30">
+                                <th class="p-3.5 text-center border-r border-amber-500/20 w-12">No.</th>
+                                <th class="p-3.5 border-r border-amber-500/20">Class Code</th>
+                                <th class="p-3.5 border-r border-amber-500/20">Subject</th>
+                                <th class="p-3.5 border-r border-amber-500/20">Subject Description</th>
+                                <th class="p-3.5 border-r border-amber-500/20">Faculty Link Reference</th>
+                                <th class="p-3.5 border-r border-amber-500/20 text-center w-28">Status</th>
+                                <th class="p-3.5 text-center w-40">Ref. No.</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scheduleTableBody" class="divide-y divide-amber-500/10"></tbody>
+                    </table>
+                </div>
             </div>
         </section>
 
         <section id="view-evaluate" class="hidden space-y-6">
-            <div class="bg-white rounded-xl shadow-xs border border-slate-200 p-5 grid grid-cols-2 md:grid-cols-5 gap-3">
-                <div class="p-2 border-l-4 border-emerald-500 bg-slate-50 rounded-r-lg"><b class="block text-sm text-slate-900">5 - Always</b><span class="text-xs text-slate-500">91%–100%</span></div>
-                <div class="p-2 border-l-4 border-teal-500 bg-slate-50 rounded-r-lg"><b class="block text-sm text-slate-900">4 - Often</b><span class="text-xs text-slate-500">61%–90%</span></div>
-                <div class="p-2 border-l-4 border-amber-500 bg-slate-50 rounded-r-lg"><b class="block text-sm text-slate-900">3 - Sometimes</b><span class="text-xs text-slate-500">31%–60%</span></div>
-                <div class="p-2 border-l-4 border-orange-500 bg-slate-50 rounded-r-lg"><b class="block text-sm text-slate-900">2 - Seldom</b><span class="text-xs text-slate-500">11%–30%</span></div>
-                <div class="p-2 border-l-4 border-rose-500 bg-slate-50 rounded-r-lg col-span-2 md:col-span-1"><b class="block text-sm text-slate-900">1 - Never</b><span class="text-xs text-slate-500">0%–10%</span></div>
+            
+            <div class="bg-[#0b152e] rounded-xl border border-amber-500/20 p-4 grid grid-cols-2 md:grid-cols-5 gap-3 text-center">
+                <div class="p-2 border-l-4 border-emerald-500 bg-[#070e21] rounded-r-lg"><b class="block text-xs text-emerald-400">5 - Always</b><span class="text-[10px] text-slate-400">91% – 100%</span></div>
+                <div class="p-2 border-l-4 border-teal-500 bg-[#070e21] rounded-r-lg"><b class="block text-xs text-teal-400">4 - Often</b><span class="text-[10px] text-slate-400">61% – 90%</span></div>
+                <div class="p-2 border-l-4 border-amber-500 bg-[#070e21] rounded-r-lg"><b class="block text-xs text-amber-400">3 - Sometimes</b><span class="text-[10px] text-slate-400">31% – 60%</span></div>
+                <div class="p-2 border-l-4 border-orange-500 bg-[#070e21] rounded-r-lg"><b class="block text-xs text-orange-400">2 - Seldom</b><span class="text-[10px] text-slate-400">11% – 30%</span></div>
+                <div class="p-2 border-l-4 border-rose-500 bg-[#070e21] rounded-r-lg col-span-2 md:col-span-1"><b class="block text-xs text-rose-400">1 - Never</b><span class="text-[10px] text-slate-400">0% – 10%</span></div>
             </div>
 
-            <form id="evaluationMatrixForm" onsubmit="submitEvaluation(event)" class="bg-white rounded-xl shadow-xs border border-slate-200 overflow-hidden">
-                <div class="bg-white p-6 border-b border-slate-200">
-                    <h2 class="text-xl font-bold text-center text-slate-800 tracking-tight pb-4 border-b border-slate-100">Faculty Performance Evaluation</h2>
-                    
-                    <div class="flex flex-col md:flex-row items-center md:items-stretch gap-6 mt-4">
+            <form id="evaluationMatrixForm" onsubmit="submitEvaluation(event)" class="bg-[#0b152e] rounded-xl border border-amber-500/20 overflow-hidden shadow-2xl">
+                
+                <div class="p-6 border-b border-amber-500/20 bg-gradient-to-b from-[#0e1c3d] to-[#091226]">
+                    <div class="flex flex-col md:flex-row items-center md:items-stretch gap-6">
                         <div class="flex-1 w-full space-y-4">
                             <div>
-                                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Faculty Name:</label>
-                                <div id="cardFacultyName" class="w-full bg-slate-100 text-slate-900 font-bold px-4 py-2.5 rounded border border-slate-200"></div>
+                                <label class="block text-[10px] font-bold text-amber-400 uppercase tracking-widest mb-1">Faculty Member:</label>
+                                <div id="cardFacultyName" class="w-full bg-[#060c1c] text-white font-black px-4 py-2.5 rounded border border-amber-500/20 shadow-inner"></div>
                             </div>
                             <div>
-                                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Subject:</label>
-                                <div id="cardSubject" class="w-full bg-slate-100 text-slate-900 font-medium px-4 py-2.5 rounded border border-slate-200"></div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">School Year:</label>
-                                    <div class="w-full bg-slate-100 text-slate-900 font-medium px-4 py-2.5 rounded border border-slate-200">2025 - 2026</div>
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Semester:</label>
-                                    <div class="w-full bg-slate-100 text-slate-900 font-medium px-4 py-2.5 rounded border border-slate-200">2nd Semester</div>
-                                </div>
+                                <label class="block text-[10px] font-bold text-amber-400 uppercase tracking-widest mb-1">Assigned Course / Description:</label>
+                                <div id="cardSubject" class="w-full bg-[#060c1c] text-amber-100 font-medium px-4 py-2.5 rounded border border-amber-500/20 shadow-inner"></div>
                             </div>
                         </div>
-                        <div class="w-40 h-48 md:w-44 flex-shrink-0 bg-slate-100 rounded-lg border border-slate-300 p-1 shadow-xs overflow-hidden flex items-center justify-center">
-                            <img id="cardFacultyImage" src="prof-placeholder.png" alt="Faculty Headshot" class="w-full h-full object-cover rounded-md">
+                        <div class="w-36 h-44 flex-shrink-0 bg-[#050a17] rounded-xl border-2 border-amber-500/30 p-1 shadow-lg overflow-hidden flex items-center justify-center">
+                            <img id="cardFacultyImage" src="prof-placeholder.png" alt="Faculty Headshot" class="w-full h-full object-cover rounded-lg">
                         </div>
                     </div>
                 </div>
 
-                <div class="flex border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase text-slate-500">
-                    <button type="button" onclick="switchStep(1)" id="stepTab1" class="flex-1 py-3 border-b-2 border-indigo-600 text-indigo-900 bg-white font-bold text-center text-xs">A. Teaching Mgmt</button>
-                    <button type="button" onclick="switchStep(2)" id="stepTab2" class="flex-1 py-3 border-b-2 border-transparent text-center text-xs">B. Pedagogy & Tech</button>
-                    <button type="button" onclick="switchStep(3)" id="stepTab3" class="flex-1 py-3 border-b-2 border-transparent text-center text-xs">C. Commitment</button>
+                <div class="flex border-b border-amber-500/20 bg-[#070f24] text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                    <button type="button" onclick="switchStep(1)" id="stepTab1" class="flex-1 py-3.5 border-b-2 border-amber-500 text-amber-300 bg-[#0b152e] text-center transition">A. Teaching Mgmt</button>
+                    <button type="button" onclick="switchStep(2)" id="stepTab2" class="flex-1 py-3.5 border-b-2 border-transparent text-center transition">B. Pedagogy & Tech</button>
+                    <button type="button" onclick="switchStep(3)" id="stepTab3" class="flex-1 py-3.5 border-b-2 border-transparent text-center transition">C. Commitment</button>
                 </div>
 
-                <div class="p-6 md:p-8 space-y-6">
+                <div class="p-6 md:p-8 space-y-6 bg-[#091124]">
                     <div id="stepSection1" class="space-y-4">
-                        <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">01. Comes to class on the time.</p>
-                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q1"></template></div>
+                        <div class="matrix-row border-b border-slate-800 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <p class="text-sm text-slate-300 font-medium"><span class="text-amber-500 font-mono mr-2">01.</span>Comes to class on the time.</p>
+                            <div class="flex items-center space-x-1 text-xs"><template class="likert-buttons" data-qid="q1"></template></div>
                         </div>
-                        <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">02. Explains learning outcomes, expectations, grading system and various requirements of the subject/course.</p>
-                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q2"></template></div>
+                        <div class="matrix-row border-b border-slate-800 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <p class="text-sm text-slate-300 font-medium"><span class="text-amber-500 font-mono mr-2">02.</span>Explains learning outcomes, expectations, grading system and requirements of the subject/course.</p>
+                            <div class="flex items-center space-x-1 text-xs"><template class="likert-buttons" data-qid="q2"></template></div>
                         </div>
-                        <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">03. Maximizes the allocated time/learning hours effectively.</p>
-                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q3"></template></div>
+                        <div class="matrix-row border-b border-slate-800 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <p class="text-sm text-slate-300 font-medium"><span class="text-amber-500 font-mono mr-2">03.</span>Maximizes the allocated time/learning hours effectively.</p>
+                            <div class="flex items-center space-x-1 text-xs"><template class="likert-buttons" data-qid="q3"></template></div>
                         </div>
-                        <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">04. Facilitates students to think critically and creatively by providing appropriate learnig activities.</p>
-                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q4"></template></div>
+                        <div class="matrix-row border-b border-slate-800 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <p class="text-sm text-slate-300 font-medium"><span class="text-amber-500 font-mono mr-2">04.</span>Facilitates students to think critically and creatively by providing appropriate learnig activities.</p>
+                            <div class="flex items-center space-x-1 text-xs"><template class="likert-buttons" data-qid="q4"></template></div>
                         </div>
-                        <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">05. Guides students to learn on their own, reflect on new ideas and experiences, and make decisions in accomplishing given tasks.</p>
-                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q5"></template></div>
-                        </div>
-                        <div class="matrix-row pb-2 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">06. Communicates constructive feedback to students for their academic growth.</p>
-                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q6"></template></div>
+                        <div class="matrix-row pb-2 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <p class="text-sm text-slate-300 font-medium"><span class="text-amber-500 font-mono mr-2">05.</span>Guides students to learn on their own, reflect on new ideas and tasks configurations.</p>
+                            <div class="flex items-center space-x-1 text-xs"><template class="likert-buttons" data-qid="q5"></template></div>
                         </div>
                     </div>
 
                     <div id="stepSection2" class="space-y-4 hidden">
-                        <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">07. Demonstrates extensive and broad knowledge of the subject/courses.</p>
-                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q7"></template></div>
+                        <div class="matrix-row border-b border-slate-800 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <p class="text-sm text-slate-300 font-medium"><span class="text-amber-500 font-mono mr-2">06.</span>Communicates constructive feedback to students for their academic growth.</p>
+                            <div class="flex items-center space-x-1 text-xs"><template class="likert-buttons" data-qid="q6"></template></div>
                         </div>
-                        <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">08. Simplifies complex ideas in the lesson for ease of understanding.</p>
-                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q8"></template></div>
+                        <div class="matrix-row border-b border-slate-800 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <p class="text-sm text-slate-300 font-medium"><span class="text-amber-500 font-mono mr-2">07.</span>Demonstrates extensive and broad knowledge of the subject/courses.</p>
+                            <div class="flex items-center space-x-1 text-xs"><template class="likert-buttons" data-qid="q7"></template></div>
                         </div>
-                        <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">09. Relates the subject matter to contemporary issues and developments in the descipline and/or daily life activities.</p>
-                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q9"></template></div>
+                        <div class="matrix-row border-b border-slate-800 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <p class="text-sm text-slate-300 font-medium"><span class="text-amber-500 font-mono mr-2">08.</span>Simplifies complex ideas in the lesson for ease of understanding.</p>
+                            <div class="flex items-center space-x-1 text-xs"><template class="likert-buttons" data-qid="q8"></template></div>
                         </div>
-                        <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">10. Promotes active learning and students engagement by using appropriate teaching and learning resources including ICT tools and platform.</p>
-                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q10"></template></div>
+                        <div class="matrix-row border-b border-slate-800 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <p class="text-sm text-slate-300 font-medium"><span class="text-amber-500 font-mono mr-2">09.</span>Relates the subject matter to contemporary issues and daily life operations.</p>
+                            <div class="flex items-center space-x-1 text-xs"><template class="likert-buttons" data-qid="q9"></template></div>
                         </div>
-                        <div class="matrix-row pb-2 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">11. Uses appropriate assessments(projects, exam, quizzes, assignment, etc.) aligned with the learning outcomes.</p>
-                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q11"></template></div>
+                        <div class="matrix-row pb-2 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <p class="text-sm text-slate-300 font-medium"><span class="text-amber-500 font-mono mr-2">10.</span>Promotes active learning using appropriate teaching frameworks and platforms.</p>
+                            <div class="flex items-center space-x-1 text-xs"><template class="likert-buttons" data-qid="q10"></template></div>
                         </div>
                     </div>
 
                     <div id="stepSection3" class="space-y-6 hidden">
                         <div class="space-y-4">
-                            <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                                <p class="text-sm text-slate-700 font-medium">12. Recognizes and values the unique diversity and individual differences among students.</p>
-                                <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q12"></template></div>
+                            <div class="matrix-row border-b border-slate-800 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                <p class="text-sm text-slate-300 font-medium"><span class="text-amber-500 font-mono mr-2">11.</span>Uses appropriate assessments aligned with target lesson output matrices.</p>
+                                <div class="flex items-center space-x-1 text-xs"><template class="likert-buttons" data-qid="q11"></template></div>
                             </div>
-                            <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                                <p class="text-sm text-slate-700 font-medium">13. Assists students with their learning challenges during consultations hours.</p>
-                                <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q13"></template></div>
+                            <div class="matrix-row border-b border-slate-800 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                <p class="text-sm text-slate-300 font-medium"><span class="text-amber-500 font-mono mr-2">12.</span>Recognizes and values the unique diversity and differences among students.</p>
+                                <div class="flex items-center space-x-1 text-xs"><template class="likert-buttons" data-qid="q12"></template></div>
                             </div>
-                            <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                                <p class="text-sm text-slate-700 font-medium">14. Provides immediate feedback on student outputs and performance.</p>
-                                <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q14"></template></div>
+                            <div class="matrix-row border-b border-slate-800 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                <p class="text-sm text-slate-300 font-medium"><span class="text-amber-500 font-mono mr-2">13.</span>Assists students with their challenges during designated consultation hours.</p>
+                                <div class="flex items-center space-x-1 text-xs"><template class="likert-buttons" data-qid="q13"></template></div>
                             </div>
-                            <div class="matrix-row pb-2 flex justify-between items-center">
-                                <p class="text-sm text-slate-700 font-medium">15. Provides transparent and clear criteria in rating student's performance.</p>
-                                <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q15"></template></div>
+                            <div class="matrix-row border-b border-slate-800 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                <p class="text-sm text-slate-300 font-medium"><span class="text-amber-500 font-mono mr-2">14.</span>Provides immediate loop feedback on student outputs and execution metrics.</p>
+                                <div class="flex items-center space-x-1 text-xs"><template class="likert-buttons" data-qid="q14"></template></div>
+                            </div>
+                            <div class="matrix-row pb-2 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                <p class="text-sm text-slate-300 font-medium"><span class="text-amber-500 font-mono mr-2">15.</span>Provides transparent and clear criteria in rating student's performance.</p>
+                                <div class="flex items-center space-x-1 text-xs"><template class="likert-buttons" data-qid="q15"></template></div>
                             </div>
                         </div>
-                        <div class="pt-4 border-t border-slate-200 space-y-4">
+
+                        <div class="pt-6 border-t border-slate-800 space-y-4 text-xs">
                             <div>
-                                <label class="block text-sm font-bold text-slate-900 mb-1">1. What specific qualities of the Faculty Member you admire the most?(Required)</label>
-                                <textarea id="commentAdmire" required rows="2" class="w-full text-xs p-2 rounded border border-slate-300 outline-none focus:ring-2 focus:ring-indigo-600 transition"></textarea>
+                                <label class="block text-xs font-bold text-amber-400 uppercase tracking-wide mb-2">1. What specific qualities of the Faculty Member you admire the most? (Required)</label>
+                                <textarea id="commentAdmire" required rows="2" placeholder="Write core strengths..." class="w-full text-sm bg-[#060c1a] border border-amber-500/20 text-slate-100 p-3 rounded-lg outline-none focus:border-amber-400 transition"></textarea>
                             </div>
                             <div>
-                                <label class="block text-sm font-bold text-slate-900 mb-1">2. What are the qualities and teaching methodology of the Faculty Member that needs for improvement? (Required)</label>
-                                <textarea id="commentImprove" required rows="2" class="w-full text-xs p-2 rounded border border-slate-300 outline-none focus:ring-2 focus:ring-indigo-600 transition"></textarea>
+                                <label class="block text-xs font-bold text-amber-400 uppercase tracking-wide mb-2">2. What are the qualities and teaching methodology of the Faculty Member that needs for improvement? (Required)</label>
+                                <textarea id="commentImprove" required rows="2" placeholder="Write specific constructive growth inputs..." class="w-full text-sm bg-[#060c1a] border border-amber-500/20 text-slate-100 p-3 rounded-lg outline-none focus:border-amber-400 transition"></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-slate-50 border-t border-slate-200 px-6 py-4 flex justify-between items-center">
-                    <button type="button" id="prevFormBtn" onclick="navigateStep(-1)" class="px-4 py-1.5 text-xs font-semibold rounded bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 disabled:opacity-50" disabled>Back</button>
-                    <button type="button" id="nextFormBtn" onclick="navigateStep(1)" class="px-4 py-1.5 text-xs font-semibold rounded bg-indigo-600 text-white hover:bg-indigo-700 transition">Continue Next</button>
-                    <button type="submit" id="submitFormBtn" class="px-4 py-1.5 text-xs font-bold rounded bg-emerald-600 text-white hover:bg-emerald-700 hidden transition">Complete Submission</button>
+                <div class="bg-[#070f24] border-t border-amber-500/20 px-6 py-4 flex justify-between items-center">
+                    <button type="button" id="prevFormBtn" onclick="navigateStep(-1)" class="px-4 py-1.5 text-xs font-bold rounded bg-slate-800 border border-slate-700 text-slate-300 hover:bg-slate-700 disabled:opacity-30" disabled>Back</button>
+                    <button type="button" id="nextFormBtn" onclick="navigateStep(1)" class="px-4 py-1.5 text-xs font-bold rounded bg-gradient-to-b from-amber-300 to-amber-500 text-indigo-950 hover:from-amber-400 transition shadow">Continue Next</button>
+                    <button type="submit" id="submitFormBtn" class="px-5 py-1.5 text-xs font-black rounded bg-emerald-600 text-white hover:bg-emerald-700 hidden transition shadow-lg uppercase tracking-wide">Complete Submission</button>
                 </div>
             </form>
         </section>
 
         <section id="view-admin" class="hidden space-y-6">
-            <div class="bg-white rounded-xl border border-slate-200 p-6 flex justify-between items-center">
-                <h2 class="text-xl font-bold text-slate-900">Institutional Faculty Matrix</h2>
-                <button onclick="wipeMetricsCache()" class="px-3 py-1.5 text-xs font-semibold bg-rose-50 border border-rose-200 rounded text-rose-700 hover:bg-rose-100 transition">Reset System Data</button>
+            <div class="bg-[#0b152e] rounded-xl border border-amber-500/20 p-6 flex justify-between items-center shadow-xl">
+                <div>
+                    <h2 class="text-xl font-bold tracking-wide text-amber-400 uppercase">Institutional Analytics Overview</h2>
+                    <p class="text-xs text-slate-400 mt-1">Live calculated evaluation scores saved across browser session memory grids.</p>
+                </div>
+                <button onclick="wipeMetricsCache()" class="px-3 py-1.5 text-xs font-bold bg-rose-950/40 border border-rose-500/30 text-rose-300 hover:bg-rose-900/50 rounded transition">Reset System Database</button>
             </div>
             <div id="analyticsDashboardRoot" class="space-y-6"></div>
         </section>
@@ -307,7 +318,7 @@
         let operationalStep = 1;
         let activeTargetIndex = null;
 
-        // Custom list mapping all 9 entries with your requested professor names
+        // Custom list mapping all 9 entries with your requested anonymized professor names
         let scheduleItems = [
             { classCode: "141216", subjectCode: "ECE01L", desc: "Fundamentals of Electronic Circuits Laboratory", professor: "Boss Atan", status: "PENDING", refNo: "--" },
             { classCode: "141331", subjectCode: "CPE204", desc: "Software Design", professor: "Boss Agul", status: "PENDING", refNo: "--" },
@@ -339,7 +350,6 @@
 
         function handlePortalLogin(event) {
             event.preventDefault();
-            
             const inputName = document.getElementById('loginStudentName').value.trim().toUpperCase();
             const inputCourse = document.getElementById('loginStudentCourse').value.trim();
 
@@ -348,7 +358,6 @@
 
             document.getElementById('metaStudentName').value = inputName;
             document.getElementById('metaCourseLevel').value = inputCourse;
-
             document.getElementById('view-login').classList.add('hidden');
         }
 
@@ -363,20 +372,20 @@
             let html = '';
             scheduleItems.forEach((item, idx) => {
                 const isEvaluated = item.status === "EVALUATED";
-                const statusBadgeColor = isEvaluated ? "bg-green-100 text-green-800 font-bold" : "bg-slate-100 text-slate-600";
+                const statusBadgeColor = isEvaluated ? "bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30" : "bg-amber-500/10 text-amber-400 border border-amber-500/20";
                 const facultyActionContent = isEvaluated
-                    ? `<span class="text-slate-400 font-medium">${item.professor}</span>`
-                    : `<button onclick="launchEvaluationForm(${idx})" class="text-blue-600 hover:underline font-semibold text-left transition">${item.professor}</button>`;
+                    ? `<span class="text-slate-400 font-semibold">${item.professor}</span>`
+                    : `<button onclick="launchEvaluationForm(${idx})" class="text-sky-400 hover:text-sky-300 hover:underline font-bold text-left transition">${item.professor}</button>`;
 
                 html += `
-                    <tr class="border-b border-slate-200 hover:bg-slate-50 transition text-slate-700">
-                        <td class="p-3 text-center border-r border-slate-200 font-medium text-slate-400">${idx + 1}.</td>
-                        <td class="p-3 border-r border-slate-200 font-mono">${item.classCode}</td>
-                        <td class="p-3 border-r border-slate-200 font-bold text-slate-900">${item.subjectCode}</td>
-                        <td class="p-3 border-r border-slate-200">${item.desc}</td>
-                        <td class="p-3 border-r border-slate-200">${facultyActionContent}</td>
-                        <td class="p-3 border-r border-slate-200 text-center"><span class="px-2 py-0.5 rounded text-[10px] uppercase ${statusBadgeColor}">${item.status}</span></td>
-                        <td class="p-3 text-center font-mono text-slate-500 tracking-tight">${item.refNo}</td>
+                    <tr class="hover:bg-amber-500/[0.02] transition text-slate-300 font-medium">
+                        <td class="p-3 text-center border-r border-amber-500/10 font-bold text-slate-500">${idx + 1}.</td>
+                        <td class="p-3 border-r border-amber-500/10 font-mono text-amber-200/80">${item.classCode}</td>
+                        <td class="p-3 border-r border-amber-500/10 font-bold text-amber-300">${item.subjectCode}</td>
+                        <td class="p-3 border-r border-amber-500/10 text-slate-300">${item.desc}</td>
+                        <td class="p-3 border-r border-amber-500/10">${facultyActionContent}</td>
+                        <td class="p-3 border-r border-amber-500/10 text-center"><span class="px-2.5 py-0.5 rounded text-[10px] uppercase tracking-wider ${statusBadgeColor}">${item.status}</span></td>
+                        <td class="p-3 text-center font-mono text-slate-400 tracking-tight">${item.refNo}</td>
                     </tr>`;
             });
             tbody.innerHTML = html;
@@ -388,6 +397,7 @@
             document.getElementById('cardFacultyName').innerText = targetItem.professor;
             document.getElementById('cardSubject').innerText = `${targetItem.subjectCode} - ${targetItem.desc}`;
             
+            // Dynamic image assignments updated to match your exact filenames perfectly
             const imageEl = document.getElementById('cardFacultyImage');
             if (targetItem.professor === "Boss Atan") {
                 imageEl.src = "BOSS%20ATAN.jpg";
@@ -439,7 +449,7 @@
                     html += `
                         <div class="relative">
                             <input type="radio" id="${qid}_${score}" name="${qid}" value="${score}" required class="sr-only">
-                            <label for="${qid}_${score}" class="rating-btn inline-block border border-slate-200 px-3 py-1 rounded cursor-pointer text-slate-600 font-bold text-center min-w-[34px] transition-all">
+                            <label for="${qid}_${score}" class="rating-btn inline-block border border-amber-500/20 bg-[#060c1a] px-3 py-1 rounded cursor-pointer text-amber-400 font-bold text-center min-w-[34px] transition-all">
                                 ${score}
                             </label>
                         </div>`;
@@ -457,8 +467,8 @@
             for (let i = 1; i <= 3; i++) {
                 const tab = document.getElementById(`stepTab${i}`);
                 tab.className = i === operationalStep 
-                    ? "flex-1 py-3 border-b-2 border-indigo-600 text-indigo-900 bg-white font-bold text-center text-xs"
-                    : "flex-1 py-3 border-b-2 border-transparent text-center text-slate-400 text-xs";
+                    ? "flex-1 py-3.5 border-b-2 border-amber-400 text-amber-300 bg-[#0b152e] font-bold text-center text-xs"
+                    : "flex-1 py-3.5 border-b-2 border-transparent text-center text-slate-500 text-xs hover:text-slate-300 transition";
             }
 
             document.getElementById('prevFormBtn').disabled = (operationalStep === 1);
@@ -494,6 +504,7 @@
             dataStore.push(payload);
             localStorage.setItem('eval_logs_v5', JSON.stringify(dataStore));
 
+            // Static row target array reference numbers from reference layout image
             const references = [
                 "2605-2665326653", "2605-2665826658", "2605-2666226662",
                 "2605-2666726667", "2605-2667026670", "2605-2668126681",
@@ -513,7 +524,7 @@
             const container = document.getElementById('analyticsDashboardRoot');
             const dataStore = JSON.parse(localStorage.getItem('eval_logs_v5')) || [];
             if(dataStore.length === 0) {
-                container.innerHTML = `<div class="text-center bg-white border p-12 rounded-xl text-slate-400">No evaluations found.</div>`;
+                container.innerHTML = `<div class="text-center bg-[#0b152e] border border-amber-500/10 p-12 rounded-xl text-slate-400">No evaluations found in database cache registry.</div>`;
                 return;
             }
 
@@ -521,21 +532,21 @@
             dataStore.forEach(entry => {
                 const avg = (entry.scores.reduce((a,b) => a+b, 0) / entry.scores.length).toFixed(2);
                 finalHtml += `
-                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden p-5 space-y-2">
-                        <div class="flex justify-between items-center border-b pb-2">
-                            <h3 class="font-bold text-base text-slate-900">${entry.faculty}</h3>
-                            <span class="text-xs bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded font-bold">Avg: ${avg}/5.0</span>
+                    <div class="bg-[#0b152e] rounded-xl border border-amber-500/20 overflow-hidden p-5 space-y-2 shadow-lg">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <h3 class="font-bold text-base text-amber-300">${entry.faculty}</h3>
+                            <span class="text-xs bg-indigo-950 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded font-black">Composite Average: ${avg} / 5.00</span>
                         </div>
-                        <p class="text-xs text-slate-500 uppercase font-bold tracking-wider">${entry.subject}</p>
-                        <p class="text-xs text-slate-600"><b>Admired:</b> "${entry.admireText}"</p>
-                        <p class="text-xs text-slate-600"><b>Improvement:</b> "${entry.improveText}"</p>
+                        <p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">${entry.subject}</p>
+                        <p class="text-xs text-slate-300"><b>Admired Traits:</b> "${entry.admireText}"</p>
+                        <p class="text-xs text-slate-300"><b>Areas for Growth:</b> "${entry.improveText}"</p>
                     </div>`;
             });
             container.innerHTML = finalHtml;
         }
 
         function wipeMetricsCache() {
-            if(confirm("This will clear all local data. Continue?")) {
+            if(confirm("Confirm resetting all local data metrics?")) {
                 localStorage.clear();
                 location.reload();
             }
