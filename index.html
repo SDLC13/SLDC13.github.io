@@ -251,16 +251,19 @@
         let operationalStep = 1;
         let activeTargetIndex = null;
 
-        // Custom slim list focusing precisely on Gomez, Marife E.
+        // Expanded dataset mapping all 5 fields exactly from your layout table reference image
         let scheduleItems = [
+            { classCode: "141216", subjectCode: "ECE01L", desc: "Fundamentals of Electronic Circuits Laboratory", professor: "MARTINEZ, RICARDO M.", status: "PENDING", refNo: "--" },
             { classCode: "141331", subjectCode: "CPE204", desc: "Software Design", professor: "GOMEZ, MARIFE E.", status: "PENDING", refNo: "--" },
-            { classCode: "141332", subjectCode: "CPE204L", desc: "Software Design Laboratory", professor: "GOMEZ, MARIFE E.", status: "PENDING", refNo: "--" }
+            { classCode: "141332", subjectCode: "CPE204L", desc: "Software Design Laboratory", professor: "GOMEZ, MARIFE E.", status: "PENDING", refNo: "--" },
+            { classCode: "141333", subjectCode: "ECE01", desc: "Fundamentals of Electronic Circuits", professor: "GOMEZ, ROY I.", status: "PENDING", refNo: "--" },
+            { classCode: "141335", subjectCode: "CPE205", desc: "Assembly Language Programming", professor: "ZAPLAN, CHRISTOPHER L.", status: "PENDING", refNo: "--" }
         ];
 
-        if(localStorage.getItem('schedule_tracker_v4')) {
-            scheduleItems = JSON.parse(localStorage.getItem('schedule_tracker_v4'));
+        if(localStorage.getItem('schedule_tracker_v5')) {
+            scheduleItems = JSON.parse(localStorage.getItem('schedule_tracker_v5'));
         } else {
-            localStorage.setItem('schedule_tracker_v4', JSON.stringify(scheduleItems));
+            localStorage.setItem('schedule_tracker_v5', JSON.stringify(scheduleItems));
         }
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -280,7 +283,7 @@
 
                 html += `
                     <tr class="border-b border-slate-200 hover:bg-slate-50 transition text-slate-700">
-                        <td class="p-3 text-center border-r border-slate-200 font-medium text-slate-400">${idx + 2}.</td>
+                        <td class="p-3 text-center border-r border-slate-200 font-medium text-slate-400">${idx + 1}.</td>
                         <td class="p-3 border-r border-slate-200 font-mono">${item.classCode}</td>
                         <td class="p-3 border-r border-slate-200 font-bold text-slate-900">${item.subjectCode}</td>
                         <td class="p-3 border-r border-slate-200">${item.desc}</td>
@@ -298,10 +301,16 @@
             document.getElementById('cardFacultyName').innerText = targetItem.professor;
             document.getElementById('cardSubject').innerText = `${targetItem.subjectCode} - ${targetItem.desc}`;
             
-            // Exact path alignment to your uploaded PROF IMAGE.jpg file
+            // Dynamic image assignment utilizing exact permalink rules
             const imageEl = document.getElementById('cardFacultyImage');
-            if (targetItem.professor.includes("GOMEZ, MARIFE")) {
-                imageEl.src = "PROF%20IMAGE.jpg"; 
+            if (targetItem.professor.includes("MARTINEZ")) {
+                imageEl.src = "ECE01L%20prof.jpg";
+            } else if (targetItem.professor.includes("MARIFE")) {
+                imageEl.src = "PROF%20IMAGE.jpg";
+            } else if (targetItem.professor.includes("ROY")) {
+                imageEl.src = "ECE01%20prof.jpg";
+            } else if (targetItem.professor.includes("ZAPLAN")) {
+                imageEl.src = "CPE205%20prof.jpg";
             } else {
                 imageEl.src = "prof-placeholder.png";
             }
@@ -387,14 +396,22 @@
                 improveText: document.getElementById('commentImprove').value.trim()
             };
 
-            let dataStore = JSON.parse(localStorage.getItem('eval_logs_v4')) || [];
+            let dataStore = JSON.parse(localStorage.getItem('eval_logs_v5')) || [];
             dataStore.push(payload);
-            localStorage.setItem('eval_logs_v4', JSON.stringify(dataStore));
+            localStorage.setItem('eval_logs_v5', JSON.stringify(dataStore));
 
-            const baseRef = activeTargetIndex === 0 ? "2605-2665826658" : "2605-2666226662";
+            // Static array index reference matcher matching your target portal values sequence
+            const references = [
+                "2605-2665326653",
+                "2605-2665826658",
+                "2605-2666226662",
+                "2605-2666726667",
+                "2605-2667026670"
+            ];
+            
             scheduleItems[activeTargetIndex].status = "EVALUATED";
-            scheduleItems[activeTargetIndex].refNo = baseRef;
-            localStorage.setItem('schedule_tracker_v4', JSON.stringify(scheduleItems));
+            scheduleItems[activeTargetIndex].refNo = references[activeTargetIndex] || "2605-0000000000";
+            localStorage.setItem('schedule_tracker_v5', JSON.stringify(scheduleItems));
 
             alert(`Evaluation processed successfully.`);
             document.getElementById('evaluationMatrixForm').reset();
@@ -403,7 +420,7 @@
 
         function renderInstitutionalDashboard() {
             const container = document.getElementById('analyticsDashboardRoot');
-            const dataStore = JSON.parse(localStorage.getItem('eval_logs_v4')) || [];
+            const dataStore = JSON.parse(localStorage.getItem('eval_logs_v5')) || [];
             if(dataStore.length === 0) {
                 container.innerHTML = `<div class="text-center bg-white border p-12 rounded-xl text-slate-400">No evaluations found.</div>`;
                 return;
