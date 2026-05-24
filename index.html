@@ -40,21 +40,31 @@
             </h1>
 
             <div class="grid grid-cols-1 md:grid-cols-12 gap-4 text-sm bg-white p-5 rounded-xl border border-slate-200 shadow-xs">
-                <div class="md:col-span-8 grid grid-cols-3 gap-y-2 gap-x-4">
+                <div class="md:col-span-8 grid grid-cols-3 gap-y-3 gap-x-4 items-center">
                     <span class="font-bold text-slate-700">Current School Year:</span>
-                    <span class="col-span-2 font-bold text-amber-800">2025 - 2026</span>
+                    <div class="col-span-2">
+                        <input type="text" value="2025 - 2026" class="w-full max-w-xs bg-slate-50 text-amber-800 font-bold px-3 py-1.5 rounded border border-slate-200 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 transition">
+                    </div>
 
                     <span class="font-bold text-slate-700">Current Semester:</span>
-                    <span class="col-span-2 font-bold text-amber-800">2nd Semester</span>
+                    <div class="col-span-2">
+                        <input type="text" value="2nd Semester" class="w-full max-w-xs bg-slate-50 text-amber-800 font-bold px-3 py-1.5 rounded border border-slate-200 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 transition">
+                    </div>
 
                     <span class="font-bold text-slate-700">Student Name:</span>
-                    <span class="col-span-2 text-slate-600 font-semibold uppercase">SAN FELIPE , MARK JOSEPH M.</span>
+                    <div class="col-span-2">
+                        <input type="text" placeholder="Enter Student Name" class="w-full bg-slate-50 text-slate-700 font-semibold uppercase px-3 py-1.5 rounded border border-slate-200 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 transition">
+                    </div>
 
                     <span class="font-bold text-slate-700">Course / Year Level:</span>
-                    <span class="col-span-2 text-slate-500 italic">Bachelor of Science in Computer Engineering / 2nd Year</span>
+                    <div class="col-span-2">
+                        <input type="text" placeholder="Enter Course / Year Level" class="w-full bg-slate-50 text-slate-600 italic px-3 py-1.5 rounded border border-slate-200 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 transition">
+                    </div>
 
                     <span class="font-bold text-slate-700">Evaluation Schedule:</span>
-                    <span class="col-span-2 text-slate-600">May 11, 2026 to May 25, 2026</span>
+                    <div class="col-span-2">
+                        <input type="text" value="May 11, 2026 to May 25, 2026" class="w-full bg-slate-50 text-slate-600 px-3 py-1.5 rounded border border-slate-200 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-600 transition">
+                    </div>
                 </div>
                 
                 <div class="md:col-span-4 border-l border-slate-100 pl-4 text-[11px] text-slate-400 flex flex-col justify-between gap-2">
@@ -83,8 +93,7 @@
                             <th class="p-3 text-center w-40">Ref. No.</th>
                         </tr>
                     </thead>
-                    <tbody id="scheduleTableBody">
-                        </tbody>
+                    <tbody id="scheduleTableBody"></tbody>
                 </table>
             </div>
         </section>
@@ -99,70 +108,120 @@
             </div>
 
             <form id="evaluationMatrixForm" onsubmit="submitEvaluation(event)" class="bg-white rounded-xl shadow-xs border border-slate-200 overflow-hidden">
-                <div class="bg-white p-6 border-b border-slate-200 space-y-4">
-                    <h2 class="text-xl font-bold text-center text-slate-800 tracking-tight pb-2 border-b border-slate-100">Faculty Evaluation</h2>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Faculty Name:</label>
-                        <div id="cardFacultyName" class="w-full bg-slate-100 text-slate-900 font-bold px-4 py-2.5 rounded border border-slate-200"></div>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Subject:</label>
-                        <div id="cardSubject" class="w-full bg-slate-100 text-slate-900 font-medium px-4 py-2.5 rounded border border-slate-200"></div>
+                <div class="bg-white p-6 border-b border-slate-200">
+                    <h2 class="text-xl font-bold text-center text-slate-800 tracking-tight pb-4 border-b border-slate-100">Faculty Evaluation</h2>
+                    
+                    <div class="flex flex-col md:flex-row items-center md:items-stretch gap-6 mt-4">
+                        <div class="flex-1 w-full space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Faculty Name:</label>
+                                <div id="cardFacultyName" class="w-full bg-slate-100 text-slate-900 font-bold px-4 py-2.5 rounded border border-slate-200"></div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Subject:</label>
+                                <div id="cardSubject" class="w-full bg-slate-100 text-slate-900 font-medium px-4 py-2.5 rounded border border-slate-200"></div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">School Year:</label>
+                                    <div class="w-full bg-slate-100 text-slate-900 font-medium px-4 py-2.5 rounded border border-slate-200">2025 - 2026</div>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Semester:</label>
+                                    <div class="w-full bg-slate-100 text-slate-900 font-medium px-4 py-2.5 rounded border border-slate-200">2nd Semester</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-40 h-48 md:w-44 flex-shrink-0 bg-slate-100 rounded-lg border border-slate-300 p-1 shadow-xs overflow-hidden flex items-center justify-center">
+                            <img id="cardFacultyImage" src="prof-placeholder.png" alt="Faculty Headshot" class="w-full h-full object-cover rounded-md">
+                        </div>
                     </div>
                 </div>
 
                 <div class="flex border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase text-slate-500">
-                    <button type="button" onclick="switchStep(1)" id="stepTab1" class="flex-1 py-3 border-b-2 border-indigo-600 text-indigo-900 bg-white font-bold text-center">A. Teaching Mgmt</button>
-                    <button type="button" onclick="switchStep(2)" id="stepTab2" class="flex-1 py-3 border-b-2 border-transparent text-center">B. Pedagogy & Tech</button>
-                    <button type="button" onclick="switchStep(3)" id="stepTab3" class="flex-1 py-3 border-b-2 border-transparent text-center">C. Commitment</button>
+                    <button type="button" onclick="switchStep(1)" id="stepTab1" class="flex-1 py-3 border-b-2 border-indigo-600 text-indigo-900 bg-white font-bold text-center">A. Instructional Management</button>
+                    <button type="button" onclick="switchStep(2)" id="stepTab2" class="flex-1 py-3 border-b-2 border-transparent text-center">B. Pedagogical Mastery</button>
+                    <button type="button" onclick="switchStep(3)" id="stepTab3" class="flex-1 py-3 border-b-2 border-transparent text-center">C. Commitment & Professionalism</button>
                 </div>
 
                 <div class="p-6 md:p-8 space-y-6">
                     <div id="stepSection1" class="space-y-4">
                         <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">01. Comes to class on time.</p>
+                            <p class="text-sm text-slate-700 font-medium">01. Comes to class and starts instruction on time.</p>
                             <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q1"></template></div>
                         </div>
                         <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">02. Explains learning outcomes and grading system clearly.</p>
+                            <p class="text-sm text-slate-700 font-medium">02. Explains course requirements and grading system clearly.</p>
                             <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q2"></template></div>
                         </div>
-                        <div class="matrix-row pb-2 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">03. Maximizes allocated time effectively.</p>
+                        <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
+                            <p class="text-sm text-slate-700 font-medium">03. Maximizes allocated time for learning effectively.</p>
                             <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q3"></template></div>
+                        </div>
+                        <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
+                            <p class="text-sm text-slate-700 font-medium">04. Maintains class records and systematic topic tracking.</p>
+                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q4"></template></div>
+                        </div>
+                        <div class="matrix-row pb-2 flex justify-between items-center">
+                            <p class="text-sm text-slate-700 font-medium">05. Observes consistency in following the class schedule.</p>
+                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q5"></template></div>
                         </div>
                     </div>
 
                     <div id="stepSection2" class="space-y-4 hidden">
                         <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">04. Demonstrates broad knowledge of the subject matter.</p>
-                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q4"></template></div>
+                            <p class="text-sm text-slate-700 font-medium">06. Demonstrates extensive knowledge of the subject matter.</p>
+                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q6"></template></div>
+                        </div>
+                        <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
+                            <p class="text-sm text-slate-700 font-medium">07. Simplifies complex concepts for easy understanding.</p>
+                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q7"></template></div>
+                        </div>
+                        <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
+                            <p class="text-sm text-slate-700 font-medium">08. Relates lessons to real-world applications and issues.</p>
+                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q8"></template></div>
+                        </div>
+                        <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
+                            <p class="text-sm text-slate-700 font-medium">09. Utilizes modern ICT tools to aid student learning.</p>
+                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q9"></template></div>
                         </div>
                         <div class="matrix-row pb-2 flex justify-between items-center">
-                            <p class="text-sm text-slate-700 font-medium">05. Simplifies complex ideas for easy understanding.</p>
-                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q5"></template></div>
+                            <p class="text-sm text-slate-700 font-medium">10. Encourages critical thinking and creative problem-solving.</p>
+                            <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q10"></template></div>
                         </div>
                     </div>
 
                     <div id="stepSection3" class="space-y-6 hidden">
                         <div class="space-y-4">
                             <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
-                                <p class="text-sm text-slate-700 font-medium">06. Assists students with their learning challenges.</p>
-                                <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q6"></template></div>
+                                <p class="text-sm text-slate-700 font-medium">11. Respects individual differences and student diversity.</p>
+                                <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q11"></template></div>
+                            </div>
+                            <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
+                                <p class="text-sm text-slate-700 font-medium">12. Available for consultations during designated hours.</p>
+                                <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q12"></template></div>
+                            </div>
+                            <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
+                                <p class="text-sm text-slate-700 font-medium">13. Provides prompt and constructive feedback on works.</p>
+                                <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q13"></template></div>
+                            </div>
+                            <div class="matrix-row border-b border-slate-100 pb-4 flex justify-between items-center">
+                                <p class="text-sm text-slate-700 font-medium">14. Observes professional ethics and rapport with students.</p>
+                                <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q14"></template></div>
                             </div>
                             <div class="matrix-row pb-2 flex justify-between items-center">
-                                <p class="text-sm text-slate-700 font-medium">07. Provides transparent and clear grading criteria.</p>
-                                <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q7"></template></div>
+                                <p class="text-sm text-slate-700 font-medium">15. Upholds fairness and objectivity in grading performance.</p>
+                                <div class="flex items-center space-x-1 text-sm font-bold"><template class="likert-buttons" data-qid="q15"></template></div>
                             </div>
                         </div>
                         <div class="pt-4 border-t border-slate-200 space-y-4">
                             <div>
-                                <label class="block text-sm font-bold text-slate-900 mb-1">Admired Qualities:</label>
-                                <textarea id="commentAdmire" required rows="2" class="w-full text-xs p-2 rounded border border-slate-300 outline-none focus:ring-2 focus:ring-indigo-600"></textarea>
+                                <label class="block text-sm font-bold text-slate-900 mb-1">Qualities I admire most in this faculty:</label>
+                                <textarea id="commentAdmire" required rows="2" class="w-full text-xs p-2 rounded border border-slate-300 outline-none focus:ring-2 focus:ring-indigo-600 transition"></textarea>
                             </div>
                             <div>
-                                <label class="block text-sm font-bold text-slate-900 mb-1">Areas for Improvement:</label>
-                                <textarea id="commentImprove" required rows="2" class="w-full text-xs p-2 rounded border border-slate-300 outline-none focus:ring-2 focus:ring-indigo-600"></textarea>
+                                <label class="block text-sm font-bold text-slate-900 mb-1">Suggestions for improvement:</label>
+                                <textarea id="commentImprove" required rows="2" class="w-full text-xs p-2 rounded border border-slate-300 outline-none focus:ring-2 focus:ring-indigo-600 transition"></textarea>
                             </div>
                         </div>
                     </div>
@@ -170,8 +229,8 @@
 
                 <div class="bg-slate-50 border-t border-slate-200 px-6 py-4 flex justify-between items-center">
                     <button type="button" id="prevFormBtn" onclick="navigateStep(-1)" class="px-4 py-1.5 text-xs font-semibold rounded bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 disabled:opacity-50" disabled>Back</button>
-                    <button type="button" id="nextFormBtn" onclick="navigateStep(1)" class="px-4 py-1.5 text-xs font-semibold rounded bg-indigo-600 text-white hover:bg-indigo-700">Continue Next</button>
-                    <button type="submit" id="submitFormBtn" class="px-4 py-1.5 text-xs font-bold rounded bg-emerald-600 text-white hover:bg-emerald-700 hidden">Complete Submission</button>
+                    <button type="button" id="nextFormBtn" onclick="navigateStep(1)" class="px-4 py-1.5 text-xs font-semibold rounded bg-indigo-600 text-white hover:bg-indigo-700 transition">Continue Next</button>
+                    <button type="submit" id="submitFormBtn" class="px-4 py-1.5 text-xs font-bold rounded bg-emerald-600 text-white hover:bg-emerald-700 hidden transition">Complete Submission</button>
                 </div>
             </form>
         </section>
@@ -179,7 +238,7 @@
         <section id="view-admin" class="hidden space-y-6">
             <div class="bg-white rounded-xl border border-slate-200 p-6 flex justify-between items-center">
                 <h2 class="text-xl font-bold text-slate-900">Institutional Faculty Matrix</h2>
-                <button onclick="wipeMetricsCache()" class="px-3 py-1.5 text-xs font-semibold bg-rose-50 border border-rose-200 rounded text-rose-700 hover:bg-rose-100">Reset System States</button>
+                <button onclick="wipeMetricsCache()" class="px-3 py-1.5 text-xs font-semibold bg-rose-50 border border-rose-200 rounded text-rose-700 hover:bg-rose-100 transition">Reset System Data</button>
             </div>
             <div id="analyticsDashboardRoot" class="space-y-6"></div>
         </section>
@@ -189,16 +248,15 @@
         let operationalStep = 1;
         let activeTargetIndex = null;
 
-        // Cleaned target scope matching ONLY your image snippet choices
         let scheduleItems = [
             { classCode: "141331", subjectCode: "CPE204", desc: "Software Design", professor: "GOMEZ, MARIFE E.", status: "PENDING", refNo: "--" },
             { classCode: "141332", subjectCode: "CPE204L", desc: "Software Design Laboratory", professor: "GOMEZ, MARIFE E.", status: "PENDING", refNo: "--" }
         ];
 
-        if(localStorage.getItem('schedule_tracker_slim')) {
-            scheduleItems = JSON.parse(localStorage.getItem('schedule_tracker_slim'));
+        if(localStorage.getItem('schedule_tracker_v3')) {
+            scheduleItems = JSON.parse(localStorage.getItem('schedule_tracker_v3'));
         } else {
-            localStorage.setItem('schedule_tracker_slim', JSON.stringify(scheduleItems));
+            localStorage.setItem('schedule_tracker_v3', JSON.stringify(scheduleItems));
         }
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -209,14 +267,12 @@
         function renderScheduleTable() {
             const tbody = document.getElementById('scheduleTableBody');
             let html = '';
-
             scheduleItems.forEach((item, idx) => {
                 const isEvaluated = item.status === "EVALUATED";
                 const statusBadgeColor = isEvaluated ? "bg-green-100 text-green-800 font-bold" : "bg-slate-100 text-slate-600";
-                
                 const facultyActionContent = isEvaluated
                     ? `<span class="text-slate-400 font-medium">${item.professor}</span>`
-                    : `<button onclick="launchEvaluationForm(${idx})" class="text-blue-600 hover:underline font-semibold text-left focus:outline-none">${item.professor}</button>`;
+                    : `<button onclick="launchEvaluationForm(${idx})" class="text-blue-600 hover:underline font-semibold text-left transition">${item.professor}</button>`;
 
                 html += `
                     <tr class="border-b border-slate-200 hover:bg-slate-50 transition text-slate-700">
@@ -227,8 +283,7 @@
                         <td class="p-3 border-r border-slate-200">${facultyActionContent}</td>
                         <td class="p-3 border-r border-slate-200 text-center"><span class="px-2 py-0.5 rounded text-[10px] uppercase ${statusBadgeColor}">${item.status}</span></td>
                         <td class="p-3 text-center font-mono text-slate-500 tracking-tight">${item.refNo}</td>
-                    </tr>
-                `;
+                    </tr>`;
             });
             tbody.innerHTML = html;
         }
@@ -236,9 +291,10 @@
         function launchEvaluationForm(index) {
             activeTargetIndex = index;
             const targetItem = scheduleItems[index];
-
             document.getElementById('cardFacultyName').innerText = targetItem.professor;
             document.getElementById('cardSubject').innerText = `${targetItem.subjectCode} - ${targetItem.desc}`;
+            const imageEl = document.getElementById('cardFacultyImage');
+            imageEl.src = targetItem.professor.includes("GOMEZ, MARIFE") ? "gomez-marife.png" : "prof-placeholder.png";
 
             document.getElementById('view-schedule').classList.add('hidden');
             document.getElementById('view-evaluate').classList.remove('hidden');
@@ -270,11 +326,10 @@
                     html += `
                         <div class="relative">
                             <input type="radio" id="${qid}_${score}" name="${qid}" value="${score}" required class="sr-only">
-                            <label for="${qid}_${score}" class="rating-btn inline-block border border-slate-200 px-3 py-1 rounded cursor-pointer text-slate-600 font-bold text-center min-w-[34px]">
+                            <label for="${qid}_${score}" class="rating-btn inline-block border border-slate-200 px-3 py-1 rounded cursor-pointer text-slate-600 font-bold text-center min-w-[34px] transition-all">
                                 ${score}
                             </label>
-                        </div>
-                    `;
+                        </div>`;
                 }
                 template.outerHTML = html;
             });
@@ -312,51 +367,48 @@
             event.preventDefault();
             const currentItem = scheduleItems[activeTargetIndex];
             
-            const scoresA = [1,2,3].map(i => parseInt(document.querySelector(`input[name="q${i}"]:checked`).value));
-            const scoresB = [4,5].map(i => parseInt(document.querySelector(`input[name="q${i}"]:checked`).value));
-            const scoresC = [6,7].map(i => parseInt(document.querySelector(`input[name="q${i}"]:checked`).value));
+            const scores = Array.from({length: 15}, (_, i) => parseInt(document.querySelector(`input[name="q${i+1}"]:checked`).value));
 
             const payload = {
                 faculty: currentItem.professor,
                 subject: currentItem.desc,
-                scoresA, scoresB, scoresC,
+                scores: scores,
                 admireText: document.getElementById('commentAdmire').value.trim(),
                 improveText: document.getElementById('commentImprove').value.trim()
             };
 
-            let dataStore = JSON.parse(localStorage.getItem('academic_evaluations_slim')) || [];
+            let dataStore = JSON.parse(localStorage.getItem('eval_logs_v3')) || [];
             dataStore.push(payload);
-            localStorage.setItem('academic_evaluations_slim', JSON.stringify(dataStore));
+            localStorage.setItem('eval_logs_v3', JSON.stringify(dataStore));
 
-            // Generate sequence matching the image style context
             const baseRef = activeTargetIndex === 0 ? "2605-2665826658" : "2605-2666226662";
-            
             scheduleItems[activeTargetIndex].status = "EVALUATED";
             scheduleItems[activeTargetIndex].refNo = baseRef;
-            localStorage.setItem('schedule_tracker_slim', JSON.stringify(scheduleItems));
+            localStorage.setItem('schedule_tracker_v3', JSON.stringify(scheduleItems));
 
-            alert(`Evaluation recorded successfully.`);
+            alert(`Evaluation processed successfully.`);
             document.getElementById('evaluationMatrixForm').reset();
             showScheduleView();
         }
 
         function renderInstitutionalDashboard() {
             const container = document.getElementById('analyticsDashboardRoot');
-            const dataStore = JSON.parse(localStorage.getItem('academic_evaluations_slim')) || [];
-
+            const dataStore = JSON.parse(localStorage.getItem('eval_logs_v3')) || [];
             if(dataStore.length === 0) {
-                container.innerHTML = `<div class="text-center bg-white border p-12 rounded-xl text-slate-400">No evaluations submitted yet.</div>`;
+                container.innerHTML = `<div class="text-center bg-white border p-12 rounded-xl text-slate-400">No evaluations found.</div>`;
                 return;
             }
 
             let finalHtml = '';
             dataStore.forEach(entry => {
+                const avg = (entry.scores.reduce((a,b) => a+b, 0) / entry.scores.length).toFixed(2);
                 finalHtml += `
                     <div class="bg-white rounded-xl border border-slate-200 overflow-hidden p-5 space-y-2">
                         <div class="flex justify-between items-center border-b pb-2">
                             <h3 class="font-bold text-base text-slate-900">${entry.faculty}</h3>
-                            <span class="text-xs bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-mono">${entry.subject}</span>
+                            <span class="text-xs bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded font-bold">Avg: ${avg}/5.0</span>
                         </div>
+                        <p class="text-xs text-slate-500 uppercase font-bold tracking-wider">${entry.subject}</p>
                         <p class="text-xs text-slate-600"><b>Admired:</b> "${entry.admireText}"</p>
                         <p class="text-xs text-slate-600"><b>Improvement:</b> "${entry.improveText}"</p>
                     </div>`;
@@ -365,8 +417,10 @@
         }
 
         function wipeMetricsCache() {
-            localStorage.clear();
-            location.reload();
+            if(confirm("This will clear all local data. Continue?")) {
+                localStorage.clear();
+                location.reload();
+            }
         }
     </script>
 </body>
