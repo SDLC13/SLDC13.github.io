@@ -142,9 +142,9 @@
                 </div>
 
                 <div class="flex border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase text-slate-500">
-                    <button type="button" onclick="switchStep(1)" id="stepTab1" class="flex-1 py-3 border-b-2 border-indigo-600 text-indigo-900 bg-white font-bold text-center">A. Management of Teaching and Learning</button>
-                    <button type="button" onclick="switchStep(2)" id="stepTab2" class="flex-1 py-3 border-b-2 border-transparent text-center">B. Content Knowledge, Pedagogy and Technology</button>
-                    <button type="button" onclick="switchStep(3)" id="stepTab3" class="flex-1 py-3 border-b-2 border-transparent text-center">C. Commitment and Transparency</button>
+                    <button type="button" onclick="switchStep(1)" id="stepTab1" class="flex-1 py-3 border-b-2 border-indigo-600 text-indigo-900 bg-white font-bold text-center text-xs">A. Teaching Mgmt</button>
+                    <button type="button" onclick="switchStep(2)" id="stepTab2" class="flex-1 py-3 border-b-2 border-transparent text-center text-xs">B. Pedagogy & Tech</button>
+                    <button type="button" onclick="switchStep(3)" id="stepTab3" class="flex-1 py-3 border-b-2 border-transparent text-center text-xs">C. Commitment</button>
                 </div>
 
                 <div class="p-6 md:p-8 space-y-6">
@@ -251,14 +251,14 @@
         let operationalStep = 1;
         let activeTargetIndex = null;
 
-        // Anonymized professor dataset structure mapping all 9 table items perfectly
+        // Custom list mapping all 9 entries with your requested professor names
         let scheduleItems = [
             { classCode: "141216", subjectCode: "ECE01L", desc: "Fundamentals of Electronic Circuits Laboratory", professor: "Boss Atan", status: "PENDING", refNo: "--" },
             { classCode: "141331", subjectCode: "CPE204", desc: "Software Design", professor: "Boss Agul", status: "PENDING", refNo: "--" },
             { classCode: "141332", subjectCode: "CPE204L", desc: "Software Design Laboratory", professor: "Boss Agul", status: "PENDING", refNo: "--" },
             { classCode: "141333", subjectCode: "ECE01", desc: "Fundamentals of Electronic Circuits", professor: "Fernando Rivera", status: "PENDING", refNo: "--" },
             { classCode: "141335", subjectCode: "CPE205", desc: "Assembly Language Programming", professor: "Daddy tyga", status: "PENDING", refNo: "--" },
-            { classCode: "1490022", subjectCode: "DE", desc: "Differential Equations", professor: "Jonas Marmol", status: "PENDING", refNo: "--" },
+            { classCode: "190022", subjectCode: "DE", desc: "Differential Equations", professor: "Jonas Marmol", status: "PENDING", refNo: "--" },
             { classCode: "1310063", subjectCode: "GE-ELEC14", desc: "Technical Communication", professor: "Anygma Yuson", status: "PENDING", refNo: "--" },
             { classCode: "1313031", subjectCode: "GE03", desc: "The Contemporary World", professor: "Bato dela rosa", status: "PENDING", refNo: "--" },
             { classCode: "13100069", subjectCode: "PE04", desc: "Physical Activities Towards Health and Fitness II", professor: "Naruto Uzumaki", status: "PENDING", refNo: "--" }
@@ -305,18 +305,26 @@
             document.getElementById('cardFacultyName').innerText = targetItem.professor;
             document.getElementById('cardSubject').innerText = `${targetItem.subjectCode} - ${targetItem.desc}`;
             
-            // Image asset assignment matching the custom permalinks precisely
+            // Dynamic image assignment utilizing your explicit code filenames
             const imageEl = document.getElementById('cardFacultyImage');
             if (targetItem.professor === "Boss Atan") {
-                imageEl.src = "ECE01L%20prof.jpg";
+                imageEl.src = "BOSS%20ATAN.jpg";
             } else if (targetItem.professor === "Boss Agul") {
-                imageEl.src = "PROF%20IMAGE.jpg";
+                imageEl.src = "BOSS%20AGUL.jpg";
             } else if (targetItem.professor === "Fernando Rivera") {
-                imageEl.src = "ECE01%20prof.jpg";
+                imageEl.src = "FERNANDO.jpg";
             } else if (targetItem.professor === "Daddy tyga") {
-                imageEl.src = "CPE205%20prof.jpg";
+                imageEl.src = "DADDY%20TYGA.jpg";
+            } else if (targetItem.professor === "Jonas Marmol") {
+                imageEl.src = "MARMOL.jpg";
+            } else if (targetItem.professor === "Anygma Yuson") {
+                imageEl.src = "ANYGMA.jpg";
+            } else if (targetItem.professor === "Bato dela rosa") {
+                imageEl.src = "BATO.png";
+            } else if (targetItem.professor === "Naruto Uzumaki") {
+                imageEl.src = "NARUTO.jpg";
             } else {
-                imageEl.src = "prof-placeholder.png";
+                imageEl.src = "PRINCESS%20FIONA.jpg";
             }
 
             document.getElementById('view-schedule').classList.add('hidden');
@@ -404,7 +412,7 @@
             dataStore.push(payload);
             localStorage.setItem('eval_logs_v5', JSON.stringify(dataStore));
 
-            // Matching structural reference IDs from your target snapshot sequence
+            // Setup corresponding reference numbers exactly from your portal view
             const references = [
                 "2605-2665326653", "2605-2665826658", "2605-2666226662",
                 "2605-2666726667", "2605-2667026670", "2605-2668126681",
