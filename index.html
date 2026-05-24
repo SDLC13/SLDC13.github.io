@@ -7,7 +7,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Utility styles for active custom radio buttons */
         .rating-btn:hover { background-color: #e2e8f0; }
         input[type="radio"]:checked + label {
             background-color: #312e81; /* indigo-900 */
@@ -29,7 +28,7 @@
             </div>
         </div>
         <div class="flex space-x-2">
-            <button onclick="changeView('evaluate')" id="nav-eval" class="px-4 py-2 text-sm rounded-lg bg-indigo-800 font-medium transition duration-150">
+            <button onclick="changeView('evaluate')" id="nav-eval" class="px-4 py-2 text-sm rounded-lg bg-indigo-800 font-medium text-white transition duration-150">
                 <i class="fa-solid fa-file-signature mr-2"></i>Evaluation Form
             </button>
             <button onclick="changeView('admin')" id="nav-admin" class="px-4 py-2 text-sm rounded-lg text-indigo-200 hover:bg-indigo-900 font-medium transition duration-150">
@@ -55,134 +54,158 @@
                 <div class="bg-slate-900 text-white p-6 border-b border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
                         <h1 class="text-xl font-bold tracking-tight">Faculty Performance Appraisal</h1>
-                        <p class="text-xs text-slate-400 mt-1">Select an instructor target to begin evaluation metrics routing.</p>
+                        <p class="text-xs text-slate-400 mt-1">Select an instructor target to load their profile information.</p>
                     </div>
-                    <div class="min-w-[260px]">
-                        <select id="evalTargetFaculty" required class="w-full px-3 py-2 bg-slate-800 text-white font-medium text-sm rounded-lg border border-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    <div class="min-w-[320px]">
+                        <select id="evalTargetFaculty" required onchange="handleFacultyChange(this.value)" class="w-full px-3 py-2 bg-slate-800 text-white font-medium text-sm rounded-lg border border-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500">
                             <option value="" disabled selected>-- Select Faculty Member --</option>
-                            <option value="Prof. Jane Doe">Prof. Jane Doe (Department of Computing)</option>
-                            <option value="Dr. John Smith">Dr. John Smith (Natural Sciences)</option>
-                            <option value="Engr. Robert Lee">Engr. Robert Lee (Engineering & Tech)</option>
+                            <option value="MARTINEZ, RICARDO MAGCALENG">MARTINEZ, RICARDO MAGCALENG</option>
+                            <option value="DELA CRUZ, MARIA SANTOS">DELA CRUZ, MARIA SANTOS</option>
+                            <option value="ALCANTARA,JUAN LUNA">ALCANTARA, JUAN LUNA</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="flex border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-500 overflow-x-auto">
-                    <button type="button" onclick="switchStep(1)" id="stepTab1" class="flex-1 py-3 px-4 border-b-2 border-indigo-600 text-indigo-900 bg-white whitespace-nowrap">A. Teaching Mgmt</button>
-                    <button type="button" onclick="switchStep(2)" id="stepTab2" class="flex-1 py-3 px-4 border-b-2 border-transparent hover:text-slate-900 whitespace-nowrap">B. Pedagogy & Tech</button>
-                    <button type="button" onclick="switchStep(3)" id="stepTab3" class="flex-1 py-3 px-4 border-b-2 border-transparent hover:text-slate-900 whitespace-nowrap">C. Commitment & Feedback</button>
+                <div id="facultyProfileCard" class="hidden bg-white p-6 border-b border-slate-200 space-y-4">
+                    <h2 class="text-2xl font-bold text-center text-slate-800 pb-2">Faculty Evaluation</h2>
+                    
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-1">Faculty Name:</label>
+                        <div id="cardFacultyName" class="w-full bg-slate-100 text-slate-900 font-semibold px-4 py-3 rounded-lg border border-slate-200"></div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-1">Subject:</label>
+                        <div id="cardSubject" class="w-full bg-slate-100 text-slate-900 font-semibold px-4 py-3 rounded-lg border border-slate-200"></div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1">School Year:</label>
+                            <div id="cardYear" class="w-full bg-slate-100 text-slate-900 font-semibold px-4 py-3 rounded-lg border border-slate-200"></div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1">Semester:</label>
+                            <div id="cardSemester" class="w-full bg-slate-100 text-slate-900 font-semibold px-4 py-3 rounded-lg border border-slate-200"></div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="p-6 md:p-8 space-y-6">
-
-                    <div id="stepSection1" class="space-y-4">
-                        <div class="mb-4 bg-indigo-50 border border-indigo-100 p-4 rounded-lg">
-                            <h3 class="text-sm font-bold text-indigo-950 uppercase tracking-wide">Category A: Management of Teaching and Learning</h3>
-                            <p class="text-xs text-indigo-800 mt-0.5">Focuses on classroom structure, time utilization, and the execution of objective standard pacing configurations.</p>
-                        </div>
-                        <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                            <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">01.</span>Comes to class on time.</p>
-                            <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold">
-                                <template class="likert-buttons" data-qid="q1"></template>
-                            </div>
-                        </div>
-                        <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                            <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">02.</span>Explains learning outcomes, expectations, grading system and requirements clearly.</p>
-                            <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q2"></template></div>
-                        </div>
-                        <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                            <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">03.</span>Maximizes the allocated time/learning hours effectively.</p>
-                            <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q3"></template></div>
-                        </div>
-                        <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                            <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">04.</span>Facilitates students to think critically and creatively by providing appropriate activities.</p>
-                            <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q4"></template></div>
-                        </div>
-                        <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                            <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">05.</span>Guides students to learn independently, reflect on new ideas, and make execution decisions.</p>
-                            <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q5"></template></div>
-                        </div>
-                        <div class="matrix-row pb-2 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                            <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">06.</span>Communicates constructive feedback to students for their academic growth.</p>
-                            <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q6"></template></div>
-                        </div>
+                <div id="questionnaireContainer" class="hidden">
+                    <div class="flex border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-500 overflow-x-auto">
+                        <button type="button" onclick="switchStep(1)" id="stepTab1" class="flex-1 py-3 px-4 border-b-2 border-indigo-600 text-indigo-900 bg-white whitespace-nowrap text-center">A. Teaching Mgmt</button>
+                        <button type="button" onclick="switchStep(2)" id="stepTab2" class="flex-1 py-3 px-4 border-b-2 border-transparent hover:text-slate-900 whitespace-nowrap text-center">B. Pedagogy & Tech</button>
+                        <button type="button" onclick="switchStep(3)" id="stepTab3" class="flex-1 py-3 px-4 border-b-2 border-transparent hover:text-slate-900 whitespace-nowrap text-center">C. Commitment & Feedback</button>
                     </div>
 
-                    <div id="stepSection2" class="space-y-4 hidden">
-                        <div class="mb-4 bg-teal-50 border border-teal-100 p-4 rounded-lg">
-                            <h3 class="text-sm font-bold text-teal-950 uppercase tracking-wide">Category B: Content Knowledge, Pedagogy and Technology</h3>
-                            <p class="text-xs text-teal-800 mt-0.5">Assesses core framework competence, modern digital workspace tools incorporation, and complex logic grouping resolution.</p>
-                        </div>
-                        <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                            <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">07.</span>Demonstrates extensive and broad knowledge of the subject/courses.</p>
-                            <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q7"></template></div>
-                        </div>
-                        <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                            <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">08.</span>Simplifies complex ideas in the lesson for ease of understanding.</p>
-                            <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q8"></template></div>
-                        </div>
-                        <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                            <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">09.</span>Relates the subject matter to contemporary issues and daily life operations.</p>
-                            <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q9"></template></div>
-                        </div>
-                        <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                            <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">10.</span>Promotes active learning and student engagement using appropriate ICT platforms.</p>
-                            <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q10"></template></div>
-                        </div>
-                        <div class="matrix-row pb-2 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                            <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">11.</span>Uses appropriate assessments (projects, exams, quizzes) aligned with learning outcomes.</p>
-                            <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q11"></template></div>
-                        </div>
-                    </div>
+                    <div class="p-6 md:p-8 space-y-6">
 
-                    <div id="stepSection3" class="space-y-6 hidden">
-                        <div class="space-y-4">
-                            <div class="mb-4 bg-amber-50 border border-amber-100 p-4 rounded-lg">
-                                <h3 class="text-sm font-bold text-amber-950 uppercase tracking-wide">Category C: Commitment and Transparency</h3>
-                                <p class="text-xs text-amber-800 mt-0.5">Upholding inclusion metrics, student transparency tracking, and standard equity delivery scales.</p>
+                        <div id="stepSection1" class="space-y-4">
+                            <div class="mb-4 bg-indigo-50 border border-indigo-100 p-4 rounded-lg">
+                                <h3 class="text-sm font-bold text-indigo-950 uppercase tracking-wide">Category A: Management of Teaching and Learning</h3>
+                                <p class="text-xs text-indigo-800 mt-0.5">Focuses on classroom structure, time utilization, and the execution of objective standard pacing configurations.</p>
                             </div>
                             <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                                <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">12.</span>Recognizes and values the unique diversity and individual differences among students.</p>
-                                <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q12"></template></div>
+                                <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">01.</span>Comes to class on time.</p>
+                                <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q1"></template></div>
                             </div>
                             <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                                <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">13.</span>Assists students with their learning challenges during consultation hours.</p>
-                                <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q13"></template></div>
+                                <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">02.</span>Explains learning outcomes, expectations, grading system and requirements clearly.</p>
+                                <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q2"></template></div>
                             </div>
                             <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                                <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">14.</span>Provides immediate feedback on student outputs and execution metrics.</p>
-                                <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q14"></template></div>
+                                <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">03.</span>Maximizes the allocated time/learning hours effectively.</p>
+                                <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q3"></template></div>
+                            </div>
+                            <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">04.</span>Facilitates students to think critically and creatively by providing appropriate activities.</p>
+                                <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q4"></template></div>
+                            </div>
+                            <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">05.</span>Guides students to learn independently, reflect on new ideas, and make execution decisions.</p>
+                                <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q5"></template></div>
                             </div>
                             <div class="matrix-row pb-2 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                                <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">15.</span>Provides transparent and clear criteria in rating student performance.</p>
-                                <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q15"></template></div>
+                                <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">06.</span>Communicates constructive feedback to students for their academic growth.</p>
+                                <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q6"></template></div>
                             </div>
                         </div>
 
-                        <div class="pt-4 border-t border-slate-200 space-y-4">
-                            <div>
-                                <label class="block text-sm font-bold text-slate-900 mb-1">1. What specific qualities of the Faculty Member do you admire the most? <span class="text-rose-500">*</span></label>
-                                <textarea id="commentAdmire" required rows="3" placeholder="Write core strengths..." class="w-full text-sm px-3 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-600 outline-none"></textarea>
+                        <div id="stepSection2" class="space-y-4 hidden">
+                            <div class="mb-4 bg-teal-50 border border-teal-100 p-4 rounded-lg">
+                                <h3 class="text-sm font-bold text-teal-950 uppercase tracking-wide">Category B: Content Knowledge, Pedagogy and Technology</h3>
+                                <p class="text-xs text-teal-800 mt-0.5">Assesses core framework competence, modern digital workspace tools incorporation, and complex logic grouping resolution.</p>
                             </div>
-                            <div>
-                                <label class="block text-sm font-bold text-slate-900 mb-1">2. What are the qualities and teaching methodology of the Faculty Member that need improvement? <span class="text-rose-500">*</span></label>
-                                <textarea id="commentImprove" required rows="3" placeholder="Write descriptive structural areas requiring change..." class="w-full text-sm px-3 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-600 outline-none"></textarea>
+                            <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">07.</span>Demonstrates extensive and broad knowledge of the subject/courses.</p>
+                                <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q7"></template></div>
+                            </div>
+                            <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">08.</span>Simplifies complex ideas in the lesson for ease of understanding.</p>
+                                <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q8"></template></div>
+                            </div>
+                            <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">09.</span>Relates the subject matter to contemporary issues and daily life operations.</p>
+                                <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q9"></template></div>
+                            </div>
+                            <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">10.</span>Promotes active learning and student engagement using appropriate ICT platforms.</p>
+                                <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q10"></template></div>
+                            </div>
+                            <div class="matrix-row pb-2 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">11.</span>Uses appropriate assessments (projects, exams, quizzes) aligned with learning outcomes.</p>
+                                <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q11"></template></div>
                             </div>
                         </div>
+
+                        <div id="stepSection3" class="space-y-6 hidden">
+                            <div class="space-y-4">
+                                <div class="mb-4 bg-amber-50 border border-amber-100 p-4 rounded-lg">
+                                    <h3 class="text-sm font-bold text-amber-950 uppercase tracking-wide">Category C: Commitment and Transparency</h3>
+                                    <p class="text-xs text-amber-800 mt-0.5">Upholding inclusion metrics, student transparency tracking, and standard equity delivery scales.</p>
+                                </div>
+                                <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                    <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">12.</span>Recognizes and values the unique diversity and individual differences among students.</p>
+                                    <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q12"></template></div>
+                                </div>
+                                <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                    <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">13.</span>Assists students with their learning challenges during consultation hours.</p>
+                                    <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q13"></template></div>
+                                </div>
+                                <div class="matrix-row border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                    <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">14.</span>Provides immediate feedback on student outputs and execution metrics.</p>
+                                    <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q14"></template></div>
+                                </div>
+                                <div class="matrix-row pb-2 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                    <p class="text-sm text-slate-700 font-medium"><span class="text-slate-400 mr-2">15.</span>Provides transparent and clear criteria in rating student performance.</p>
+                                    <div class="flex items-center space-x-1 w-full md:w-auto justify-end text-sm font-bold"><template class="likert-buttons" data-qid="q15"></template></div>
+                                </div>
+                            </div>
+
+                            <div class="pt-4 border-t border-slate-200 space-y-4">
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-900 mb-1">1. What specific qualities of the Faculty Member do you admire the most? <span class="text-rose-500">*</span></label>
+                                    <textarea id="commentAdmire" required rows="3" placeholder="Write core strengths..." class="w-full text-sm px-3 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-600 outline-none"></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-900 mb-1">2. What are the qualities and teaching methodology of the Faculty Member that need improvement? <span class="text-rose-500">*</span></label>
+                                    <textarea id="commentImprove" required rows="3" placeholder="Write descriptive areas requiring change..." class="w-full text-sm px-3 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-600 outline-none"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
+                    <div class="bg-slate-50 border-t border-slate-200 px-6 py-4 flex justify-between items-center">
+                        <button type="button" id="prevFormBtn" onclick="navigateStep(-1)" class="px-4 py-2 text-sm font-semibold rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 disabled:opacity-50" disabled>Back</button>
+                        <button type="button" id="nextFormBtn" onclick="navigateStep(1)" class="px-4 py-2 text-sm font-semibold rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">Continue Next</button>
+                        <button type="submit" id="submitFormBtn" class="px-5 py-2 text-sm font-bold rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 hidden">Complete Submission</button>
+                    </div>
                 </div>
 
-                <div class="bg-slate-50 border-t border-slate-200 px-6 py-4 flex justify-between items-center">
-                    <button type="button" id="prevFormBtn" onclick="navigateStep(-1)" class="px-4 py-2 text-sm font-semibold rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 disabled:opacity-50" disabled>
-                        Back
-                    </button>
-                    <button type="button" id="nextFormBtn" onclick="navigateStep(1)" class="px-4 py-2 text-sm font-semibold rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">
-                        Continue Next
-                    </button>
-                    <button type="submit" id="submitFormBtn" class="px-5 py-2 text-sm font-bold rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 hidden">
-                        Complete Submission
-                    </button>
+                <div id="emptySelectNotice" class="p-12 text-center text-slate-400 font-medium">
+                    <i class="fa-solid fa-arrow-pointer text-3xl mb-2 text-slate-300 block"></i>
+                    Please select a Faculty Member above to unlock the appraisal form metrics.
                 </div>
             </form>
         </section>
@@ -197,22 +220,54 @@
                     <i class="fa-solid fa-trash-can mr-2"></i>Clear Records Cache
                 </button>
             </div>
-
-            <div id="analyticsDashboardRoot" class="space-y-6">
-                </div>
+            <div id="analyticsDashboardRoot" class="space-y-6"></div>
         </section>
-
     </main>
 
     <script>
         let operationalStep = 1;
 
-        // Auto-Generate custom responsive Likert rows instantly 
+        // Structured mock database repository matching professor choices
+        const facultyDatabase = {
+            "MARTINEZ, RICARDO MAGCALENG": {
+                subject: "Fundamentals of Electronic Circuits Laboratory",
+                year: "2025",
+                semester: "2S"
+            },
+            "DELA CRUZ, MARIA SANTOS": {
+                subject: "Advanced Object-Oriented Programming",
+                year: "2025",
+                semester: "1S"
+            },
+            "ALCANTARA, JUAN LUNA": {
+                subject: "Introduction to Data Science & Analytics",
+                year: "2025",
+                semester: "2S"
+            }
+        };
+
+        // When a user selects a value from the select menu dropdown
+        function handleFacultyChange(selectedName) {
+            const profile = facultyDatabase[selectedName];
+            if (profile) {
+                // Populate data onto target elements inside our custom profile snippet card
+                document.getElementById('cardFacultyName').innerText = selectedName;
+                document.getElementById('cardSubject').innerText = profile.subject;
+                document.getElementById('cardYear').innerText = profile.year;
+                document.getElementById('cardSemester').innerText = profile.semester;
+
+                // Toggle visibility states
+                document.getElementById('facultyProfileCard').classList.remove('hidden');
+                document.getElementById('questionnaireContainer').classList.remove('hidden');
+                document.getElementById('emptySelectNotice').classList.add('hidden');
+                switchStep(1); 
+            }
+        }
+
         document.addEventListener("DOMContentLoaded", () => {
             document.querySelectorAll(".likert-buttons").forEach(template => {
                 const qid = template.getAttribute("data-qid");
                 let html = '';
-                // 5 down to 1
                 for(let score = 5; score >= 1; score--) {
                     html += `
                         <div class="relative">
@@ -249,13 +304,10 @@
 
         function switchStep(stepIndex) {
             operationalStep = stepIndex;
-            
-            // Hide/Show sections
             document.getElementById('stepSection1').classList.toggle('hidden', operationalStep !== 1);
             document.getElementById('stepSection2').classList.toggle('hidden', operationalStep !== 2);
             document.getElementById('stepSection3').classList.toggle('hidden', operationalStep !== 3);
 
-            // Tab bar configuration updates
             for (let i = 1; i <= 3; i++) {
                 const tab = document.getElementById(`stepTab${i}`);
                 if (i === operationalStep) {
@@ -265,7 +317,6 @@
                 }
             }
 
-            // Footer controls configuration 
             document.getElementById('prevFormBtn').disabled = (operationalStep === 1);
             if (operationalStep === 3) {
                 document.getElementById('nextFormBtn').classList.add('hidden');
@@ -285,10 +336,8 @@
 
         function submitEvaluation(event) {
             event.preventDefault();
-            
             const facultyName = document.getElementById('evalTargetFaculty').value;
             
-            // Collect section data Arrays
             const categoryA_scores = [1,2,3,4,5,6].map(i => parseInt(document.querySelector(`input[name="q${i}"]:checked`).value));
             const categoryB_scores = [7,8,9,10,11].map(i => parseInt(document.querySelector(`input[name="q${i}"]:checked`).value));
             const categoryC_scores = [12,13,14,15].map(i => parseInt(document.querySelector(`input[name="q${i}"]:checked`).value));
@@ -309,9 +358,11 @@
 
             alert(`Evaluation safely saved for ${facultyName}!`);
             
-            // Complete reset tracking 
+            // Return interface state back to clean entry default
             document.getElementById('evaluationMatrixForm').reset();
-            switchStep(1);
+            document.getElementById('facultyProfileCard').classList.add('hidden');
+            document.getElementById('questionnaireContainer').classList.add('hidden');
+            document.getElementById('emptySelectNotice').classList.remove('hidden');
         }
 
         function renderInstitutionalDashboard() {
@@ -327,19 +378,14 @@
                 return;
             }
 
-            // Performance parser arrays grouping
             const facultyMap = {};
-
             dataStore.forEach(entry => {
                 if(!facultyMap[entry.faculty]) {
                     facultyMap[entry.faculty] = { sumA:0, countA:0, sumB:0, countB:0, sumC:0, countC:0, logs:[] };
                 }
-                
-                // Reducer arrays operations 
                 entry.scoresA.forEach(s => { facultyMap[entry.faculty].sumA += s; facultyMap[entry.faculty].countA++; });
                 entry.scoresB.forEach(s => { facultyMap[entry.faculty].sumB += s; facultyMap[entry.faculty].countB++; });
                 entry.scoresC.forEach(s => { facultyMap[entry.faculty].sumC += s; facultyMap[entry.faculty].countC++; });
-                
                 facultyMap[entry.faculty].logs.push({ admire: entry.admireText, improve: entry.improveText });
             });
 
@@ -349,7 +395,6 @@
                 const avgA = (target.sumA / target.countA).toFixed(2);
                 const avgB = (target.sumB / target.countB).toFixed(2);
                 const avgC = (target.sumC / target.countC).toFixed(2);
-                
                 const totalCompositeScore = ((parseFloat(avgA) + parseFloat(avgB) + parseFloat(avgC)) / 3).toFixed(2);
 
                 finalHtml += `
@@ -364,7 +409,6 @@
                                 <span class="text-2xl font-black">${totalCompositeScore} <span class="text-xs text-slate-400 font-normal">/ 5.00</span></span>
                             </div>
                         </div>
-                        
                         <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-slate-100">
                             <div class="bg-slate-50 p-4 border border-slate-200 rounded-lg">
                                 <span class="text-xs font-bold text-indigo-950 block mb-1">A. Teaching Management</span>
@@ -379,7 +423,6 @@
                                 <div class="text-lg font-extrabold text-slate-900">${avgC} <span class="text-xs font-normal text-slate-400">/ 5.00</span></div>
                             </div>
                         </div>
-
                         <div class="p-6 bg-slate-50/50 space-y-4">
                             <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400">Qualitative Text Log Feed:</h4>
                             ${target.logs.map(l => `
@@ -392,7 +435,6 @@
                     </div>
                 `;
             }
-
             container.innerHTML = finalHtml;
         }
 
