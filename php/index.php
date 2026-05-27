@@ -63,14 +63,14 @@
 
                 <form id="formAdminLogin" onsubmit="handleAdminVerification(event)" class="space-y-4 hidden">
                     <div>
-                        <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Personnel Email:</label>
+                        <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Admin Email:</label>
                         <div class="relative flex items-center">
                             <i class="fa-solid fa-user-shield absolute left-3 text-amber-400/60 text-sm"></i>
                             <input type="text" id="loginAdminId" required placeholder="admin@rtu.edu.ph" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm font-semibold text-amber-100 outline-none focus:border-amber-400 transition">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Authorization Password Passkey:</label>
+                        <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1"> Password:</label>
                         <div class="relative flex items-center">
                             <i class="fa-solid fa-key absolute left-3 text-amber-400/60 text-sm"></i>
                             <input type="password" id="loginAdminPin" required placeholder="•••••••••••••" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm text-amber-100 outline-none focus:border-amber-400 transition">
