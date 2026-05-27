@@ -19,8 +19,8 @@
                         <img src="../logo/RTU_Portal_Header.png" alt="Rizal Technological University" class="mx-auto h-12 w-auto object-contain">
                     </div>
                     <div class="pt-2 border-t border-amber-500/20">
-                        <h2 class="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 uppercase tracking-wider">CampusNet Gateway</h2>
-                        <p class="text-[11px] text-amber-200/60">Faculty Appraisal Institutional Access Hub</p>
+                        <h2 class="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 uppercase tracking-wider">EVALUATION SYSTEM</h2>
+                        <p class="text-[11px] text-amber-200/60">UNIVERSITY PORTAL</p>
                     </div>
                 </div>
 
