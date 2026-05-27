@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faculty Performance Evaluation Portal</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link class="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../style.css">
 </head>
 <body class="bg-gradient-to-br from-[#0b1b3d] via-[#122b5c] to-[#08132b] min-h-screen text-slate-100 font-sans antialiased selection:bg-amber-500 selection:text-indigo-950">
@@ -15,8 +15,8 @@
             <div class="bg-[#0f2042] rounded-2xl p-6 md:p-8 space-y-6 gold-border-corner">
                 
                 <div class="text-center space-y-3">
-                    <div class="bg-white p-3 rounded-xl shadow-inner inline-block w-full">
-                        <img src="../logo/RTU_Portal_Header.png" alt="Rizal Technological University" class="mx-auto h-12 w-auto object-contain">
+                    <div class="bg-white py-2 px-4 rounded-xl shadow-inner max-w-[90%] mx-auto flex items-center justify-center">
+                        <img src="../logo/RTU_Logo.png" alt="Rizal Technological University" class="h-11 w-auto object-contain block">
                     </div>
                     <div class="pt-2 border-t border-amber-500/20">
                         <h2 class="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 uppercase tracking-wider">EVALUATION SYSTEM</h2>
@@ -30,50 +30,68 @@
                 </div>
 
                 <form id="formStudentLogin" onsubmit="handlePortalLogin(event)" class="space-y-4">
-                    <div>
+                    <div class="input-container-group">
                         <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Student Name:</label>
-                        <div class="relative flex items-center">
-                            <i class="fa-solid fa-user absolute left-3 text-amber-400/60 text-sm"></i>
-                            <input type="text" id="loginStudentName" required placeholder="SURNAME, FIRST NAME MIDDLENAME" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm font-bold text-amber-100 uppercase outline-none focus:border-amber-400 transition">
+                        <div class="border-validation-ring flex items-center bg-[#0a152b]">
+                            <div id="indicatorSName" class="validation-indicator-circle indicator-waiting"></div>
+                            <div class="relative flex-1 flex items-center">
+                                <i class="fa-solid fa-user absolute left-3 text-amber-400/60 text-sm"></i>
+                                <input type="text" id="loginStudentName" required placeholder="SURNAME, FIRST NAME MIDDLENAME" class="w-full pl-9 pr-3 py-2.5 bg-transparent border-none text-sm font-bold text-amber-100 uppercase outline-none focus:ring-0 transition">
+                            </div>
                         </div>
                     </div>
-                    <div>
+                    <div class="input-container-group">
                         <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Student Account Number:</label>
-                        <div class="relative flex items-center">
-                            <i class="fa-solid fa-id-badge absolute left-3 text-amber-400/60 text-sm"></i>
-                            <input type="text" id="loginStudentId" required placeholder="e.g. 2024-10143-MN-0" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm font-semibold text-amber-100 outline-none focus:border-amber-400 transition">
+                        <div class="border-validation-ring flex items-center bg-[#0a152b]">
+                            <div id="indicatorSId" class="validation-indicator-circle indicator-waiting"></div>
+                            <div class="relative flex-1 flex items-center">
+                                <i class="fa-solid fa-id-badge absolute left-3 text-amber-400/60 text-sm"></i>
+                                <input type="text" id="loginStudentId" required placeholder="e.g. 2024-10143-MN-0" class="w-full pl-9 pr-3 py-2.5 bg-transparent border-none text-sm font-semibold text-amber-100 outline-none focus:ring-0 transition">
+                            </div>
                         </div>
                     </div>
-                    <div>
+                    <div class="input-container-group">
                         <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Course / Section:</label>
-                        <div class="relative flex items-center">
-                            <i class="fa-solid fa-graduation-cap absolute left-3 text-amber-400/60 text-sm"></i>
-                            <input type="text" id="loginStudentCourse" required placeholder="e.g. CEIT-03-401A" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm font-medium text-amber-200/90 outline-none focus:border-amber-400 transition">
+                        <div class="border-validation-ring flex items-center bg-[#0a152b]">
+                            <div id="indicatorSCourse" class="validation-indicator-circle indicator-waiting"></div>
+                            <div class="relative flex-1 flex items-center">
+                                <i class="fa-solid fa-graduation-cap absolute left-3 text-amber-400/60 text-sm"></i>
+                                <input type="text" id="loginStudentCourse" required placeholder="e.g. CEIT-03-401A" class="w-full pl-9 pr-3 py-2.5 bg-transparent border-none text-sm font-medium text-amber-200/90 outline-none focus:ring-0 transition">
+                            </div>
                         </div>
                     </div>
-                    <div>
+                    <div class="input-container-group">
                         <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Password:</label>
-                        <div class="relative flex items-center">
-                            <i class="fa-solid fa-lock absolute left-3 text-amber-400/60 text-sm"></i>
-                            <input type="password" required placeholder="•••••••••••••" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm text-amber-100 outline-none focus:border-amber-400 transition">
+                        <div class="border-validation-ring flex items-center bg-[#0a152b]">
+                            <div id="indicatorSPass" class="validation-indicator-circle indicator-waiting"></div>
+                            <div class="relative flex-1 flex items-center">
+                                <i class="fa-solid fa-lock absolute left-3 text-amber-400/60 text-sm"></i>
+                                <input type="password" id="loginStudentPassword" required placeholder="•••••••••••••" class="w-full pl-9 pr-3 py-2.5 bg-transparent border-none text-sm text-amber-100 outline-none focus:ring-0 transition">
+                            </div>
                         </div>
                     </div>
                     <button type="submit" class="w-full bg-gradient-to-r from-amber-300 via-amber-500 to-amber-600 text-indigo-950 font-black py-3 px-4 rounded-lg text-xs uppercase tracking-widest shadow-lg transition transform active:scale-98 cursor-pointer">LOGIN</button>
                 </form>
 
                 <form id="formAdminLogin" onsubmit="handleAdminVerification(event)" class="space-y-4 hidden">
-                    <div>
+                    <div class="input-container-group">
                         <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Admin Email:</label>
-                        <div class="relative flex items-center">
-                            <i class="fa-solid fa-user-shield absolute left-3 text-amber-400/60 text-sm"></i>
-                            <input type="text" id="loginAdminId" required placeholder="admin@rtu.edu.ph" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm font-semibold text-amber-100 outline-none focus:border-amber-400 transition">
+                        <div class="border-validation-ring flex items-center bg-[#0a152b]">
+                            <div id="indicatorPEmail" class="validation-indicator-circle indicator-waiting"></div>
+                            <div class="relative flex-1 flex items-center">
+                                <i class="fa-solid fa-user-shield absolute left-3 text-amber-400/60 text-sm"></i>
+                                <input type="text" id="loginAdminId" required placeholder="admin@rtu.edu.ph" class="w-full pl-9 pr-3 py-2.5 bg-transparent border-none text-sm font-semibold text-amber-100 outline-none focus:ring-0 transition">
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1"> Password:</label>
-                        <div class="relative flex items-center">
-                            <i class="fa-solid fa-key absolute left-3 text-amber-400/60 text-sm"></i>
-                            <input type="password" id="loginAdminPin" required placeholder="•••••••••••••" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm text-amber-100 outline-none focus:border-amber-400 transition">
+                    <div class="input-container-group">
+                        <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Password:</label>
+                        <div class="border-validation-ring flex items-center bg-[#0a152b]">
+                            <div id="indicatorPPass" class="validation-indicator-circle indicator-waiting"></div>
+                            <div class="relative flex-1 flex items-center">
+                                <i class="fa-solid fa-key absolute left-3 text-amber-400/60 text-sm"></i>
+                                <input type="password" id="loginAdminPin" required placeholder="•••••••••••••" class="w-full pl-9 pr-3 py-2.5 bg-transparent border-none text-sm text-amber-100 outline-none focus:ring-0 transition">
+                            </div>
                         </div>
                     </div>
                     <button type="submit" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 text-indigo-950 font-black py-3 px-4 rounded-lg text-xs uppercase tracking-widest shadow-lg transition transform active:scale-98 cursor-pointer">LOGIN</button>
@@ -86,7 +104,7 @@
     <nav class="bg-[#0b1730]/90 backdrop-blur-md border-b border-amber-500/20 sticky top-0 z-50 px-6 py-3 flex justify-between items-center shadow-lg">
         <div class="flex items-center">
             <div class="bg-white px-4 py-1.5 rounded-lg shadow-sm border border-slate-200/40">
-                <img src="../logo/RTU_Portal_Header.png" alt="Rizal Technological University" class="h-10 w-auto object-contain">
+                <img src="../logo/RTU_Logo.png" alt="Rizal Technological University" class="h-10 w-auto object-contain">
             </div>
         </div>
         <button onclick="handleLogout()" class="px-3 py-1.5 text-xs rounded bg-rose-950/40 text-rose-300 font-bold hover:bg-rose-900/50 transition border border-rose-500/30 cursor-pointer">Logout</button>
