@@ -31,21 +31,28 @@
 
                 <form id="formStudentLogin" onsubmit="handlePortalLogin(event)" class="space-y-4">
                     <div>
-                        <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Student Account Name / ID:</label>
+                        <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Student Name:</label>
                         <div class="relative flex items-center">
-                            <i class="fa-solid fa-id-badge absolute left-3 text-amber-400/60 text-sm"></i>
+                            <i class="fa-solid fa-user absolute left-3 text-amber-400/60 text-sm"></i>
                             <input type="text" id="loginStudentName" required placeholder="SURNAME, FIRST NAME MIDDLENAME" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm font-bold text-amber-100 uppercase outline-none focus:border-amber-400 transition">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Course / Year Level / Section:</label>
+                        <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Student Account Number:</label>
+                        <div class="relative flex items-center">
+                            <i class="fa-solid fa-id-badge absolute left-3 text-amber-400/60 text-sm"></i>
+                            <input type="text" id="loginStudentId" required placeholder="e.g. 2024-10143-MN-0" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm font-semibold text-amber-100 outline-none focus:border-amber-400 transition">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Course / Yr Lvl / Section:</label>
                         <div class="relative flex items-center">
                             <i class="fa-solid fa-graduation-cap absolute left-3 text-amber-400/60 text-sm"></i>
                             <input type="text" id="loginStudentCourse" required placeholder="e.g. CEIT-03-401A" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm font-medium text-amber-200/90 outline-none focus:border-amber-400 transition">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Account Password:</label>
+                        <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Password:</label>
                         <div class="relative flex items-center">
                             <i class="fa-solid fa-lock absolute left-3 text-amber-400/60 text-sm"></i>
                             <input type="password" required placeholder="•••••••••••••" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm text-amber-100 outline-none focus:border-amber-400 transition">
@@ -243,7 +250,7 @@
                 </div>
 
                 <div class="bg-[#070f24] border-t border-amber-500/20 px-6 py-4 flex justify-between items-center">
-                    <button type="button" id="prevFormBtn" onclick="navigateStep(-1)" class="px-4 py-1.5 text-xs font-bold rounded bg-slate-800 text-slate-300 disabled:opacity-30 cursor-pointer">Back</button>
+                    <button type="button" id="prevFormBtn" onclick="navigateStep(-1)" class="px-4 py-1.5 text-xs font-bold rounded bg-slate-800 text-slate-300 disabled:opacity-30 cursor-pointer">Cancel Form</button>
                     <button type="button" id="nextFormBtn" onclick="navigateStep(1)" class="px-4 py-1.5 text-xs font-bold rounded bg-gradient-to-b from-amber-300 to-amber-500 text-indigo-950 hover:from-amber-400 transition cursor-pointer">Continue Next</button>
                     <button type="submit" id="submitFormBtn" class="px-5 py-1.5 text-xs font-black rounded bg-emerald-600 text-white hover:bg-emerald-700 hidden transition cursor-pointer uppercase tracking-wide">Complete Submission</button>
                 </div>

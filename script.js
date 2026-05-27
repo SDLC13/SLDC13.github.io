@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
     renderScheduleTable();
 });
 
-// Controls visibility toggle switching between input blocks inside lock mask
 function switchLoginRole(role) {
     const studentForm = document.getElementById('formStudentLogin');
     const adminForm   = document.getElementById('formAdminLogin');
@@ -49,7 +48,6 @@ function switchLoginRole(role) {
     }
 }
 
-// Fixed Target Hardcoded Administrative Personnel Match verification parameters logic 
 function handleAdminVerification(event) {
     event.preventDefault();
     const adminEmail = document.getElementById('loginAdminId').value.trim();
@@ -63,6 +61,7 @@ function handleAdminVerification(event) {
     }
 }
 
+// MATCHED LOGIC: Pull parameters from adjusted inputs layout configuration cleanly
 function handlePortalLogin(event) {
     event.preventDefault();
     const inputName = document.getElementById('loginStudentName').value.trim().toUpperCase();
@@ -182,7 +181,6 @@ function switchStep(stepIndex) {
             : "flex-1 py-3.5 border-b-2 border-transparent text-center text-slate-500 text-xs hover:text-slate-300 transition cursor-pointer";
     }
 
-    // Dynamic Back Button Logic Handler Parameters Control Override mapping
     if (operationalStep === 1) {
         document.getElementById('prevFormBtn').innerText = "Cancel Form";
     } else {
@@ -218,7 +216,7 @@ function submitEvaluation(event) {
     for(let i = 1; i <= 15; i++) {
         const checkedRadio = document.querySelector(`input[name="q${i}"]:checked`);
         if(!checkedRadio) {
-            alert(`Operational Matrix Exception: Please complete all selections before submission routing.`);
+            alert('Operational Matrix Exception: Please complete all selections.');
             return;
         }
         scores.push(parseInt(checkedRadio.value));
@@ -255,11 +253,11 @@ function submitEvaluation(event) {
             document.getElementById('evaluationMatrixForm').reset();
             showScheduleView();
         } else {
-            alert(`Database synchronization drop failure: ${data.message}`);
+            alert(`Database synchronization failure: ${data.message}`);
         }
     })
     .catch(err => {
         console.error(err);
-        alert('Server database execution pipe connection error timeout.');
+        alert('Server processing connection timeout alert.');
     });
 }
