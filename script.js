@@ -261,3 +261,74 @@ function submitEvaluation(event) {
         alert('Server database execution pipe connection error timeout.');
     });
 }
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const loginInputs = document.querySelectorAll(".login-input");
+
+    loginInputs.forEach(input => {
+
+        const group = input.closest(".validation-group");
+        const indicator = group.querySelector(".status-indicator");
+
+        function validateInput() {
+
+            const value = input.value.trim();
+
+            indicator.classList.remove(
+                "status-red",
+                "status-yellow",
+                "status-green"
+            );
+
+            // EMPTY INPUT = RED
+            if (value === "") {
+                indicator.classList.add("status-red");
+                return;
+            }
+
+            // YELLOW WHILE TYPING
+            indicator.classList.add("status-yellow");
+
+            // PASSWORD CHECK
+            if (input.type === "password") {
+
+                if (value.length >= 8) {
+                    indicator.classList.remove("status-yellow");
+                    indicator.classList.add("status-green");
+                } else {
+                    indicator.classList.remove("status-yellow");
+                    indicator.classList.add("status-red");
+                }
+
+                return;
+            }
+
+            // EMAIL VALIDATION
+            if (input.id === "loginAdminId") {
+
+                if (value.includes("@")) {
+                    indicator.classList.remove("status-yellow");
+                    indicator.classList.add("status-green");
+                } else {
+                    indicator.classList.remove("status-yellow");
+                    indicator.classList.add("status-red");
+                }
+
+                return;
+            }
+
+            // NORMAL INPUTS
+            if (value.length > 0) {
+                indicator.classList.remove("status-yellow");
+                indicator.classList.add("status-green");
+            }
+        }
+
+        input.addEventListener("input", validateInput);
+
+        validateInput();
+    });
+
+});
