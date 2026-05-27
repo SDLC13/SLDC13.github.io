@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderScheduleTable();
 });
 
-// ADDED: Smooth Form Switch Toggle without affecting tables or dashboard logic
+// Controls visibility toggle switching between input blocks inside lock mask
 function switchLoginRole(role) {
     const studentForm = document.getElementById('formStudentLogin');
     const adminForm   = document.getElementById('formAdminLogin');
@@ -39,27 +39,27 @@ function switchLoginRole(role) {
     if (role === 'student') {
         studentForm.classList.remove('hidden');
         adminForm.classList.add('hidden');
-        studentTab.className = "flex-1 py-2 text-center rounded bg-amber-500 text-indigo-950 transition cursor-pointer";
+        studentTab.className = "flex-1 py-2 text-center rounded bg-amber-500 text-indigo-950 font-bold transition cursor-pointer";
         adminTab.className = "flex-1 py-2 text-center rounded text-slate-400 hover:text-slate-200 transition cursor-pointer";
     } else {
         studentForm.classList.add('hidden');
         adminForm.classList.remove('hidden');
-        adminTab.className = "flex-1 py-2 text-center rounded bg-amber-500 text-indigo-950 transition cursor-pointer";
+        adminTab.className = "flex-1 py-2 text-center rounded bg-amber-500 text-indigo-950 font-bold transition cursor-pointer";
         studentTab.className = "flex-1 py-2 text-center rounded text-slate-400 hover:text-slate-200 transition cursor-pointer";
     }
 }
 
-// ADDED: Handles secure administrative personnel routing parameters
+// Fixed Target Hardcoded Administrative Personnel Match verification parameters logic 
 function handleAdminVerification(event) {
     event.preventDefault();
-    const adminId  = document.getElementById('loginAdminId').value.trim();
-    const adminPin = document.getElementById('loginAdminPin').value;
+    const adminEmail = document.getElementById('loginAdminId').value.trim();
+    const adminPass  = document.getElementById('loginAdminPin').value;
 
-    if (adminId === "admin" && adminPin === "1234") {
-        alert("Administrative Clear Access Authorized. Redirecting to Audit Dashboard...");
+    if (adminEmail === "admin@rtu.edu.ph" && adminPass === "admin123") {
+        alert("Administrative personnel validation authorized. Redirecting to Management Console...");
         window.location.href = "admin.php";
     } else {
-        alert("Authorization Denied: Invalid Administrative Credentials.");
+        alert("Authentication Denied: Invalid Personnel Email address alignment or Passkey.");
     }
 }
 
@@ -116,6 +116,7 @@ function launchEvaluationForm(index) {
     const profImages = {
         "Engr. Nathanial Atan": "../pics/BOSS%20ATAN.jpg",
         "Prof. Alejandro Agul": "../pics/BOSS%20AGUL.jpg",
+        "Prof. Fiona Princess": "../pics/PRINCESS%20FIONA.jpg",
         "Dr. Fernando Rivera": "../pics/FERNANDO.jpg",
         "Engr. Tyga Collins": "../pics/DADDY%20TYGA.jpg",
         "Prof. Jonas Marmol": "../pics/MARMOL.jpg",
@@ -181,7 +182,13 @@ function switchStep(stepIndex) {
             : "flex-1 py-3.5 border-b-2 border-transparent text-center text-slate-500 text-xs hover:text-slate-300 transition cursor-pointer";
     }
 
-    document.getElementById('prevFormBtn').disabled = (operationalStep === 1);
+    // Dynamic Back Button Logic Handler Parameters Control Override mapping
+    if (operationalStep === 1) {
+        document.getElementById('prevFormBtn').innerText = "Cancel Form";
+    } else {
+        document.getElementById('prevFormBtn').innerText = "Back";
+    }
+
     if (operationalStep === 3) {
         document.getElementById('nextFormBtn').classList.add('hidden');
         document.getElementById('submitFormBtn').classList.remove('hidden');
@@ -192,6 +199,12 @@ function switchStep(stepIndex) {
 }
 
 function navigateStep(direction) {
+    if (direction === -1 && operationalStep === 1) {
+        if(confirm("Discard current evaluation changes and return to calendar dashboard roster?")) {
+            showScheduleView();
+        }
+        return;
+    }
     if (direction === 1 && !validateCurrentStepAnswers()) return;
     let nextTarget = operationalStep + direction;
     if(nextTarget >= 1 && nextTarget <= 3) switchStep(nextTarget);
@@ -205,7 +218,7 @@ function submitEvaluation(event) {
     for(let i = 1; i <= 15; i++) {
         const checkedRadio = document.querySelector(`input[name="q${i}"]:checked`);
         if(!checkedRadio) {
-            alert(`Operational Matrix Exception: Please answer all evaluation matrix inputs before finalizing.`);
+            alert(`Operational Matrix Exception: Please complete all selections before submission routing.`);
             return;
         }
         scores.push(parseInt(checkedRadio.value));
@@ -242,11 +255,11 @@ function submitEvaluation(event) {
             document.getElementById('evaluationMatrixForm').reset();
             showScheduleView();
         } else {
-            alert(`Database pipeline synchronization issue: ${data.message}`);
+            alert(`Database synchronization drop failure: ${data.message}`);
         }
     })
     .catch(err => {
         console.error(err);
-        alert('Server processing connection timeout alert.');
+        alert('Server database execution pipe connection error timeout.');
     });
 }
