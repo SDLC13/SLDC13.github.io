@@ -15,8 +15,8 @@
             <div class="bg-[#0f2042] rounded-2xl p-6 md:p-8 space-y-6 gold-border-corner">
                 
                 <div class="text-center space-y-3">
-                    <div class="bg-white py-2 px-4 rounded-xl shadow-inner max-w-[90%] mx-auto flex items-center justify-center">
-                        <img src="../logo/RTU_Logo.png" alt="Rizal Technological University" class="h-11 w-auto object-contain block">
+                    <div class="max-w-[70%] mx-auto flex items-center justify-center">
+                        <img src="../logo/RTU_Logo.png" alt="Rizal Technological University" class="h-20 w-auto object-contain block drop-shadow-[0_4px_6px_rgba(0,0,0,0.3)]">
                     </div>
                     <div class="pt-2 border-t border-amber-500/20">
                         <h2 class="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 uppercase tracking-wider">EVALUATION SYSTEM</h2>
@@ -103,8 +103,8 @@
 
     <nav class="bg-[#0b1730]/90 backdrop-blur-md border-b border-amber-500/20 sticky top-0 z-50 px-6 py-3 flex justify-between items-center shadow-lg">
         <div class="flex items-center">
-            <div class="bg-white px-4 py-1.5 rounded-lg shadow-sm border border-slate-200/40">
-                <img src="../logo/RTU_Logo.png" alt="Rizal Technological University" class="h-10 w-auto object-contain">
+            <div class="flex items-center justify-center">
+                <img src="../logo/RTU_Logo.png" alt="Rizal Technological University" class="h-10 w-auto object-contain block drop-shadow">
             </div>
         </div>
         <button onclick="handleLogout()" class="px-3 py-1.5 text-xs rounded bg-rose-950/40 text-rose-300 font-bold hover:bg-rose-900/50 transition border border-rose-500/30 cursor-pointer">Logout</button>

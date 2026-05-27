@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faculty Performance Evaluation Portal - Admin Panel</title>
+    <title>Institutional Administration Portal - Admin Panel</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../style.css">
@@ -15,8 +15,8 @@
             <div class="bg-[#0f2042] rounded-2xl p-6 md:p-8 space-y-6 gold-border-corner">
                 
                 <div class="text-center space-y-3">
-                    <div class="bg-white py-2 px-4 rounded-xl shadow-inner max-w-[90%] mx-auto flex items-center justify-center">
-                        <img src="../logo/RTU_Logo.png" alt="Rizal Technological University" class="h-11 w-auto object-contain block">
+                    <div class="max-w-[70%] mx-auto flex items-center justify-center">
+                        <img src="../logo/RTU_Logo.png" alt="Rizal Technological University" class="h-20 w-auto object-contain block drop-shadow-[0_4px_6px_rgba(0,0,0,0.3)]">
                     </div>
                     <div class="pt-2 border-t border-amber-500/20">
                         <h2 class="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 uppercase tracking-wider">EVALUATION SYSTEM</h2>
@@ -29,7 +29,7 @@
                     <button type="button" id="toggleAdminTab" onclick="switchLoginRole('admin')" class="flex-1 py-2 text-center rounded bg-amber-500 text-indigo-950 font-bold transition cursor-pointer">Admin Portal</button>
                 </div>
 
-                <form id="formStudentLogin" onsubmit="handlePortalRedirect(event)" class="space-y-4">
+                <form id="formStudentLogin" onsubmit="handlePortalRedirect(event)" class="space-y-4 hidden">
                     <div class="input-container-group">
                         <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Student Name:</label>
                         <div class="border-validation-ring flex items-center bg-[#0a152b]">
@@ -103,8 +103,8 @@
 
     <nav class="bg-[#0b1730]/90 backdrop-blur-md border-b border-amber-500/20 sticky top-0 z-50 px-6 py-4 flex justify-between items-center shadow-lg">
         <div class="flex items-center space-x-3">
-            <div class="bg-white px-3 py-1 rounded shadow-sm">
-                <img src="../logo/RTU_Logo.png" alt="RTU Logo" class="h-8 w-auto object-contain">
+            <div class="flex items-center justify-center">
+                <img src="../logo/RTU_Logo.png" alt="RTU Logo" class="h-8 w-auto object-contain block drop-shadow">
             </div>
             <span class="text-xs font-bold tracking-widest text-amber-400 uppercase border-l border-slate-700 pl-3">Admin Panel</span>
         </div>
@@ -152,14 +152,13 @@
         let cachedAdminRecords = [];
         
         document.addEventListener("DOMContentLoaded", () => { 
-            // Control authorization state cache
             if (sessionStorage.getItem('admin_authenticated') === 'true') {
                 document.getElementById('view-login').classList.add('hidden');
                 loadAdminRegistry();
             } else {
                 switchLoginRole('admin');
             }
-            bindAdminInputMonitorListeners();
+            bindAdminInputMonitorLetters();
         });
 
         function switchLoginRole(role) {
@@ -183,7 +182,6 @@
 
         function handlePortalRedirect(event) {
             event.preventDefault();
-            // Cache form state values across redirect mapping parameters
             localStorage.setItem('active_session_name', document.getElementById('loginStudentName').value.trim().toUpperCase());
             localStorage.setItem('active_session_course', document.getElementById('loginStudentCourse').value.trim());
             window.location.href = "index.php";
@@ -256,7 +254,6 @@
             modal.classList.add('hidden'); modal.classList.remove('flex');
         }
 
-        // Real-time input status circle monitor function
         function bindAdminInputMonitorRepository(inputId, indicatorId, pattern) {
             const inputEl = document.getElementById(inputId);
             const indicatorEl = document.getElementById(indicatorId);
