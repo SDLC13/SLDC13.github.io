@@ -58,7 +58,7 @@
                             <input type="password" required placeholder="•••••••••••••" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm text-amber-100 outline-none focus:border-amber-400 transition">
                         </div>
                     </div>
-                    <button type="submit" class="w-full bg-gradient-to-r from-amber-300 via-amber-500 to-amber-600 text-indigo-950 font-black py-3 px-4 rounded-lg text-xs uppercase tracking-widest shadow-lg transition transform active:scale-98 cursor-pointer">Verify Student Identity</button>
+                    <button type="submit" class="w-full bg-gradient-to-r from-amber-300 via-amber-500 to-amber-600 text-indigo-950 font-black py-3 px-4 rounded-lg text-xs uppercase tracking-widest shadow-lg transition transform active:scale-98 cursor-pointer">LOGIN</button>
                 </form>
 
                 <form id="formAdminLogin" onsubmit="handleAdminVerification(event)" class="space-y-4 hidden">
@@ -76,7 +76,7 @@
                             <input type="password" id="loginAdminPin" required placeholder="•••••••••••••" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm text-amber-100 outline-none focus:border-amber-400 transition">
                         </div>
                     </div>
-                    <button type="submit" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 text-indigo-950 font-black py-3 px-4 rounded-lg text-xs uppercase tracking-widest shadow-lg transition transform active:scale-98 cursor-pointer">Authenticate Admin Node</button>
+                    <button type="submit" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 text-indigo-950 font-black py-3 px-4 rounded-lg text-xs uppercase tracking-widest shadow-lg transition transform active:scale-98 cursor-pointer">LOGIN</button>
                 </form>
 
             </div>
