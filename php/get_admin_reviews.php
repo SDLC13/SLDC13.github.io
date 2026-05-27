@@ -2,7 +2,6 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 
-// Trapping runtime displays to hidden server log archives securely
 ini_set('display_errors', 0);
 ini_set('display_startup_errors', 0);
 error_reporting(E_ALL);
@@ -17,7 +16,7 @@ $dbname = "evaluation_db";
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
-    echo json_encode(["status" => "error", "message" => "Database node runtime socket connection failure."]);
+    echo json_encode(["status" => "error", "message" => "Database link connectivity error exception."]);
     exit();
 }
 

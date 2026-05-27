@@ -3,7 +3,6 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");
 
-// Silent Failover Security Log Filters
 ini_set('display_errors', 0);
 ini_set('display_startup_errors', 0);
 error_reporting(E_ALL);
@@ -18,7 +17,7 @@ $dbname = "evaluation_db";
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
-    echo json_encode(["status" => "error", "message" => "Database connection fault exception."]);
+    echo json_encode(["status" => "error", "message" => "Database connection exception drop."]);
     exit();
 }
 
@@ -34,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($inputData)) {
     $scoresArray  = $inputData['scores'];
 
     if (empty($studentName) || empty($courseLevel) || empty($faculty) || empty($subject) || empty($admireText) || empty($improveText) || count($scoresArray) !== 15) {
-        echo json_encode(["status" => "error", "message" => "Server validation error matrix fields missing parameters."]);
+        echo json_encode(["status" => "error", "message" => "Server validation failure: incomplete payload parameter parameters."]);
         exit();
     }
 
@@ -46,11 +45,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($inputData)) {
     if ($stmt->execute()) {
         echo json_encode(["status" => "success", "message" => "Evaluation for " . $faculty . " synchronized to live server registry matrix successfully."]);
     } else {
-        echo json_encode(["status" => "error", "message" => "SQL Operational Failure: " . $stmt->error]);
+        echo json_encode(["status" => "error", "message" => "SQL Registry Fault: " . $stmt->error]);
     }
     $stmt->close();
 } else {
-    echo json_encode(["status" => "error", "message" => "Protocol execution method mismatch flag."]);
+    echo json_encode(["status" => "error", "message" => "Invalid transmission standard protocol."]);
 }
 $conn->close();
 ?>

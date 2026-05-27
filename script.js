@@ -1,6 +1,7 @@
 let operationalStep = 1;
 let activeTargetIndex = null;
 
+// Formalized structural faculty scheduling parameters tracking system logs array
 let scheduleItems = [
     { classCode: "141216", subjectCode: "ECE01L", desc: "Fundamentals of Electronic Circuits Laboratory", professor: "Engr. Nathanial Atan", status: "PENDING", refNo: "--" },
     { classCode: "141331", subjectCode: "CPE204", desc: "Software Design", professor: "Prof. Alejandro Agul", status: "PENDING", refNo: "--" },
@@ -21,6 +22,7 @@ if(localStorage.getItem('schedule_tracker_v6')) {
 
 document.addEventListener("DOMContentLoaded", () => {
     buildLikertRadioButtons();
+    
     if (localStorage.getItem('active_session_name')) {
         document.getElementById('metaStudentName').value = localStorage.getItem('active_session_name');
         document.getElementById('metaCourseLevel').value = localStorage.getItem('active_session_course');
@@ -28,38 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     renderScheduleTable();
 });
-
-function switchLoginRole(role) {
-    const studentForm = document.getElementById('formStudentLogin');
-    const adminForm   = document.getElementById('formAdminLogin');
-    const studentTab  = document.getElementById('toggleStudentTab');
-    const adminTab    = document.getElementById('toggleAdminTab');
-
-    if (role === 'student') {
-        studentForm.classList.remove('hidden');
-        adminForm.classList.add('hidden');
-        studentTab.className = "flex-1 py-2 text-center rounded bg-amber-500 text-indigo-950 transition cursor-pointer";
-        adminTab.className = "flex-1 py-2 text-center rounded text-slate-400 hover:text-slate-200 transition cursor-pointer";
-    } else {
-        studentForm.classList.add('hidden');
-        adminForm.remove('hidden'); // Fix: ensure dynamic toggle acts safely on nodes
-        adminForm.classList.remove('hidden');
-        adminTab.className = "flex-1 py-2 text-center rounded bg-amber-500 text-indigo-950 transition cursor-pointer";
-        studentTab.className = "flex-1 py-2 text-center rounded text-slate-400 hover:text-slate-200 transition cursor-pointer";
-    }
-}
-
-function handleAdminVerification(event) {
-    event.preventDefault();
-    const adminId  = document.getElementById('loginAdminId').value.trim();    const adminPin = document.getElementById('loginAdminPin').value;
-
-    if (adminId === "admin" && adminPin === "1234") {
-        alert("Administrative Clear Access Authorized. Redirecting to Audit Dashboard...");
-        window.location.href = "admin.php";
-    } else {
-        alert("Authorization Denied: Invalid Administrative Credentials.");
-    }
-}
 
 function handlePortalLogin(event) {
     event.preventDefault();
@@ -222,6 +192,7 @@ function submitEvaluation(event) {
         improveText: document.getElementById('commentImprove').value.trim()
     };
 
+    // AJAX Payload Bridge Synchronization directly to PHP handlers inside the same subfolder context
     fetch('submit_evaluation.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -244,7 +215,7 @@ function submitEvaluation(event) {
         }
     })
     .catch(err => {
-        console.error(err);
+        console.error('Fetch operation abort error:', err);
         alert('Server processing connection timeout alert.');
     });
 }

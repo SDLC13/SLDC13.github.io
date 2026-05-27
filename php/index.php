@@ -13,23 +13,16 @@
     <section id="view-login" class="fixed inset-0 bg-gradient-to-b from-[#071126] to-[#0f244d] z-[99] flex items-center justify-center px-4 overflow-y-auto">
         <div class="max-w-md w-full bg-gradient-to-b from-[#e6c687] via-[#cca356] to-[#ad8336] rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] p-1">
             <div class="bg-[#0f2042] rounded-2xl p-6 md:p-8 space-y-6 gold-border-corner">
-                
                 <div class="text-center space-y-3">
                     <div class="bg-white p-3 rounded-xl shadow-inner inline-block w-full">
                         <img src="../logo/RTU_Portal_Header.png" alt="Rizal Technological University" class="mx-auto h-12 w-auto object-contain">
                     </div>
                     <div class="pt-2 border-t border-amber-500/20">
-                        <h2 class="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 uppercase tracking-wider">CampusNet Gateway</h2>
-                        <p class="text-[11px] text-amber-200/60">Faculty Appraisal Institutional Access Hub</p>
+                        <h2 class="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 uppercase tracking-wider">CampusNet Login</h2>
+                        <p class="text-[11px] text-amber-200/60">Faculty Appraisal Gateway</p>
                     </div>
                 </div>
-
-                <div class="flex bg-[#0a152b] p-1 rounded-lg border border-amber-500/20 text-xs font-bold uppercase">
-                    <button type="button" id="toggleStudentTab" onclick="switchLoginRole('student')" class="flex-1 py-2 text-center rounded bg-amber-500 text-indigo-950 transition cursor-pointer">Student Portal</button>
-                    <button type="button" id="toggleAdminTab" onclick="switchLoginRole('admin')" class="flex-1 py-2 text-center rounded text-slate-400 hover:text-slate-200 transition cursor-pointer">Personnel Login</button>
-                </div>
-
-                <form id="formStudentLogin" onsubmit="handlePortalLogin(event)" class="space-y-4">
+                <form onsubmit="handlePortalLogin(event)" class="space-y-4">
                     <div>
                         <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Student ID Number:</label>
                         <div class="relative flex items-center">
@@ -51,27 +44,15 @@
                             <input type="text" id="loginStudentCourse" required placeholder="e.g. CEIT-03-401A" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm font-medium text-amber-200/90 outline-none focus:border-amber-400 transition">
                         </div>
                     </div>
-                    <button type="submit" class="w-full bg-gradient-to-r from-amber-300 via-amber-500 to-amber-600 text-indigo-950 font-black py-3 px-4 rounded-lg text-xs uppercase tracking-widest shadow-lg transition transform active:scale-98 cursor-pointer">Verify Student Identity</button>
-                </form>
-
-                <form id="formAdminLogin" onsubmit="handleAdminVerification(event)" class="space-y-4 hidden">
                     <div>
-                        <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Personnel Employee ID:</label>
+                        <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Portal Password:</label>
                         <div class="relative flex items-center">
-                            <i class="fa-solid fa-user-shield absolute left-3 text-amber-400/60 text-sm"></i>
-                            <input type="text" id="loginAdminId" required placeholder="e.g. admin" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm font-semibold text-amber-100 outline-none focus:border-amber-400 transition">
+                            <i class="fa-solid fa-lock absolute left-3 text-amber-400/60 text-sm"></i>
+                            <input type="password" required placeholder="•••••••••••••" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm text-amber-100 outline-none focus:border-amber-400 transition">
                         </div>
                     </div>
-                    <div>
-                        <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Secure Authorization Passkey PIN:</label>
-                        <div class="relative flex items-center">
-                            <i class="fa-solid fa-key absolute left-3 text-amber-400/60 text-sm"></i>
-                            <input type="password" id="loginAdminPin" required placeholder="e.g. 1234" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm text-amber-100 outline-none focus:border-amber-400 transition">
-                        </div>
-                    </div>
-                    <button type="submit" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 text-indigo-950 font-black py-3 px-4 rounded-lg text-xs uppercase tracking-widest shadow-lg transition transform active:scale-98 cursor-pointer">Authenticate Administrative Node</button>
+                    <button type="submit" class="w-full bg-gradient-to-r from-amber-300 via-amber-500 to-amber-600 text-indigo-950 font-black py-3 px-4 rounded-lg text-xs uppercase tracking-widest shadow-lg transition transform active:scale-98 cursor-pointer">Login to CampusNet</button>
                 </form>
-
             </div>
         </div>
     </section>
