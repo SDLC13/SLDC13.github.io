@@ -1,68 +1,225 @@
-# FULL UPDATED `style.css`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal Node</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-```css
-/* Custom Premium Rating Styles */
-.rating-btn:hover { 
-    background-color: #fef08a; 
-    color: #1e3a8a; 
-}
+    <style>
+        /* Custom Premium Rating Styles */
+        .rating-btn:hover { 
+            background-color: #fef08a; 
+            color: #1e3a8a; 
+        }
 
-input[type="radio"]:checked + label {
-    background-color: #1e3a8a;
-    color: #ffffff;
-    border-color: #1e3a8a;
-    box-shadow: 0 0 8px rgba(30, 58, 138, 0.4);
-}
+        input[type="radio"]:checked + label {
+            background-color: #1e3a8a;
+            color: #ffffff;
+            border-color: #1e3a8a;
+            box-shadow: 0 0 8px rgba(30, 58, 138, 0.4);
+        }
 
-/* Geometric Corner Accents matching reference */
-.gold-border-corner {
-    position: relative;
-}
+        /* Geometric Corner Accents matching reference */
+        .gold-border-corner {
+            position: relative;
+        }
 
-.gold-border-corner::before {
-    content: ''; 
-    position: absolute; 
-    inset: 4px;
-    border: 1px solid rgba(234, 179, 8, 0.3);
-    pointer-events: none; 
-    border-radius: 12px;
-}
+        .gold-border-corner::before {
+            content: ''; 
+            position: absolute; 
+            inset: 4px;
+            border: 1px solid rgba(234, 179, 8, 0.3);
+            pointer-events: none; 
+            border-radius: 12px;
+        }
 
-/* =================================
-   LOGIN VALIDATION INDICATORS
-================================= */
+        /* =================================
+           LOGIN VALIDATION INDICATORS
+        ================================= */
+        .validation-group {
+            position: relative;
+        }
 
-.validation-group {
-    position: relative;
-}
+        .status-indicator {
+            position: absolute;
+            left: -18px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ef4444;
+            box-shadow: 0 0 8px rgba(239, 68, 68, 0.7);
+            transition: all 0.3s ease;
+            z-index: 5;
+        }
 
-.status-indicator {
-    position: absolute;
-    left: -18px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #ef4444;
-    box-shadow: 0 0 8px rgba(239, 68, 68, 0.7);
-    transition: all 0.3s ease;
-    z-index: 5;
-}
+        /* RED STATE */
+        .status-red {
+            background: #ef4444;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.9);
+        }
 
-/* RED */
-.status-red {
-    background: #ef4444;
-    box-shadow: 0 0 10px rgba(239, 68, 68, 0.9);
-}
+        /* YELLOW STATE */
+        .status-yellow {
+            background: #facc15;
+            box-shadow: 0 0 10px rgba(250, 204, 21, 0.9);
+        }
 
-/* YELLOW */
-.status-yellow {
-    background: #facc15;
-    box-shadow: 0 0 10px rgba(250, 204, 21, 0.9);
-}
+        /* GREEN STATE */
+        .status-green {
+            background: #22c55e;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+        }
+    </style>
+</head>
+<body class="bg-[#040a18] min-h-screen flex items-center justify-center p-4">
 
-/* GREEN */
-.status-green {
-    background: #22c55e;
-    box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
-}
-```
+    <div class="w-full max-w-md bg-[#071126] border border-amber-500/20 rounded-xl p-6 shadow-2xl gold-border-corner">
+        
+        <form id="formStudentLogin" name="student_login_form" method="POST" onsubmit="handlePortalLogin(event)" class="space-y-4">
+
+            <div>
+                <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">
+                    Student Name:
+                </label>
+
+                <div class="relative flex items-center validation-group">
+                    <span class="status-indicator status-red"></span>
+                    <i class="fa-solid fa-user absolute left-3 text-amber-400/60 text-sm"></i>
+                    <input
+                        type="text"
+                        id="loginStudentName"
+                        name="student_name"
+                        required
+                        placeholder="SURNAME, FIRST NAME MIDDLENAME"
+                        class="login-input w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm font-bold text-amber-100 uppercase outline-none focus:border-amber-400 transition"
+                    >
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">
+                    Student Account Number:
+                </label>
+
+                <div class="relative flex items-center validation-group">
+                    <span class="status-indicator status-red"></span>
+                    <i class="fa-solid fa-id-badge absolute left-3 text-amber-400/60 text-sm"></i>
+                    <input
+                        type="text"
+                        id="loginStudentId"
+                        name="student_id"
+                        required
+                        placeholder="e.g. 2024-10143-MN-0"
+                        class="login-input w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm font-semibold text-amber-100 outline-none focus:border-amber-400 transition"
+                    >
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">
+                    Course / Section:
+                </label>
+
+                <div class="relative flex items-center validation-group">
+                    <span class="status-indicator status-red"></span>
+                    <i class="fa-solid fa-graduation-cap absolute left-3 text-amber-400/60 text-sm"></i>
+                    <input
+                        type="text"
+                        id="loginStudentCourse"
+                        name="student_course"
+                        required
+                        placeholder="e.g. CEIT-03-401A"
+                        class="login-input w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm font-medium text-amber-200/90 outline-none focus:border-amber-400 transition"
+                    >
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">
+                    Password:
+                </label>
+
+                <div class="relative flex items-center validation-group">
+                    <span class="status-indicator status-red"></span>
+                    <i class="fa-solid fa-lock absolute left-3 text-amber-400/60 text-sm"></i>
+                    <input
+                        type="password"
+                        id="loginStudentPassword"
+                        name="student_password"
+                        required
+                        placeholder="•••••••••••••"
+                        class="login-input w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm text-amber-100 outline-none focus:border-amber-400 transition"
+                    >
+                </div>
+            </div>
+
+            <button
+                type="submit"
+                name="submit_student_login"
+                class="w-full bg-gradient-to-r from-amber-300 via-amber-500 to-amber-600 text-indigo-950 font-black py-3 px-4 rounded-lg text-xs uppercase tracking-widest shadow-lg transition transform active:scale-95 cursor-pointer"
+            >
+                Verify Student Identity
+            </button>
+
+        </form>
+
+
+        <form id="formAdminLogin" name="admin_login_form" method="POST" onsubmit="handleAdminVerification(event)" class="space-y-4 hidden">
+
+            <div>
+                <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">
+                    ADMIN PORTAL:
+                </label>
+
+                <div class="relative flex items-center validation-group">
+                    <span class="status-indicator status-red"></span>
+                    <i class="fa-solid fa-user-shield absolute left-3 text-amber-400/60 text-sm"></i>
+                    <input
+                        type="email"
+                        id="loginAdminId"
+                        name="admin_email"
+                        required
+                        placeholder="admin@rtu.edu.ph"
+                        class="login-input w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm font-semibold text-amber-100 outline-none focus:border-amber-400 transition"
+                    >
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">
+                    Authorization Password Passkey:
+                </label>
+
+                <div class="relative flex items-center validation-group">
+                    <span class="status-indicator status-red"></span>
+                    <i class="fa-solid fa-key absolute left-3 text-amber-400/60 text-sm"></i>
+                    <input
+                        type="password"
+                        id="loginAdminPin"
+                        name="admin_password"
+                        required
+                        placeholder="•••••••••••••"
+                        class="login-input w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm text-amber-100 outline-none focus:border-amber-400 transition"
+                    >
+                </div>
+            </div>
+
+            <button
+                type="submit"
+                name="submit_admin_login"
+                class="w-full bg-gradient-to-r from-amber-400 to-amber-600 text-indigo-950 font-black py-3 px-4 rounded-lg text-xs uppercase tracking-widest shadow-lg transition transform active:scale-95 cursor-pointer"
+            >
+                Authenticate Admin Node
+            </button>
+
+        </form>
+    </div>
+
+    </body>
+</html>
