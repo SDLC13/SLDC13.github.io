@@ -117,7 +117,7 @@
     <!-- ADMIN EMAIL -->
     <div>
         <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">
-            Personnel Email:
+            ADMIN PORTAL:
         </label>
 
         <div class="relative flex items-center validation-group">
