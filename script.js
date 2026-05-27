@@ -61,7 +61,6 @@ function handleAdminVerification(event) {
     }
 }
 
-// MATCHED LOGIC: Pull parameters from adjusted inputs layout configuration cleanly
 function handlePortalLogin(event) {
     event.preventDefault();
     const inputName = document.getElementById('loginStudentName').value.trim().toUpperCase();
@@ -208,6 +207,7 @@ function navigateStep(direction) {
     if(nextTarget >= 1 && nextTarget <= 3) switchStep(nextTarget);
 }
 
+// RESTORED SECURITY INSERTER BRIDGE LOGIC: Kept pristine for prepared parameters binding
 function submitEvaluation(event) {
     event.preventDefault();
     const currentItem = scheduleItems[activeTargetIndex];
@@ -216,7 +216,7 @@ function submitEvaluation(event) {
     for(let i = 1; i <= 15; i++) {
         const checkedRadio = document.querySelector(`input[name="q${i}"]:checked`);
         if(!checkedRadio) {
-            alert('Operational Matrix Exception: Please complete all selections.');
+            alert(`Operational Matrix Exception: Please complete all selections before submission routing.`);
             return;
         }
         scores.push(parseInt(checkedRadio.value));
@@ -253,11 +253,11 @@ function submitEvaluation(event) {
             document.getElementById('evaluationMatrixForm').reset();
             showScheduleView();
         } else {
-            alert(`Database synchronization failure: ${data.message}`);
+            alert(`Database synchronization drop failure: ${data.message}`);
         }
     })
     .catch(err => {
         console.error(err);
-        alert('Server processing connection timeout alert.');
+        alert('Server database execution pipe connection error timeout.');
     });
 }

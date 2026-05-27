@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faculty Performance Evaluation Portal</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link class="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../style.css">
 </head>
 <body class="bg-gradient-to-br from-[#0b1b3d] via-[#122b5c] to-[#08132b] min-h-screen text-slate-100 font-sans antialiased selection:bg-amber-500 selection:text-indigo-950">
@@ -25,7 +25,7 @@
                 </div>
 
                 <div class="flex bg-[#0a152b] p-1 rounded-lg border border-amber-500/20 text-xs font-bold uppercase">
-                    <button type="button" id="toggleStudentTab" onclick="switchLoginRole('student')" class="flex-1 py-2 text-center rounded bg-amber-500 text-indigo-950 transition cursor-pointer">Student Portal</button>
+                    <button type="button" id="toggleStudentTab" onclick="switchLoginRole('student')" class="flex-1 py-2 text-center rounded bg-amber-500 text-indigo-950 font-bold transition cursor-pointer">Student Portal</button>
                     <button type="button" id="toggleAdminTab" onclick="switchLoginRole('admin')" class="flex-1 py-2 text-center rounded text-slate-400 hover:text-slate-200 transition cursor-pointer">Personnel Login</button>
                 </div>
 
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div>
-                        <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Course / Yr Lvl / Section:</label>
+                        <label class="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-1">Course / Section:</label>
                         <div class="relative flex items-center">
                             <i class="fa-solid fa-graduation-cap absolute left-3 text-amber-400/60 text-sm"></i>
                             <input type="text" id="loginStudentCourse" required placeholder="e.g. CEIT-03-401A" class="w-full pl-9 pr-3 py-2.5 bg-[#0a152b] border border-amber-500/30 rounded-lg text-sm font-medium text-amber-200/90 outline-none focus:border-amber-400 transition">

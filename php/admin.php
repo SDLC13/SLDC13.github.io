@@ -15,7 +15,7 @@
             <div class="bg-white px-3 py-1 rounded shadow-sm">
                 <img src="../logo/RTU_Portal_Header.png" alt="RTU Logo" class="h-8 w-auto object-contain">
             </div>
-            <span class="text-xs font-bold tracking-widest text-amber-400 uppercase border-l border-slate-700 pl-3">Admin Audit Matrix</span>
+            <span class="text-xs font-bold tracking-widest text-amber-400 uppercase border-l border-slate-700 pl-3">Admin Panel</span>
         </div>
         <a href="index.php" class="px-4 py-1.5 text-xs font-bold bg-amber-500 text-indigo-950 rounded hover:bg-amber-400 shadow transition duration-150">Exit Console</a>
     </nav>
@@ -63,7 +63,7 @@
 
         function loadAdminRegistry() {
             const container = document.getElementById('adminRecordsRoot');
-            container.innerHTML = `<div class="col-span-2 text-center text-slate-400 p-6 italic">Querying server database tables...</div>`;
+            container.innerHTML = `<div class="col-span-2 text-center text-slate-400 p-6 italic">Querying SQL database logs matrices rows...</div>`;
             fetch('get_admin_reviews.php')
                 .then(res => res.json())
                 .then(response => {
