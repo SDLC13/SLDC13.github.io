@@ -24,9 +24,9 @@
         <div class="flex items-center justify-between border-b border-amber-500/20 pb-4">
             <div>
                 <h2 class="text-xl font-bold tracking-wide text-amber-300 uppercase">Student Submission Registry</h2>
-                <p class="text-xs text-slate-400 mt-0.5">Select any logged card data row below to pop up deep evaluation summaries.</p>
+                <p class="text-xs text-slate-400 mt-0.5">Select a student card row to pop up specific dynamic logs summaries data elements.</p>
             </div>
-            <button onclick="loadAdminRegistry()" class="px-3 py-1.5 text-xs font-bold bg-amber-500 text-indigo-950 rounded hover:bg-amber-400 transition cursor-pointer">Refresh Records</button>
+            <button onclick="loadAdminRegistry()" class="px-3 py-1.5 text-xs font-bold bg-amber-500 text-indigo-950 rounded hover:bg-amber-400 transition cursor-pointer">Refresh Logs Matrix</button>
         </div>
 
         <div id="adminRecordsRoot" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
@@ -43,13 +43,13 @@
             </div>
             <div class="p-6 overflow-y-auto space-y-5 text-sm text-slate-300">
                 <div class="grid grid-cols-2 gap-4 bg-[#0a1429] p-4 rounded-lg">
-                    <div><span class="block text-[10px] uppercase font-bold tracking-wider text-amber-400/70">Faculty Target Member:</span><span id="modalFacultyMember" class="font-bold text-white text-base"></span></div>
+                    <div><span class="block text-[10px] uppercase font-bold tracking-wider text-amber-400/70">Faculty Member:</span><span id="modalFacultyMember" class="font-bold text-white text-base"></span></div>
                     <div><span class="block text-[10px] uppercase font-bold tracking-wider text-amber-400/70">Subject Context Description:</span><span id="modalSubjectDesc" class="italic text-slate-200"></span></div>
                 </div>
-                <div class="bg-[#0a1429] p-4 rounded-lg flex justify-between items-center"><span class="font-bold text-slate-200 text-xs tracking-wider uppercase">Composite Weight Rating:</span><span id="modalScoreAvg" class="text-xl font-black px-3 py-1 bg-indigo-950 text-emerald-400 rounded"></span></div>
+                <div class="bg-[#0a1429] p-4 rounded-lg flex justify-between items-center"><span class="font-bold text-slate-200 text-xs tracking-wider uppercase">Score Summary Average Weight:</span><span id="modalScoreAvg" class="text-xl font-black px-3 py-1 bg-indigo-950 text-emerald-400 rounded"></span></div>
                 <div class="space-y-3">
-                    <div class="p-4 bg-emerald-950/20 border border-emerald-500/20 rounded-lg"><b class="text-emerald-400 block text-xs uppercase mb-1">Admired Qualities:</b><p id="modalAdmiredText" class="italic text-slate-300"></p></div>
-                    <div class="p-4 bg-rose-950/20 border border-rose-500/20 rounded-lg"><b class="text-rose-400 block text-xs uppercase mb-1">Methodology Growth Needs:</b><p id="modalGrowthText" class="italic text-slate-300"></p></div>
+                    <div class="p-4 bg-emerald-950/20 border border-emerald-500/20 rounded-lg"><b class="text-emerald-400 block text-xs uppercase mb-1">Admired Attributes:</b><p id="modalAdmiredText" class="italic text-slate-300"></p></div>
+                    <div class="p-4 bg-rose-950/20 border border-rose-500/20 rounded-lg"><b class="text-rose-400 block text-xs uppercase mb-1">Constructive Methodology Improvement Inputs:</b><p id="modalGrowthText" class="italic text-slate-300"></p></div>
                 </div>
             </div>
         </div>
@@ -59,21 +59,22 @@
         let cachedAdminRecords = [];
         document.addEventListener("DOMContentLoaded", () => { loadAdminRegistry(); });
 
+        // Pull dynamic dataset feeds directly out of active SQL database tables rows
         function loadAdminRegistry() {
             const container = document.getElementById('adminRecordsRoot');
-            container.innerHTML = `<div class="col-span-2 text-center text-slate-400 p-6 italic">Reading live system SQL registries rows data matrices...</div>`;
+            container.innerHTML = `<div class="col-span-2 text-center text-slate-400 p-6 italic">Querying SQL database logs matrices rows...</div>`;
             fetch('get_admin_reviews.php')
                 .then(res => res.json())
                 .then(response => {
                     if (response.status !== 'success' || response.data.length === 0) {
-                        container.innerHTML = `<div class="col-span-2 text-center text-slate-400 p-6">No evaluation submissions found inside live storage memory logs.</div>`;
+                        container.innerHTML = `<div class="col-span-2 text-center text-slate-400 p-6">No dynamic evaluations found inside server registers rows.</div>`;
                         return;
                     }
                     cachedAdminRecords = response.data;
                     let html = '';
                     response.data.forEach((entry, index) => {
                         html += `
-                            <div onclick="openEvaluationModal(${index})" class="bg-[#0b152e] rounded-xl border border-amber-500/20 p-5 space-y-3 hover:border-amber-400/50 transition cursor-pointer group transform hover:-translate-y-0.5 duration-200 shadow">
+                            <div onclick="openEvaluationModal(${index})" class="bg-[#0b152e] rounded-xl border border-amber-500/20 p-5 space-y-3 hover:border-amber-400/50 transition cursor-pointer group transform hover:-translate-y-0.5 duration-200 shadow-md">
                                 <div class="flex justify-between items-start border-b border-slate-800 pb-2">
                                     <div><h3 class="font-black text-slate-100 group-hover:text-amber-300 uppercase tracking-wide">${entry.student_name}</h3><p class="text-[10px] text-slate-400 italic">${entry.course_level}</p></div>
                                     <span class="text-xs bg-indigo-950 text-amber-400 px-2.5 py-1 rounded font-black font-mono">Avg: ${entry.score_avg}</span>
@@ -82,7 +83,7 @@
                             </div>`;
                     });
                     container.innerHTML = html;
-                }).catch(err => { container.innerHTML = `<div class="col-span-2 text-center text-rose-400 p-4">Server logging processing socket error timeout.</div>`; });
+                }).catch(err => { container.innerHTML = `<div class="col-span-2 text-center text-rose-400">Connection error timeout.</div>`; });
         }
         function openEvaluationModal(index) {
             const data = cachedAdminRecords[index];

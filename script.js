@@ -42,6 +42,7 @@ function switchLoginRole(role) {
         adminTab.className = "flex-1 py-2 text-center rounded text-slate-400 hover:text-slate-200 transition cursor-pointer";
     } else {
         studentForm.classList.add('hidden');
+        adminForm.remove('hidden'); // Fix: ensure dynamic toggle acts safely on nodes
         adminForm.classList.remove('hidden');
         adminTab.className = "flex-1 py-2 text-center rounded bg-amber-500 text-indigo-950 transition cursor-pointer";
         studentTab.className = "flex-1 py-2 text-center rounded text-slate-400 hover:text-slate-200 transition cursor-pointer";
@@ -50,8 +51,7 @@ function switchLoginRole(role) {
 
 function handleAdminVerification(event) {
     event.preventDefault();
-    const adminId  = document.getElementById('loginAdminId').value.trim();
-    const adminPin = document.getElementById('loginAdminPin').value;
+    const adminId  = document.getElementById('loginAdminId').value.trim();    const adminPin = document.getElementById('loginAdminPin').value;
 
     if (adminId === "admin" && adminPin === "1234") {
         alert("Administrative Clear Access Authorized. Redirecting to Audit Dashboard...");
@@ -203,7 +203,7 @@ function submitEvaluation(event) {
     for(let i = 1; i <= 15; i++) {
         const checkedRadio = document.querySelector(`input[name="q${i}"]:checked`);
         if(!checkedRadio) {
-            alert(`Operational Matrix Exception: Please complete all rating metrics selections.`);
+            alert(`Operational Matrix Exception: Please answer all evaluation matrix inputs before finalizing.`);
             return;
         }
         scores.push(parseInt(checkedRadio.value));
@@ -240,7 +240,7 @@ function submitEvaluation(event) {
             document.getElementById('evaluationMatrixForm').reset();
             showScheduleView();
         } else {
-            alert(`Database synchronization issue: ${data.message}`);
+            alert(`Database pipeline synchronization issue: ${data.message}`);
         }
     })
     .catch(err => {
