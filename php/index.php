@@ -26,7 +26,7 @@
 
                 <div class="flex bg-[#0a152b] p-1 rounded-lg border border-amber-500/20 text-xs font-bold uppercase">
                     <button type="button" id="toggleStudentTab" onclick="switchLoginRole('student')" class="flex-1 py-2 text-center rounded bg-amber-500 text-indigo-950 font-bold transition cursor-pointer">Student Portal</button>
-                    <button type="button" id="toggleAdminTab" onclick="switchLoginRole('admin')" class="flex-1 py-2 text-center rounded text-slate-400 hover:text-slate-200 transition cursor-pointer">Personnel Login</button>
+                    <button type="button" id="toggleAdminTab" onclick="switchLoginRole('admin')" class="flex-1 py-2 text-center rounded text-slate-400 hover:text-slate-200 transition cursor-pointer">Admin Portal</button>
                 </div>
 
                 <form id="formStudentLogin" onsubmit="handlePortalLogin(event)" class="space-y-4">
