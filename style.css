@@ -1,0 +1,26 @@
+/* Custom Premium Rating Styles */
+.rating-btn:hover { 
+    background-color: #fef08a; 
+    color: #1e3a8a; 
+}
+
+input[type="radio"]:checked + label {
+    background-color: #1e3a8a;
+    color: #ffffff;
+    border-color: #1e3a8a;
+    box-shadow: 0 0 8px rgba(30, 58, 138, 0.4);
+}
+
+/* Classic Geometric Corner Accents matching reference */
+.gold-border-corner {
+    position: relative;
+}
+
+.gold-border-corner::before {
+    content: ''; 
+    position: absolute; 
+    inset: 4px;
+    border: 1px solid rgba(234, 179, 8, 0.3);
+    pointer-events: none; 
+    border-radius: 12px;
+}
